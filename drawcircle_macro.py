@@ -66,7 +66,7 @@ def draw_circle(event, x, y, flags, param):
 
     # 오른쪽 버튼 클릭 => 점 지우기
     if event == cv2.EVENT_RBUTTONDOWN:
-        img = cv2.resize(cv2.imread(img_path, cv2.IMREAD_UNCHANGED), dsize=(933,700))
+        img = cv2.resize(cv2.imread(img_path, cv2.IMREAD_UNCHANGED), dsize=(700,700))
         print("cleaned")
           
 def show_images(image_files, json_data):
@@ -77,7 +77,7 @@ def show_images(image_files, json_data):
 
     for i in range(0, len(image_files)):
         img_path = join(mypath,image_files[i])
-        img = cv2.resize(cv2.imread(img_path, cv2.IMREAD_UNCHANGED), dsize=(933,700))
+        img = cv2.resize(cv2.imread(img_path, cv2.IMREAD_UNCHANGED), dsize=(700,700))
 
         img_org = copy.deepcopy(img)
 
