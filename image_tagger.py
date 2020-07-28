@@ -1,3 +1,4 @@
+import os
 from os import listdir
 from os.path import isfile, join
 import cv2  
@@ -92,7 +93,7 @@ def draw_circle(event, x, y, flags, param):
 
     # 오른쪽 버튼 클릭 => 점 지우기
     elif event == cv2.EVENT_RBUTTONDOWN:
-        img = cv2.resize(cv2.imread(img_path, cv2.IMREAD_UNCHANGED), dsize=(933,700))
+        img = cv2.resize(cv2.imread(img_path, cv2.IMREAD_UNCHANGED), dsize=(700,700))
         print("cleaned")
           
 def show_images(image_files, json_data):
@@ -104,7 +105,9 @@ def show_images(image_files, json_data):
 
     for i in range(0, len(image_files)):
         img_path = join(mypath,image_files[i])
-        img = cv2.resize(cv2.imread(img_path, cv2.IMREAD_UNCHANGED), dsize=(933,700))
+        img = cv2.resize(cv2.imread(img_path, cv2.IMREAD_UNCHANGED), dsize=(700,700))
+        img = cv2.rotate(img, cv2.ROTATE_180) if img_rotate else img
+        img_org = copy.deepcopy(img)
         print(img.shape[0], img.shape[1], img.shape[2])
 
         img_name = img_path.split('/')[-1]
@@ -135,10 +138,10 @@ def show_images(image_files, json_data):
             elif k == ord('s'):
                 # 점찍은 사진 저장하기 위한 directory/filename 설정
                 # 예시: cv2.imwrite('./directory/name_{}.jpg'.format(img_id), img)
-                cv2.imwrite('./{0}/{1}_{2}.png'.format(save_directory, acupuncture_info, img_id),img) 
+                cv2.imwrite('./{0}/change/{1}_{2}.png'.format(save_directory, acupuncture_info, img_id),img) 
                 
                 # 원본 사진 저장하기 위한 dirctory/filename 설정
-                cv2.imwrite('./{0}/Hand_{1}.png'.format(save_directory, img_id), img_org) 
+                cv2.imwrite('./{0}/org/Hand_{1}.png'.format(save_directory, img_id), img_org) 
                 
                 break
 
@@ -152,17 +155,21 @@ def show_images(image_files, json_data):
         json.dump(json_data, outfile, indent=4)
 
 
+
+
 ##############################################################################################
 
 # 이미지를 불러올 directory 폴더 설정, 적당한 이미지 수만큼 넣고 돌릴것 or (cv::OutOfMemoryError)
 mypath = './test2'
 
-# 혈점 정보, 점 사이즈, 손 위치 입력
-acupuncture_info = '상양'
+# 혈점 정보, 점 사이즈, 손 위치 입력, 손 180도 회전 설정
+acupuncture_info = input('혈자리를 입력해주세요. ex) 소충 ')
 acupuncture_size = 3
+img_rotate = True # True => 회전
 
-# 손모양 => 오른손앞:1, 왼손앞:2, 오른손뒤:3, 왼손뒤:4
-hand_pos = 1
+# 손모양 => 'dorsal_right':1, 'dorsal_left':2, 'palmar_right':3, 'palmar_left':4
+hand_p = {'dorsal_right':1, 'dorsal_left':2, 'palmar_right':3, 'palmar_left':4}
+hand_pos = hand_p[input('손의 위치를 입력해주세요. ex) palmar_left ')]
 
 ##############################################################################################
 
@@ -172,6 +179,18 @@ acupuncture_db = open_temp_db()
 acupuncture_info = is_acupuncture(acupuncture_info, acupuncture_db)
 
 save_directory = f'{acupuncture_info}_{hand_position}'
+
+try:
+    if not(os.path.isdir(save_directory)):
+        os.makedirs(os.path.join(save_directory))
+    if not(os.path.isdir(save_directory+'/change')):
+        os.makedirs(os.path.join(save_directory+'/change'))
+    if not (os.path.isdir(save_directory+'/org')):
+        os.makedirs(os.path.join(save_directory+'/org'))
+except OSError as e:
+    if e.errno != errno.EEXIST:
+        print("Failed to create directory!!!!!")
+        raise
 
 json_file = "./{}_info.json".format(acupuncture_info)
 json_data = open_json_file(json_file)
