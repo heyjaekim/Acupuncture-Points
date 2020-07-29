@@ -1,12 +1,4 @@
-# Flask + ReactJS + MySQL Login and Registration
-
-![ReactJS Todo](../screenshots/react-login1.PNG)
-#
-![ReactJS Todo](../screenshots/react-login2.PNG)
-#
-![ReactJS Todo](../screenshots/react-login3.PNG)
-
+# 웹앱 서비스 구현 작업
 
 ## Setup
-
 Manually clone the repo and then run `npm install`.
