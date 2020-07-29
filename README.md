@@ -1,4 +1,5 @@
-# KU-Acupuncture-Points-Proj
+# 빅데이터 청년인재 13조 - 손을 주시오 혈을 잡겠오
+---
 Korea University GAN Image Clustering Project for Acupuncture Points
 
 Image Tagger How To Use
