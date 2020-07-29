@@ -1,13 +1,18 @@
-# 빅데이터 청년인재 13조 - 손을 주시오 혈을 잡겠오
+# 빅데이터 청년인재 13조 - 손을 주시오, 혈을 잡겠오
 
 ### 프로젝트 소개
-Korea University GAN Image Clustering Project for Acupuncture Points
-
-Image Tagger How To Use
-- Inside the comment box, set up your environment (directory, etc)
-- run the program, then type in acupuncture point and hand position
-- 'click left' => tag acupuncture
-- 'click right' => undo
-- 's' => save image
-- 'esc' => skip image
-- 'z' => terminate program
+  1. 프로젝트 명: 손을 주시오, 혈을 잡겠오
+  2. 조원: 김성진, 김재원, 김정규, 정지우, 최선
+  3. 프로젝트 소개:
+  4. 개발기간: 2020.07 ~ 2020.08
+  
+### Repository 폴더 구조
+  1. Acupuncture-Webapp
+  2. Data
+  3. Image-Tagger
+  
+### 일정/공유사항 등의 작성방법
+1. Issues : 프로젝트를 진행하면서 일어날 수 있는 모든 일에 대해 작성한다
+작성시 분류방법 : 제목앞에 []로 표시하되 TODO/ISSUE/개발/Metting 으로 구분하여 작성
+(ex: [TODD]OCR 구현을 위한 자료 조사)
+2. Projcts : 이 프로젝트를 진행하면서 진행해야 할 일을 TO-DO List 형태로 등록한다
