@@ -94,6 +94,7 @@ def draw_circle(event, x, y, flags, param):
     # 오른쪽 버튼 클릭 => 점 지우기
     elif event == cv2.EVENT_RBUTTONDOWN:
         img = cv2.resize(cv2.imread(img_path, cv2.IMREAD_UNCHANGED), dsize=(700,700))
+        img = cv2.rotate(img, cv2.ROTATE_180)
         print("cleaned")
           
 def show_images(image_files, json_data):
@@ -106,7 +107,7 @@ def show_images(image_files, json_data):
     for i in range(0, len(image_files)):
         img_path = join(mypath,image_files[i])
         img = cv2.resize(cv2.imread(img_path, cv2.IMREAD_UNCHANGED), dsize=(700,700))
-        img = cv2.rotate(img, cv2.ROTATE_180) if img_rotate else img
+        img = cv2.rotate(img, cv2.ROTATE_180)
         img_org = copy.deepcopy(img)
         print(img.shape[0], img.shape[1], img.shape[2])
 
@@ -160,12 +161,11 @@ def show_images(image_files, json_data):
 ##############################################################################################
 
 # 이미지를 불러올 directory 폴더 설정, 적당한 이미지 수만큼 넣고 돌릴것 or (cv::OutOfMemoryError)
-mypath = './test2'
+mypath = './directory'
 
-# 혈점 정보, 점 사이즈, 손 위치 입력, 손 180도 회전 설정
+# 혈점 정보, 점 사이즈, 손 위치 입력
 acupuncture_info = input('혈자리를 입력해주세요. ex) 소충 ')
 acupuncture_size = 3
-img_rotate = True # True => 회전
 
 # 손모양 => 'dorsal_right':1, 'dorsal_left':2, 'palmar_right':3, 'palmar_left':4
 hand_p = {'dorsal_right':1, 'dorsal_left':2, 'palmar_right':3, 'palmar_left':4}
