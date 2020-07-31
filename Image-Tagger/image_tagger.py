@@ -42,6 +42,10 @@ def open_json_file(file_path):
     else:
         return dict()        
 
+def save_json_file(json_data):
+    with open(json_file, 'w') as outfile:
+        json.dump(json_data, outfile, indent=4)
+
 def draw_circle(event, x, y, flags, param):     
     global img
     global img_org
@@ -148,15 +152,12 @@ def show_images(image_files, json_data):
 
             # 'z' => 프로그램 종료(terminate program)
             elif k == ord('z'):
+                save_json_file(json_data)
                 exit()
                 
         cv2.destroyAllWindows()
 
-    with open(json_file, 'w') as outfile:
-        json.dump(json_data, outfile, indent=4)
-
-
-
+    save_json_file(json_data)
 
 ##############################################################################################
 
