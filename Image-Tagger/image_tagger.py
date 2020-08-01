@@ -140,7 +140,7 @@ def show_images(image_files, json_data):
                 break
 
             # 's' => 원본 사진과 점찍은 사진 저장하고 다음사진으로 넘어가기
-            elif k == ord('s'):
+            elif k == ord('s') and len(json_data[acupuncture_id]) == 2:
                 # 점찍은 사진 저장하기 위한 directory/filename 설정
                 # 예시: cv2.imwrite('./directory/name_{}.jpg'.format(img_id), img)
                 cv2.imwrite('./{0}/change/{1}_{2}.png'.format(save_directory, acupuncture_info, img_id),img) 
@@ -152,6 +152,7 @@ def show_images(image_files, json_data):
 
             # 'z' => 프로그램 종료(terminate program)
             elif k == ord('z'):
+                json_data.pop(acupuncture_id)
                 save_json_file(json_data)
                 exit()
                 
@@ -162,7 +163,7 @@ def show_images(image_files, json_data):
 ##############################################################################################
 
 # 이미지를 불러올 directory 폴더 설정, 적당한 이미지 수만큼 넣고 돌릴것 or (cv::OutOfMemoryError)
-mypath = './directory'
+mypath = './test2'
 
 # 혈점 정보, 점 사이즈, 손 위치 입력
 acupuncture_info = input('혈자리를 입력해주세요. ex) 소충 ')
