@@ -1,4 +1,4 @@
-# 손을 주시오, 혈을 집겠오 웹앱 서비스 구현 작업
+# 손을 주시오, 혈을 잡겠오 웹앱 서비스 구현 작업
 
 ## Setup
 1. XAMPP(Control Panel)를 설치/실행 후 Apache와 Mysql을 실행.
