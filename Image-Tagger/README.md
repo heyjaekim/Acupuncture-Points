@@ -5,5 +5,5 @@
 
 1. 이미지 불러올 Directory 설정 ex) mypath = './directory'
 2. 프로그램 시작
-3. 혈점자리 입력 ex) 소충 or 상양
+3. 혈점자리 입력 ex) 소충, 상양, ...
 4. 손모양 입력 ex) dorsal_left/dorsal_right/palmar_left/palmar_right
