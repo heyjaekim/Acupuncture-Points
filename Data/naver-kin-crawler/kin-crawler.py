@@ -18,8 +18,9 @@ pattern6 = re.compile(r'\s{2,}')
 pattern7 = re.compile(r'\b[A-Za-z0-9 ]+\b')
 
 headers = {
-    'user-agent':
-    'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'
+    'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64)\
+                    AppleWebKit/537.36 (KHTML, like Gecko)\
+                        Chrome/84.0.4147.105 Safari/537.36'
 }
 
 def open_json_file(file_path):
@@ -69,17 +70,17 @@ def download(url, params={}, headers={}, method='GET', limit=3):
             print(e.response.headers)
     return resp
 
-def kin_crawling(url, kin_data):
+def kin_crawling(url, kin_data, expected_ans):
     urls, visited = list(), list()
     ques_n = 0
 
     urls.append({'url':url, 'depth':1})
 
-    while urls and ques_n <= 500: # Queue
+    while urls and ques_n <= 100: # Queue
         seed = urls.pop(0) # BFS
         visited.append(seed)
-        if seed['depth'] > 3:
-            break
+        # if seed['depth'] > 3:
+        #     break
         # print(seed['url'])
         resp = download(seed['url'])
         dom = BeautifulSoup(resp.text, 'html.parser')
@@ -97,7 +98,7 @@ def kin_crawling(url, kin_data):
         
         # 스크래핑
         if dom.select_one('div.c-heading__content') != None and\
-            dom.select('div.se-component-content'):
+                expected_ans in str(dom.select('div.se-component-content')) :
             ques = cleaning(str(dom.select('div.c-heading__content')))
             ans = cleaning(str(dom.select('div.se-component-content')))
             ques_key = "Kin_"+str(ques_n)
@@ -108,12 +109,12 @@ def kin_crawling(url, kin_data):
 
     save_json_file(kin_data)
 
-##################################################################################
+#######################################################################################
 
-# search = '머리 아픔'
 search = input('Naver Kin Search Word: ')
+expected_ans = input('Type in expected answer: ')
 
-##################################################################################
+#######################################################################################
 
 search_url = search.replace(' ', '+')
 url = 'https://kin.naver.com/search/list.nhn?query=/'+search_url
@@ -121,4 +122,4 @@ params = {'query':''}
 params['query'] = search
 json_file = "./{}_info.json".format(search)
 json_data = open_json_file(json_file)
-kin_crawling(url, json_data)
+kin_crawling(url, json_data, expected_ans)
