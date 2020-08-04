@@ -120,6 +120,6 @@ search_url = search.replace(' ', '+')
 url = 'https://kin.naver.com/search/list.nhn?query=/'+search_url
 params = {'query':''}
 params['query'] = search
-json_file = "./{}_info.json".format(search)
+json_file = "./{}_info.json".format(expected_ans)
 json_data = open_json_file(json_file)
 kin_crawling(url, json_data, expected_ans)

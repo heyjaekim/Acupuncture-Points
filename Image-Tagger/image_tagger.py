@@ -1,6 +1,5 @@
-import os
-from os import listdir
-from os.path import isfile, join
+from os import listdir, makedirs
+from os.path import isfile, isdir, join
 import cv2  
 import copy
 import json
@@ -183,12 +182,12 @@ acupuncture_info = is_acupuncture(acupuncture_info, acupuncture_db)
 save_directory = f'{acupuncture_info}_{hand_position}'
 
 try:
-    if not(os.path.isdir(save_directory)):
-        os.makedirs(os.path.join(save_directory))
-    if not(os.path.isdir(save_directory+'/change')):
-        os.makedirs(os.path.join(save_directory+'/change'))
-    if not (os.path.isdir(save_directory+'/org')):
-        os.makedirs(os.path.join(save_directory+'/org'))
+    if not(isdir(save_directory)):
+        makedirs(join(save_directory))
+    if not(isdir(save_directory+'/change')):
+        makedirs(join(save_directory+'/change'))
+    if not (isdir(save_directory+'/org')):
+        makedirs(join(save_directory+'/org'))
 except OSError as e:
     if e.errno != errno.EEXIST:
         print("Failed to create directory!!!!!")
