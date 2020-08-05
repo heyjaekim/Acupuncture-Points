@@ -1,4 +1,10 @@
 # TODO: 1. 형태소 분석기
+from konlpy.tag import Hannanum, Kkma, Okt, Komoran
+
+kkma = Kkma()
+hann = Hannanum()
+okt = Okt()
+kom = Komoran()
 # TODO: 2. 로직 설계 => 크롤링을 통해서 기대값에 상응하는 QnA json 파일을 가지고 sentence 안에 test context를 형태소 유사도 비교분석해서 평균적으로 몇퍼센트 나오는지 일단 구해보자  
 
 test_context = ("저희 지역에서 코로나 바이러스 감염 확진자가 나왔습니다 제가 사는 동네 바로 옆동네이고요 저는 설날에는 다른 지역에 있다가 25일날\
