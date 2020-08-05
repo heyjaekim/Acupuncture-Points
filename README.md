@@ -6,10 +6,15 @@
   3. 프로젝트 소개: 손, 발, 얼굴 등 사진을 찍었을때 해당하는 주치에 해당하는 혈자리들을 짚어주는 이미지 학습 모델링을 만들기 위함
   4. 개발기간: 2020.07.06 ~ 2020.08.31
   
-## Repository 폴더 구조
-  1. Acupuncture-Webapp
-  2. Data
-  3. Image-Tagger
+## Repository 구조
+  1. Acupuncture-Webapp \
+      : 프로젝트 웹 애플리케이션 구현 폴더
+  2. CV_DeepLearning \
+      :
+  3. Data \
+      : 주치 관련 크롤링 데이터 및 증상 유사도 체크 관련 폴더
+  4. Image-Tagger \
+      : 이미지 태깅 전처리 관련 폴더
   
 ## COMMIT/공유사항 등의 작성방법
 1. COMMIT : 코드 push 시에 현재 본인이 작업중이거나/업데이트한 작업에 대해서 최대한 자세히 적는다.
