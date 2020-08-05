@@ -1,14 +1,10 @@
 # DL Application to predict Acupuncture Points 
 ## Overview
-
 ### 1. Image(Input) &rarr; 2. ConvNet (Feature Extraction) &rarr; 3. Coordinate Regression (Output)
-
 - Backbone : ResNet ( advancements will be made  )
 - **Colored Mnist Dataset** designed and used to check out basic performance
-
 ---
-## TODO LIST
-
+### TODO LIST
 - [ ] Learning Rate Schduler
 - [ ] Train / Validation Splitter
 - [ ] Checkpoint Saver/Loader
