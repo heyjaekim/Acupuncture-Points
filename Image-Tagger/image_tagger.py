@@ -135,6 +135,7 @@ def show_images(image_files, json_data):
             
             # ESC => 저장 안하고 다음사진으로 넘어가기
             if k == 27:
+                json_data.pop(acupuncture_id)
                 cv2.destroyAllWindows()
                 break
 
