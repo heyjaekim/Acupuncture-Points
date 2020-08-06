@@ -3,6 +3,7 @@ import os
 from os.path import isfile, isdir, join
 import re
 
+
 # 현재 디렉토리에 있는 파일들 중 확장자가 .json인 파일만을 출력.
 def print_json_filename(dirname):
     full_filenames = []
