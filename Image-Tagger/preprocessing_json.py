@@ -58,10 +58,12 @@ def return_only_number_in_list(list_name):
 # 통합
 def json_intersection_extract(dirname,acup_left_dirname, acup_right_dirname,acup_name):
     json_filename_list = print_json_filename(dirname)
+    print(json_filename_list)
     
     json_to_dictionary = {}
     for i in range(len(json_filename_list)):
         json_to_dictionary.update(open_json_file(json_filename_list[i]))
+    
     
     cleaning_json(json_to_dictionary)
     
