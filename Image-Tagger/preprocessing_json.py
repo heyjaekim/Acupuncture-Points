@@ -1,13 +1,7 @@
-# In[1]:
-
 import json
 import os
-from os.path import isfile, isdir, join
+from os.path import isfile, join
 import re
-
-
-# In[2]:
-
 
 # 현재 디렉토리에 있는 파일들 중 확장자가 .json인 파일만을 출력.
 def print_json_filename(dirname):
@@ -20,10 +14,6 @@ def print_json_filename(dirname):
             full_filenames.append(full_filename)
     return(full_filenames)
 
-
-# In[3]:
-
-
 # json 파일 열기
 def open_json_file(file_name):
     if isfile(file_name):
@@ -32,11 +22,7 @@ def open_json_file(file_name):
         return json_data
     else:
         return dict()
-
-
-# In[4]:
-
-
+    
 # json 파일 cleaning
 def cleaning_json(json_file):
     for i in list(json_file.keys()):
@@ -45,18 +31,10 @@ def cleaning_json(json_file):
         except IndexError:
             json_file.pop(i)
     print('cleaned')
-
-
-# In[5]:
-
-
+    
 # json merge(update)
 def json_merge(jf1, jf2):
     return(jf1.update(jf2))
-
-
-# In[6]:
-
 
 # dir 안의 png파일 이름 모두 불러오기 -> list 형태로 저장
 def search(dirname):
@@ -69,10 +47,6 @@ def search(dirname):
             filename_list.append(full_filename)
     return(filename_list)
 
-
-# In[7]:
-
-
 # 숫자만 리스트 형태로 저장
 def return_only_number_in_list(list_name):
     new_list_name = []
@@ -81,46 +55,8 @@ def return_only_number_in_list(list_name):
         new_list_name.append(k)
     return(new_list_name)
 
-
-# In[8]:
-
-
-def checking_symmetric_difference(list1, list2):
-    set1 = set(list1)
-    set2 = set(list2)
-    if (set1-set2==set())&(set2-set1==set()):
-        print('교집합만 존재함')
-    else:
-        print('차집합이 존재함')
-        print('first input에만 있는 것:',set1-set2)
-        print('second input에만 있는 것:',set2-set1)
-
-
-# In[9]:
-
-
-# 교집합 만들기
-def make_intersection(f1, f2, f3):
-    set1 = set(f1)
-    set2 = set(f2)
-    set3 = set(f3)
-    intersection_set = set1 & set2 & set3
-
-
-# In[10]:
-
-
-# json 파일 생성
-def save_json_file(json_data):
-    with open(json_file, 'w') as outfile:
-        json.dump(json_data, outfile, indent=4)
-
-
-# In[11]:
-
-
 # 통합
-def json_intersection_extract(dirname,acup_left_dirname, acup_right_dirname):
+def json_intersection_extract(dirname,acup_left_dirname, acup_right_dirname,acup_name):
     json_filename_list = print_json_filename(dirname)
     
     json_to_dictionary = {}
@@ -134,15 +70,22 @@ def json_intersection_extract(dirname,acup_left_dirname, acup_right_dirname):
     left_intersection = set(return_only_number_in_list(search(join(acup_left_dirname,'change')))) & set(return_only_number_in_list(search(join(acup_left_dirname,'org'))))
     right_intersection = set(return_only_number_in_list(search(join(acup_right_dirname,'change')))) & set(return_only_number_in_list(search(join(acup_right_dirname,'org'))))
 
-    set2 = left_intersection | right_intersection
+    lr_joined_set = left_intersection | right_intersection
     
-    set3 = set(json_file_keys) & set2
-    print(set3)
     
-    # save_json_file()
+    completed_set = set(json_file_keys) & lr_joined_set
+    
+    c = set()
+    for i in completed_set:
+        k = 'sangyang_'+i
+        c.add(k)
 
-
-# In[12]:
-
-
-json_intersection_extract('./','./sangyang_dorsal_left','./sangyang_dorsal_right')
+    global d
+    d = dict()
+    for j in c:
+        d[j]=json_to_dictionary[j]
+    
+    with open(acup_name + '_intersection.json', 'w', encoding='utf-8') as make_file:  # 맨 마지막 라인 저장
+        json.dump(d, make_file, indent="\t")
+        
+# how to use : json_intersection_extract('./','./sangyang_dorsal_left','./sangyang_dorsal_right','sangyang')
