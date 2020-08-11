@@ -6,3 +6,4 @@
 2. 콘솔에서 mysqlloginreg.py 실행
 3. Repository에 들어와서 `npm start` 입력.
 
+![20200731 발표자료_최종 (18)](https://user-images.githubusercontent.com/63584973/89733979-1759d680-da94-11ea-9e10-427e4b657944.png)
