@@ -79,15 +79,14 @@ def json_intersection_extract(dirname,acup_left_dirname, acup_right_dirname,acup
     
     c = set()
     for i in completed_set:
-        k = 'sangyang_'+i
+        k = acup_name+'_'+i
         c.add(k)
 
-    global d
     d = dict()
     for j in c:
         d[j]=json_to_dictionary[j]
     
-    with open(acup_name + '_intersection.json', 'w', encoding='utf-8') as make_file:  # 맨 마지막 라인 저장
+    with open(acup_name + '_intersection.json', 'w') as make_file:
         json.dump(d, make_file, indent="\t")
         
 # how to use : json_intersection_extract('./','./sangyang_dorsal_left','./sangyang_dorsal_right','sangyang')
