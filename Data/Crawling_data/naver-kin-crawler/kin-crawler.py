@@ -32,8 +32,9 @@ def open_json_file(file_path):
         return dict()        
 
 def save_json_file(json_data):
-    with open(json_file, 'w', encoding='utf-8') as outfile:
-        dump(json_data, outfile, ensure_ascii=False, indent=4)
+    with open(json_file, 'w', encoding='utf-8') as make_file:
+        dump(json_data, make_file, ensure_ascii=False, indent="\t")
+
 
 def cleaning(doc):
     return pattern7.sub(' ',
@@ -51,7 +52,6 @@ def canfetch(url, agent='*', path='/'):
 def download(url, params={}, headers={}, method='GET', limit=3):
     if canfetch(url) == False:
         print('[Error] ' + url)
-#     else: # 실제 수집할 때, 제약사항이 많으므로 여기선 잠시 해제
     try:
         resp = request(method, url,
                params=params if method=='GET' else {},
@@ -70,7 +70,7 @@ def download(url, params={}, headers={}, method='GET', limit=3):
             print(e.response.headers)
     return resp
 
-def kin_crawling(url, kin_data, expected_ans):
+def kin_crawling(url, kin_data):
     urls, visited = list(), list()
     ques_n = 0
 
@@ -79,9 +79,9 @@ def kin_crawling(url, kin_data, expected_ans):
     while urls and ques_n <= 10: # Queue
         seed = urls.pop(0) # BFS
         visited.append(seed)
-        # if seed['depth'] > 3:
-        #     break
-        # print(seed['url'])
+        if seed['depth'] > 15:
+            break
+        
         resp = download(seed['url'])
         dom = BeautifulSoup(resp.text, 'html.parser')
         
@@ -96,31 +96,30 @@ def kin_crawling(url, kin_data, expected_ans):
                 visited.append(newurl)
                 urls.append({'url':newurl,
                             'depth':seed['depth']+1})
-
-            
+ 
         # 스크래핑
-        if dom.select_one('div.c-heading__content') and len(dom.select('div.se-component-content')) > 0 and "전문의" in dom.select_one('div.c-heading-answer__title > div.c-userinfo span:nth-of-type(2)'):
-                ques = cleaning(dom.select_one('div.c-heading__content').text)
-                ans = cleaning(str(dom.select('div.se-component-content')))
-                print("success1")
-                ques_key = "Kin_"+str(ques_n)
-                kin_data[ques_key] = {
-                    "question":f"{ques}",
-                    "answer":f"{ans}"}
-                ques_n += 1
-        
-        elif dom.select_one('div.c-heading__content') and len(dom.select('div.c-heading-answer__content-user p')) > 0 and "전문의" in dom.select_one('div.c-heading-answer__title > div.c-userinfo span:nth-of-type(2)'):
-                ques = cleaning(dom.select_one('div.c-heading__content').text)
-                ans = cleaning(str(dom.select('div.c-heading-answer__content-user p')))
-                print("success2")
-                ques_key = "Kin_"+str(ques_n)
-                kin_data[ques_key] = {
-                    "question":f"{ques}",
-                    "answer":f"{ans}"}
-                ques_n += 1
-        else:
-            print("failed")
-
+        try:
+            if dom.select_one('div.c-heading__content') and len(dom.select('div.se-component-content')) > 0 and "전문의" in dom.select_one('div.c-heading-answer__title > div.c-userinfo span:nth-of-type(2)'):
+                    ques = cleaning(dom.select_one('div.c-heading__content').text)
+                    ans = cleaning(str(dom.select('div.se-component-content')))
+                    print("success1")
+                    ques_key = "Kin_"+str(ques_n)
+                    kin_data[ques_key] = {
+                        "question":f"{ques}",
+                        "answer":f"{ans}"}
+                    ques_n += 1
+            
+            elif dom.select_one('div.c-heading__content') and len(dom.select('div.c-heading-answer__content-user p')) > 0 and "전문의" in dom.select_one('div.c-heading-answer__title > div.c-userinfo span:nth-of-type(2)'):
+                    ques = cleaning(dom.select_one('div.c-heading__content').text)
+                    ans = cleaning(str(dom.select('div.c-heading-answer__content-user p')))
+                    print("success2")
+                    ques_key = "Kin_"+str(ques_n)
+                    kin_data[ques_key] = {
+                        "question":f"{ques}",
+                        "answer":f"{ans}"}
+                    ques_n += 1
+        except TypeError:
+            pass
     save_json_file(kin_data)
 
 #######################################################################################
@@ -128,12 +127,36 @@ def kin_crawling(url, kin_data, expected_ans):
 search = input('Naver Kin Search Word: ')
 expected_ans = input('Type in expected answer: ')
 
+# search = ['다한증', '두근거림', '두통', '발열', '백내장', '복통', '부정맥', '불면', '코피', '산후무유', '수유량', '생리통', '설사', '소화장애', '손목 아픔', '손바닥 열', '수관절장', '수족냉증', '실신', '안구피로']
+# expected_ans = ['다한증', '두근거림', '두통', '발열', '백내장', '복통', '부정맥', '불면', '코피', '산후무유', '산후무유', '생리통', '설사', '소화장애', '무력', '손바닥', '수관절장', '수족냉증', '실신', '안구피로']
+# search = ['열사병','오심','요로폐색','요실금','요통',
+#         '이명','인후염','입덧','족관절염좌','주관절통증',
+#         '중풍','천식','치통','코감기','편도선염','피로',
+#         '항강','현훈','황달','흉통','히스테리']
+# expected_ans = ['열사병','오심','요로폐색','요실금','요통',
+#         '이명','인후염','입덧','족관절염좌','주관절통증',
+#         '중풍','천식','치통','코감기','편도선염','피로',
+#         '항강','현훈','황달','흉통','히스테리']
 #######################################################################################
+try:
+    search_url = search.replace(' ', '+')
+    url = 'https://kin.naver.com/search/list.nhn?query=/'+search_url
+    params = {'query':''}
+    params['query'] = search
+    json_file = "./Crawling_data/scrapped-data/{0}_{1}_info.json".format(search, expected_ans)
+    json_data = open_json_file(json_file)
+    kin_crawling(url, json_data)
+except ConnectionError:
+    pass
 
-search_url = search.replace(' ', '+')
-url = 'https://kin.naver.com/search/list.nhn?query=/'+search_url
-params = {'query':''}
-params['query'] = search
-json_file = "./scrapped-data/{0}_{1}_info.json".format(search, expected_ans)
-json_data = open_json_file(json_file)
-kin_crawling(url, json_data, expected_ans)
+# for i in range(len(search)):
+#     try:
+#         search_url = search[i].replace(' ', '+')
+#         url = 'https://kin.naver.com/search/list.nhn?query=/'+search_url
+#         params = {'query':''}
+#         params['query'] = search[i]
+#         json_file = "./Crawling_data/scrapped-data/{0}_{1}_info.json".format(search[i], expected_ans[i])
+#         json_data = open_json_file(json_file)
+#         kin_crawling(url, json_data)
+#     except ConnectionError:
+#         pass
