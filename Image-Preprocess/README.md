@@ -6,7 +6,7 @@
     2. 혈점자리 입력 ex) 소충, 상양, ...
     3. 손모양 입력 ex) dorsal_left/dorsal_right/palmar_left/palmar_right
 
-## image_transformer.py
+## image_augmentation.py
 설명: 태깅된 사진과 json파일 안의 좌표정보를 이용하여 다양한 태깅 데이터들을 만들어내는 프로그램.\
 결과: 혈자리 태깅된 한 사진을 각기 다른 방법으로 transform 시키고 json파일로 추합. 
 
