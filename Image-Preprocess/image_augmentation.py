@@ -22,7 +22,7 @@ def make_path_tuple(acupuncture_info, changed_hands_path):
     path = []
     for _ in changed_hands_path:
         for f in listdir(_):
-            hand_pos = (_.split('/')[1]).strip(f'{acupuncture_info}_')
+            hand_pos = (_.split('/')[2]).strip(f'{acupuncture_info}_')
             path.append((join(_,f), hand_pos))
     return path
 

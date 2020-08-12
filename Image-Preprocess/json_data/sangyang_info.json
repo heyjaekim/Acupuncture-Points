@@ -32,7 +32,7 @@
 	"sangyang_0000021_tr-60": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_left",
 			"acup_size": "3"
 		},
 		{
@@ -47,7 +47,7 @@
 	"sangyang_0000002_tr-60": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_right",
 			"acup_size": "3"
 		},
 		{
@@ -62,7 +62,7 @@
 	"sangyang_0000021_tr-30": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_left",
 			"acup_size": "3"
 		},
 		{
@@ -77,7 +77,7 @@
 	"sangyang_0000002_tr-30": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_right",
 			"acup_size": "3"
 		},
 		{
@@ -92,7 +92,7 @@
 	"sangyang_0000021_tr30": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_left",
 			"acup_size": "3"
 		},
 		{
@@ -107,7 +107,7 @@
 	"sangyang_0000002_tr30": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_right",
 			"acup_size": "3"
 		},
 		{
@@ -122,7 +122,7 @@
 	"sangyang_0000021_tr60": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_left",
 			"acup_size": "3"
 		},
 		{
@@ -137,7 +137,7 @@
 	"sangyang_0000002_tr60": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_right",
 			"acup_size": "3"
 		},
 		{
@@ -152,7 +152,7 @@
 	"sangyang_0000021_dm400_sc0": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_left",
 			"acup_size": "3"
 		},
 		{
@@ -167,7 +167,7 @@
 	"sangyang_0000021_dm400_sc40": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_left",
 			"acup_size": "3"
 		},
 		{
@@ -182,7 +182,7 @@
 	"sangyang_0000021_dm400_sc80": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_left",
 			"acup_size": "3"
 		},
 		{
@@ -197,7 +197,7 @@
 	"sangyang_0000021_dm400_sc120": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_left",
 			"acup_size": "3"
 		},
 		{
@@ -212,7 +212,7 @@
 	"sangyang_0000021_dm400_sc160": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_left",
 			"acup_size": "3"
 		},
 		{
@@ -227,7 +227,7 @@
 	"sangyang_0000002_dm400_sc0": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_right",
 			"acup_size": "3"
 		},
 		{
@@ -242,7 +242,7 @@
 	"sangyang_0000002_dm400_sc40": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_right",
 			"acup_size": "3"
 		},
 		{
@@ -257,7 +257,7 @@
 	"sangyang_0000002_dm400_sc80": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_right",
 			"acup_size": "3"
 		},
 		{
@@ -272,7 +272,7 @@
 	"sangyang_0000002_dm400_sc120": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_right",
 			"acup_size": "3"
 		},
 		{
@@ -287,7 +287,7 @@
 	"sangyang_0000002_dm400_sc160": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_right",
 			"acup_size": "3"
 		},
 		{
@@ -302,7 +302,7 @@
 	"sangyang_0000021_dm500_sc0": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_left",
 			"acup_size": "3"
 		},
 		{
@@ -317,7 +317,7 @@
 	"sangyang_0000021_dm500_sc40": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_left",
 			"acup_size": "3"
 		},
 		{
@@ -332,7 +332,7 @@
 	"sangyang_0000021_dm500_sc80": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_left",
 			"acup_size": "3"
 		},
 		{
@@ -347,7 +347,7 @@
 	"sangyang_0000021_dm500_sc120": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_left",
 			"acup_size": "3"
 		},
 		{
@@ -362,7 +362,7 @@
 	"sangyang_0000021_dm500_sc160": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_left",
 			"acup_size": "3"
 		},
 		{
@@ -377,7 +377,7 @@
 	"sangyang_0000002_dm500_sc0": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_right",
 			"acup_size": "3"
 		},
 		{
@@ -392,7 +392,7 @@
 	"sangyang_0000002_dm500_sc40": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_right",
 			"acup_size": "3"
 		},
 		{
@@ -407,7 +407,7 @@
 	"sangyang_0000002_dm500_sc80": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_right",
 			"acup_size": "3"
 		},
 		{
@@ -422,7 +422,7 @@
 	"sangyang_0000002_dm500_sc120": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_right",
 			"acup_size": "3"
 		},
 		{
@@ -437,7 +437,7 @@
 	"sangyang_0000002_dm500_sc160": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "",
+			"hand_pos": "dorsal_right",
 			"acup_size": "3"
 		},
 		{
