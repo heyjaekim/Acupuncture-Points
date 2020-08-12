@@ -194,7 +194,7 @@ except OSError as e:
         print("Failed to create directory!!!!!")
         raise
 
-json_file = "./{}_info.json".format(acupuncture_info)
+json_file = "./json_data/{}_info.json".format(acupuncture_info)
 json_data = open_json_file(json_file)
 image_files = [ f for f in listdir(mypath) if isfile(join(mypath,f))]
 show_images(image_files, json_data)
