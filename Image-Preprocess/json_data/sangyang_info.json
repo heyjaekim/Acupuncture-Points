@@ -1,4 +1,19 @@
 {
+	"sangyang_0000002": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_right",
+			"acup_size": "3"
+		},
+		{
+			"acup_coord_x": 270,
+			"acup_coord_y": 185,
+			"acup_coord": [
+				270,
+				185
+			]
+		}
+	],
 	"sangyang_0000021": [
 		{
 			"acup_info": "sangyang",
@@ -6,1556 +21,431 @@
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 329,
-			"acup_coord_y": 261,
+			"acup_coord_x": 330,
+			"acup_coord_y": 269,
 			"acup_coord": [
-				329,
-				261
+				330,
+				269
 			]
 		}
 	],
-	"sangyang_0000022": [
+	"sangyang_0000021_tr-60": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 331,
-			"acup_coord_y": 271,
+			"acup_coord_x": 270,
+			"acup_coord_y": 269,
 			"acup_coord": [
-				331,
-				271
+				270,
+				269
 			]
 		}
 	],
-	"sangyang_0000024": [
+	"sangyang_0000002_tr-60": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 312,
-			"acup_coord_y": 235,
+			"acup_coord_x": 210,
+			"acup_coord_y": 185,
 			"acup_coord": [
-				312,
-				235
+				210,
+				185
 			]
 		}
 	],
-	"sangyang_0000025": [
+	"sangyang_0000021_tr-30": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 321,
-			"acup_coord_y": 226,
+			"acup_coord_x": 300,
+			"acup_coord_y": 269,
 			"acup_coord": [
-				321,
-				226
+				300,
+				269
 			]
 		}
 	],
-	"sangyang_0000021_dim400_scaling0": [
+	"sangyang_0000002_tr-30": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 188.0,
-			"acup_coord_y": 149.14285714285714,
+			"acup_coord_x": 240,
+			"acup_coord_y": 185,
 			"acup_coord": [
-				188.0,
-				149.14285714285714
+				240,
+				185
 			]
 		}
 	],
-	"sangyang_0000021_dim400_scaling40": [
+	"sangyang_0000021_tr30": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 228.0,
-			"acup_coord_y": 149.14285714285714,
+			"acup_coord_x": 360,
+			"acup_coord_y": 269,
 			"acup_coord": [
-				228.0,
-				149.14285714285714
+				360,
+				269
 			]
 		}
 	],
-	"sangyang_0000021_dim400_scaling80": [
+	"sangyang_0000002_tr30": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 268.0,
-			"acup_coord_y": 149.14285714285714,
+			"acup_coord_x": 300,
+			"acup_coord_y": 185,
 			"acup_coord": [
-				268.0,
-				149.14285714285714
+				300,
+				185
 			]
 		}
 	],
-	"sangyang_0000021_dim400_scaling120": [
+	"sangyang_0000021_tr60": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 308.0,
-			"acup_coord_y": 149.14285714285714,
+			"acup_coord_x": 390,
+			"acup_coord_y": 269,
 			"acup_coord": [
-				308.0,
-				149.14285714285714
+				390,
+				269
 			]
 		}
 	],
-	"sangyang_0000021_dim400_scaling160": [
+	"sangyang_0000002_tr60": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 348.0,
-			"acup_coord_y": 149.14285714285714,
+			"acup_coord_x": 330,
+			"acup_coord_y": 185,
 			"acup_coord": [
-				348.0,
-				149.14285714285714
+				330,
+				185
 			]
 		}
 	],
-	"sangyang_0000022_dim400_scaling0": [
+	"sangyang_0000021_dm400_sc0": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 189.14285714285714,
-			"acup_coord_y": 154.85714285714286,
+			"acup_coord_x": 188.57142857142858,
+			"acup_coord_y": 153.71428571428572,
 			"acup_coord": [
-				189.14285714285714,
-				154.85714285714286
+				188.57142857142858,
+				153.71428571428572
 			]
 		}
 	],
-	"sangyang_0000022_dim400_scaling40": [
+	"sangyang_0000021_dm400_sc40": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 229.14285714285714,
-			"acup_coord_y": 154.85714285714286,
+			"acup_coord_x": 228.57142857142858,
+			"acup_coord_y": 153.71428571428572,
 			"acup_coord": [
-				229.14285714285714,
-				154.85714285714286
+				228.57142857142858,
+				153.71428571428572
 			]
 		}
 	],
-	"sangyang_0000022_dim400_scaling80": [
+	"sangyang_0000021_dm400_sc80": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 269.1428571428571,
-			"acup_coord_y": 154.85714285714286,
+			"acup_coord_x": 268.57142857142856,
+			"acup_coord_y": 153.71428571428572,
 			"acup_coord": [
-				269.1428571428571,
-				154.85714285714286
+				268.57142857142856,
+				153.71428571428572
 			]
 		}
 	],
-	"sangyang_0000022_dim400_scaling120": [
+	"sangyang_0000021_dm400_sc120": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 309.1428571428571,
-			"acup_coord_y": 154.85714285714286,
+			"acup_coord_x": 308.57142857142856,
+			"acup_coord_y": 153.71428571428572,
 			"acup_coord": [
-				309.1428571428571,
-				154.85714285714286
+				308.57142857142856,
+				153.71428571428572
 			]
 		}
 	],
-	"sangyang_0000022_dim400_scaling160": [
+	"sangyang_0000021_dm400_sc160": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 349.1428571428571,
-			"acup_coord_y": 154.85714285714286,
+			"acup_coord_x": 348.57142857142856,
+			"acup_coord_y": 153.71428571428572,
 			"acup_coord": [
-				349.1428571428571,
-				154.85714285714286
+				348.57142857142856,
+				153.71428571428572
 			]
 		}
 	],
-	"sangyang_0000024_dim400_scaling0": [
+	"sangyang_0000002_dm400_sc0": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 178.28571428571428,
-			"acup_coord_y": 134.28571428571428,
+			"acup_coord_x": 154.28571428571428,
+			"acup_coord_y": 105.71428571428571,
 			"acup_coord": [
-				178.28571428571428,
-				134.28571428571428
+				154.28571428571428,
+				105.71428571428571
 			]
 		}
 	],
-	"sangyang_0000024_dim400_scaling40": [
+	"sangyang_0000002_dm400_sc40": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 218.28571428571428,
-			"acup_coord_y": 134.28571428571428,
+			"acup_coord_x": 194.28571428571428,
+			"acup_coord_y": 105.71428571428571,
 			"acup_coord": [
-				218.28571428571428,
-				134.28571428571428
+				194.28571428571428,
+				105.71428571428571
 			]
 		}
 	],
-	"sangyang_0000024_dim400_scaling80": [
+	"sangyang_0000002_dm400_sc80": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 258.2857142857143,
-			"acup_coord_y": 134.28571428571428,
+			"acup_coord_x": 234.28571428571428,
+			"acup_coord_y": 105.71428571428571,
 			"acup_coord": [
-				258.2857142857143,
-				134.28571428571428
+				234.28571428571428,
+				105.71428571428571
 			]
 		}
 	],
-	"sangyang_0000024_dim400_scaling120": [
+	"sangyang_0000002_dm400_sc120": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 298.2857142857143,
-			"acup_coord_y": 134.28571428571428,
+			"acup_coord_x": 274.2857142857143,
+			"acup_coord_y": 105.71428571428571,
 			"acup_coord": [
-				298.2857142857143,
-				134.28571428571428
+				274.2857142857143,
+				105.71428571428571
 			]
 		}
 	],
-	"sangyang_0000024_dim400_scaling160": [
+	"sangyang_0000002_dm400_sc160": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 338.2857142857143,
-			"acup_coord_y": 134.28571428571428,
+			"acup_coord_x": 314.2857142857143,
+			"acup_coord_y": 105.71428571428571,
 			"acup_coord": [
-				338.2857142857143,
-				134.28571428571428
+				314.2857142857143,
+				105.71428571428571
 			]
 		}
 	],
-	"sangyang_0000025_dim400_scaling0": [
+	"sangyang_0000021_dm500_sc0": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 183.42857142857142,
-			"acup_coord_y": 129.14285714285714,
+			"acup_coord_x": 235.71428571428572,
+			"acup_coord_y": 192.14285714285714,
 			"acup_coord": [
-				183.42857142857142,
-				129.14285714285714
+				235.71428571428572,
+				192.14285714285714
 			]
 		}
 	],
-	"sangyang_0000025_dim400_scaling40": [
+	"sangyang_0000021_dm500_sc40": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 223.42857142857142,
-			"acup_coord_y": 129.14285714285714,
+			"acup_coord_x": 275.7142857142857,
+			"acup_coord_y": 192.14285714285714,
 			"acup_coord": [
-				223.42857142857142,
-				129.14285714285714
+				275.7142857142857,
+				192.14285714285714
 			]
 		}
 	],
-	"sangyang_0000025_dim400_scaling80": [
+	"sangyang_0000021_dm500_sc80": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 263.42857142857144,
-			"acup_coord_y": 129.14285714285714,
+			"acup_coord_x": 315.7142857142857,
+			"acup_coord_y": 192.14285714285714,
 			"acup_coord": [
-				263.42857142857144,
-				129.14285714285714
+				315.7142857142857,
+				192.14285714285714
 			]
 		}
 	],
-	"sangyang_0000025_dim400_scaling120": [
+	"sangyang_0000021_dm500_sc120": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 303.42857142857144,
-			"acup_coord_y": 129.14285714285714,
+			"acup_coord_x": 355.7142857142857,
+			"acup_coord_y": 192.14285714285714,
 			"acup_coord": [
-				303.42857142857144,
-				129.14285714285714
+				355.7142857142857,
+				192.14285714285714
 			]
 		}
 	],
-	"sangyang_0000025_dim400_scaling160": [
+	"sangyang_0000021_dm500_sc160": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 343.42857142857144,
-			"acup_coord_y": 129.14285714285714,
+			"acup_coord_x": 395.7142857142857,
+			"acup_coord_y": 192.14285714285714,
 			"acup_coord": [
-				343.42857142857144,
-				129.14285714285714
+				395.7142857142857,
+				192.14285714285714
 			]
 		}
 	],
-	"sangyang_0000021_dim450_scaling0": [
+	"sangyang_0000002_dm500_sc0": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 211.5,
-			"acup_coord_y": 167.78571428571428,
+			"acup_coord_x": 192.85714285714286,
+			"acup_coord_y": 132.14285714285714,
 			"acup_coord": [
-				211.5,
-				167.78571428571428
+				192.85714285714286,
+				132.14285714285714
 			]
 		}
 	],
-	"sangyang_0000021_dim450_scaling40": [
+	"sangyang_0000002_dm500_sc40": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 251.5,
-			"acup_coord_y": 167.78571428571428,
+			"acup_coord_x": 232.85714285714286,
+			"acup_coord_y": 132.14285714285714,
 			"acup_coord": [
-				251.5,
-				167.78571428571428
+				232.85714285714286,
+				132.14285714285714
 			]
 		}
 	],
-	"sangyang_0000021_dim450_scaling80": [
+	"sangyang_0000002_dm500_sc80": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 291.5,
-			"acup_coord_y": 167.78571428571428,
+			"acup_coord_x": 272.8571428571429,
+			"acup_coord_y": 132.14285714285714,
 			"acup_coord": [
-				291.5,
-				167.78571428571428
+				272.8571428571429,
+				132.14285714285714
 			]
 		}
 	],
-	"sangyang_0000021_dim450_scaling120": [
+	"sangyang_0000002_dm500_sc120": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 331.5,
-			"acup_coord_y": 167.78571428571428,
+			"acup_coord_x": 312.8571428571429,
+			"acup_coord_y": 132.14285714285714,
 			"acup_coord": [
-				331.5,
-				167.78571428571428
+				312.8571428571429,
+				132.14285714285714
 			]
 		}
 	],
-	"sangyang_0000021_dim450_scaling160": [
+	"sangyang_0000002_dm500_sc160": [
 		{
 			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
+			"hand_pos": "",
 			"acup_size": "3"
 		},
 		{
-			"acup_coord_x": 371.5,
-			"acup_coord_y": 167.78571428571428,
+			"acup_coord_x": 352.8571428571429,
+			"acup_coord_y": 132.14285714285714,
 			"acup_coord": [
-				371.5,
-				167.78571428571428
-			]
-		}
-	],
-	"sangyang_0000022_dim450_scaling0": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 212.78571428571428,
-			"acup_coord_y": 174.21428571428572,
-			"acup_coord": [
-				212.78571428571428,
-				174.21428571428572
-			]
-		}
-	],
-	"sangyang_0000022_dim450_scaling40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 252.78571428571428,
-			"acup_coord_y": 174.21428571428572,
-			"acup_coord": [
-				252.78571428571428,
-				174.21428571428572
-			]
-		}
-	],
-	"sangyang_0000022_dim450_scaling80": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 292.7857142857143,
-			"acup_coord_y": 174.21428571428572,
-			"acup_coord": [
-				292.7857142857143,
-				174.21428571428572
-			]
-		}
-	],
-	"sangyang_0000022_dim450_scaling120": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 332.7857142857143,
-			"acup_coord_y": 174.21428571428572,
-			"acup_coord": [
-				332.7857142857143,
-				174.21428571428572
-			]
-		}
-	],
-	"sangyang_0000022_dim450_scaling160": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 372.7857142857143,
-			"acup_coord_y": 174.21428571428572,
-			"acup_coord": [
-				372.7857142857143,
-				174.21428571428572
-			]
-		}
-	],
-	"sangyang_0000024_dim450_scaling0": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 200.57142857142858,
-			"acup_coord_y": 151.07142857142858,
-			"acup_coord": [
-				200.57142857142858,
-				151.07142857142858
-			]
-		}
-	],
-	"sangyang_0000024_dim450_scaling40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 240.57142857142858,
-			"acup_coord_y": 151.07142857142858,
-			"acup_coord": [
-				240.57142857142858,
-				151.07142857142858
-			]
-		}
-	],
-	"sangyang_0000024_dim450_scaling80": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 280.57142857142856,
-			"acup_coord_y": 151.07142857142858,
-			"acup_coord": [
-				280.57142857142856,
-				151.07142857142858
-			]
-		}
-	],
-	"sangyang_0000024_dim450_scaling120": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 320.57142857142856,
-			"acup_coord_y": 151.07142857142858,
-			"acup_coord": [
-				320.57142857142856,
-				151.07142857142858
-			]
-		}
-	],
-	"sangyang_0000024_dim450_scaling160": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 360.57142857142856,
-			"acup_coord_y": 151.07142857142858,
-			"acup_coord": [
-				360.57142857142856,
-				151.07142857142858
-			]
-		}
-	],
-	"sangyang_0000025_dim450_scaling0": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 206.35714285714286,
-			"acup_coord_y": 145.28571428571428,
-			"acup_coord": [
-				206.35714285714286,
-				145.28571428571428
-			]
-		}
-	],
-	"sangyang_0000025_dim450_scaling40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 246.35714285714286,
-			"acup_coord_y": 145.28571428571428,
-			"acup_coord": [
-				246.35714285714286,
-				145.28571428571428
-			]
-		}
-	],
-	"sangyang_0000025_dim450_scaling80": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 286.3571428571429,
-			"acup_coord_y": 145.28571428571428,
-			"acup_coord": [
-				286.3571428571429,
-				145.28571428571428
-			]
-		}
-	],
-	"sangyang_0000025_dim450_scaling120": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 326.3571428571429,
-			"acup_coord_y": 145.28571428571428,
-			"acup_coord": [
-				326.3571428571429,
-				145.28571428571428
-			]
-		}
-	],
-	"sangyang_0000025_dim450_scaling160": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 366.3571428571429,
-			"acup_coord_y": 145.28571428571428,
-			"acup_coord": [
-				366.3571428571429,
-				145.28571428571428
-			]
-		}
-	],
-	"sangyang_0000021_dim500_scaling0": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 235.0,
-			"acup_coord_y": 186.42857142857142,
-			"acup_coord": [
-				235.0,
-				186.42857142857142
-			]
-		}
-	],
-	"sangyang_0000021_dim500_scaling40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 275.0,
-			"acup_coord_y": 186.42857142857142,
-			"acup_coord": [
-				275.0,
-				186.42857142857142
-			]
-		}
-	],
-	"sangyang_0000021_dim500_scaling80": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 315.0,
-			"acup_coord_y": 186.42857142857142,
-			"acup_coord": [
-				315.0,
-				186.42857142857142
-			]
-		}
-	],
-	"sangyang_0000021_dim500_scaling120": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 355.0,
-			"acup_coord_y": 186.42857142857142,
-			"acup_coord": [
-				355.0,
-				186.42857142857142
-			]
-		}
-	],
-	"sangyang_0000021_dim500_scaling160": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 395.0,
-			"acup_coord_y": 186.42857142857142,
-			"acup_coord": [
-				395.0,
-				186.42857142857142
-			]
-		}
-	],
-	"sangyang_0000022_dim500_scaling0": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 236.42857142857142,
-			"acup_coord_y": 193.57142857142858,
-			"acup_coord": [
-				236.42857142857142,
-				193.57142857142858
-			]
-		}
-	],
-	"sangyang_0000022_dim500_scaling40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 276.42857142857144,
-			"acup_coord_y": 193.57142857142858,
-			"acup_coord": [
-				276.42857142857144,
-				193.57142857142858
-			]
-		}
-	],
-	"sangyang_0000022_dim500_scaling80": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 316.42857142857144,
-			"acup_coord_y": 193.57142857142858,
-			"acup_coord": [
-				316.42857142857144,
-				193.57142857142858
-			]
-		}
-	],
-	"sangyang_0000022_dim500_scaling120": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 356.42857142857144,
-			"acup_coord_y": 193.57142857142858,
-			"acup_coord": [
-				356.42857142857144,
-				193.57142857142858
-			]
-		}
-	],
-	"sangyang_0000022_dim500_scaling160": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 396.42857142857144,
-			"acup_coord_y": 193.57142857142858,
-			"acup_coord": [
-				396.42857142857144,
-				193.57142857142858
-			]
-		}
-	],
-	"sangyang_0000024_dim500_scaling0": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 222.85714285714286,
-			"acup_coord_y": 167.85714285714286,
-			"acup_coord": [
-				222.85714285714286,
-				167.85714285714286
-			]
-		}
-	],
-	"sangyang_0000024_dim500_scaling40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 262.8571428571429,
-			"acup_coord_y": 167.85714285714286,
-			"acup_coord": [
-				262.8571428571429,
-				167.85714285714286
-			]
-		}
-	],
-	"sangyang_0000024_dim500_scaling80": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 302.8571428571429,
-			"acup_coord_y": 167.85714285714286,
-			"acup_coord": [
-				302.8571428571429,
-				167.85714285714286
-			]
-		}
-	],
-	"sangyang_0000024_dim500_scaling120": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 342.8571428571429,
-			"acup_coord_y": 167.85714285714286,
-			"acup_coord": [
-				342.8571428571429,
-				167.85714285714286
-			]
-		}
-	],
-	"sangyang_0000024_dim500_scaling160": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 382.8571428571429,
-			"acup_coord_y": 167.85714285714286,
-			"acup_coord": [
-				382.8571428571429,
-				167.85714285714286
-			]
-		}
-	],
-	"sangyang_0000025_dim500_scaling0": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 229.28571428571428,
-			"acup_coord_y": 161.42857142857142,
-			"acup_coord": [
-				229.28571428571428,
-				161.42857142857142
-			]
-		}
-	],
-	"sangyang_0000025_dim500_scaling40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 269.2857142857143,
-			"acup_coord_y": 161.42857142857142,
-			"acup_coord": [
-				269.2857142857143,
-				161.42857142857142
-			]
-		}
-	],
-	"sangyang_0000025_dim500_scaling80": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 309.2857142857143,
-			"acup_coord_y": 161.42857142857142,
-			"acup_coord": [
-				309.2857142857143,
-				161.42857142857142
-			]
-		}
-	],
-	"sangyang_0000025_dim500_scaling120": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 349.2857142857143,
-			"acup_coord_y": 161.42857142857142,
-			"acup_coord": [
-				349.2857142857143,
-				161.42857142857142
-			]
-		}
-	],
-	"sangyang_0000025_dim500_scaling160": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 389.2857142857143,
-			"acup_coord_y": 161.42857142857142,
-			"acup_coord": [
-				389.2857142857143,
-				161.42857142857142
-			]
-		}
-	],
-	"sangyang_0000021_dim550_scaling0": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 258.5,
-			"acup_coord_y": 205.07142857142858,
-			"acup_coord": [
-				258.5,
-				205.07142857142858
-			]
-		}
-	],
-	"sangyang_0000021_dim550_scaling40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 298.5,
-			"acup_coord_y": 205.07142857142858,
-			"acup_coord": [
-				298.5,
-				205.07142857142858
-			]
-		}
-	],
-	"sangyang_0000021_dim550_scaling80": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 338.5,
-			"acup_coord_y": 205.07142857142858,
-			"acup_coord": [
-				338.5,
-				205.07142857142858
-			]
-		}
-	],
-	"sangyang_0000021_dim550_scaling120": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 378.5,
-			"acup_coord_y": 205.07142857142858,
-			"acup_coord": [
-				378.5,
-				205.07142857142858
-			]
-		}
-	],
-	"sangyang_0000022_dim550_scaling0": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 260.07142857142856,
-			"acup_coord_y": 212.92857142857142,
-			"acup_coord": [
-				260.07142857142856,
-				212.92857142857142
-			]
-		}
-	],
-	"sangyang_0000022_dim550_scaling40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 300.07142857142856,
-			"acup_coord_y": 212.92857142857142,
-			"acup_coord": [
-				300.07142857142856,
-				212.92857142857142
-			]
-		}
-	],
-	"sangyang_0000022_dim550_scaling80": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 340.07142857142856,
-			"acup_coord_y": 212.92857142857142,
-			"acup_coord": [
-				340.07142857142856,
-				212.92857142857142
-			]
-		}
-	],
-	"sangyang_0000022_dim550_scaling120": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 380.07142857142856,
-			"acup_coord_y": 212.92857142857142,
-			"acup_coord": [
-				380.07142857142856,
-				212.92857142857142
-			]
-		}
-	],
-	"sangyang_0000024_dim550_scaling0": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 245.14285714285714,
-			"acup_coord_y": 184.64285714285714,
-			"acup_coord": [
-				245.14285714285714,
-				184.64285714285714
-			]
-		}
-	],
-	"sangyang_0000024_dim550_scaling40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 285.1428571428571,
-			"acup_coord_y": 184.64285714285714,
-			"acup_coord": [
-				285.1428571428571,
-				184.64285714285714
-			]
-		}
-	],
-	"sangyang_0000024_dim550_scaling80": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 325.1428571428571,
-			"acup_coord_y": 184.64285714285714,
-			"acup_coord": [
-				325.1428571428571,
-				184.64285714285714
-			]
-		}
-	],
-	"sangyang_0000024_dim550_scaling120": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 365.1428571428571,
-			"acup_coord_y": 184.64285714285714,
-			"acup_coord": [
-				365.1428571428571,
-				184.64285714285714
-			]
-		}
-	],
-	"sangyang_0000025_dim550_scaling0": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 252.21428571428572,
-			"acup_coord_y": 177.57142857142858,
-			"acup_coord": [
-				252.21428571428572,
-				177.57142857142858
-			]
-		}
-	],
-	"sangyang_0000025_dim550_scaling40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 292.2142857142857,
-			"acup_coord_y": 177.57142857142858,
-			"acup_coord": [
-				292.2142857142857,
-				177.57142857142858
-			]
-		}
-	],
-	"sangyang_0000025_dim550_scaling80": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 332.2142857142857,
-			"acup_coord_y": 177.57142857142858,
-			"acup_coord": [
-				332.2142857142857,
-				177.57142857142858
-			]
-		}
-	],
-	"sangyang_0000025_dim550_scaling120": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 372.2142857142857,
-			"acup_coord_y": 177.57142857142858,
-			"acup_coord": [
-				372.2142857142857,
-				177.57142857142858
-			]
-		}
-	],
-	"sangyang_0000021_trans-40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 289,
-			"acup_coord_y": 261,
-			"acup_coord": [
-				289,
-				261
-			]
-		}
-	],
-	"sangyang_0000022_trans-40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 291,
-			"acup_coord_y": 271,
-			"acup_coord": [
-				291,
-				271
-			]
-		}
-	],
-	"sangyang_0000024_trans-40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 272,
-			"acup_coord_y": 235,
-			"acup_coord": [
-				272,
-				235
-			]
-		}
-	],
-	"sangyang_0000025_trans-40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 281,
-			"acup_coord_y": 226,
-			"acup_coord": [
-				281,
-				226
-			]
-		}
-	],
-	"sangyang_0000021_trans-20": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 309,
-			"acup_coord_y": 261,
-			"acup_coord": [
-				309,
-				261
-			]
-		}
-	],
-	"sangyang_0000022_trans-20": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 311,
-			"acup_coord_y": 271,
-			"acup_coord": [
-				311,
-				271
-			]
-		}
-	],
-	"sangyang_0000024_trans-20": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 292,
-			"acup_coord_y": 235,
-			"acup_coord": [
-				292,
-				235
-			]
-		}
-	],
-	"sangyang_0000025_trans-20": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 301,
-			"acup_coord_y": 226,
-			"acup_coord": [
-				301,
-				226
-			]
-		}
-	],
-	"sangyang_0000021_trans+20": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 349,
-			"acup_coord_y": 261,
-			"acup_coord": [
-				349,
-				261
-			]
-		}
-	],
-	"sangyang_0000022_trans+20": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 351,
-			"acup_coord_y": 271,
-			"acup_coord": [
-				351,
-				271
-			]
-		}
-	],
-	"sangyang_0000024_trans+20": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 332,
-			"acup_coord_y": 235,
-			"acup_coord": [
-				332,
-				235
-			]
-		}
-	],
-	"sangyang_0000025_trans+20": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 341,
-			"acup_coord_y": 226,
-			"acup_coord": [
-				341,
-				226
-			]
-		}
-	],
-	"sangyang_0000021_trans+40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 369,
-			"acup_coord_y": 261,
-			"acup_coord": [
-				369,
-				261
-			]
-		}
-	],
-	"sangyang_0000022_trans+40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 371,
-			"acup_coord_y": 271,
-			"acup_coord": [
-				371,
-				271
-			]
-		}
-	],
-	"sangyang_0000024_trans+40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 352,
-			"acup_coord_y": 235,
-			"acup_coord": [
-				352,
-				235
-			]
-		}
-	],
-	"sangyang_0000025_trans+40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 361,
-			"acup_coord_y": 226,
-			"acup_coord": [
-				361,
-				226
-			]
-		}
-	],
-	"sangyang_0000021_trans-60": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 269,
-			"acup_coord_y": 261,
-			"acup_coord": [
-				269,
-				261
-			]
-		}
-	],
-	"sangyang_0000022_trans-60": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 271,
-			"acup_coord_y": 271,
-			"acup_coord": [
-				271,
-				271
-			]
-		}
-	],
-	"sangyang_0000024_trans-60": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 252,
-			"acup_coord_y": 235,
-			"acup_coord": [
-				252,
-				235
-			]
-		}
-	],
-	"sangyang_0000025_trans-60": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 261,
-			"acup_coord_y": 226,
-			"acup_coord": [
-				261,
-				226
-			]
-		}
-	],
-	"sangyang_0000021_trans+60": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 389,
-			"acup_coord_y": 261,
-			"acup_coord": [
-				389,
-				261
-			]
-		}
-	],
-	"sangyang_0000022_trans+60": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 391,
-			"acup_coord_y": 271,
-			"acup_coord": [
-				391,
-				271
-			]
-		}
-	],
-	"sangyang_0000024_trans+60": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 372,
-			"acup_coord_y": 235,
-			"acup_coord": [
-				372,
-				235
-			]
-		}
-	],
-	"sangyang_0000025_trans+60": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 381,
-			"acup_coord_y": 226,
-			"acup_coord": [
-				381,
-				226
+				352.8571428571429,
+				132.14285714285714
 			]
 		}
 	]

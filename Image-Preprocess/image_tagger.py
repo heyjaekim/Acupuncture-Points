@@ -43,7 +43,7 @@ def open_json_file(file_path):
 
 def save_json_file(json_data):
     with open(json_file, 'w') as outfile:
-        json.dump(json_data, outfile, indent=4)
+        json.dump(json_data, outfile, indent='\t')
 
 def draw_circle(event, x, y, flags, param):     
     global img
@@ -180,7 +180,7 @@ hand_position = get_hand_position(hand_pos)
 acupuncture_db = open_temp_db()
 acupuncture_info = is_acupuncture(acupuncture_info, acupuncture_db)
 
-save_directory = f'{acupuncture_info}_{hand_position}'
+save_directory = f'{acupuncture_info}/{acupuncture_info}_{hand_position}'
 
 try:
     if not(isdir(save_directory)):

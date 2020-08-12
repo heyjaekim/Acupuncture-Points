@@ -82,7 +82,7 @@ def translate_image(images_info, json_data, xmove):
         acupuncture_id = f"{acupuncture_info}_{img_id}"
         x, y, xy = json_data[acupuncture_id][1].values()
         
-        acupuncture_new_id = acupuncture_id + f'_trans+{xmove}' if xmove >= 0 else acupuncture_id + f'_trans{xmove}'
+        acupuncture_new_id = acupuncture_id + f'_tr{xmove}' if xmove >= 0 else acupuncture_id + f'_tr{xmove}'
         
         json_data[acupuncture_new_id] = list()
         json_data[acupuncture_new_id].append({
@@ -128,7 +128,7 @@ def scaling_image(images_info, json_data, dim):
                         l_img[row, col+xmove] = img[row, col]
                         
                 acupuncture_id = f"{acupuncture_info}_{img_id}"
-                acupuncture_new_id = acupuncture_id + f'_dim{dim}_scaling{xmove}'
+                acupuncture_new_id = acupuncture_id + f'_dm{dim}_sc{xmove}'
                 x, y, xy = json_data[acupuncture_id][1].values()
                 new_x, new_y = x * dim / 700 + xmove, y * dim / 700
                 new_xy = (new_x, new_y)
@@ -206,20 +206,18 @@ acupuncture_info = input('혈자리를 입력해주세요. ex) 소충 ')
 
 # TODO: transformation(ongoing)
 
-x_moves = [-60, -40, -20, 20, 40, 60]
-dimensions = [400,450,500,550]
+x_moves = [-60, -30, 30, 60]
+dimensions = [400,500]
 angles = [-45, -30, 15, 15, 30, 45]
-# x_moves = [-40, -30, -20, -10, 10, 20, 30, 40]
-# dimensions = [500,550,600,650]
 
 acupuncture_size = 3
 acupuncture_db = open_temp_db()
 acupuncture_info = is_acupuncture(acupuncture_info, acupuncture_db)
 
-hand_path_frst = f'./{acupuncture_info}_dorsal_left/'
-hand_path_scnd = f'./{acupuncture_info}_dorsal_right/'
-hand_path_thrd = f'./{acupuncture_info}_palmar_left/'
-hand_path_frth = f'./{acupuncture_info}_palmar_right/'
+hand_path_frst = f'./{acupuncture_info}/{acupuncture_info}_dorsal_left/'
+hand_path_scnd = f'./{acupuncture_info}/{acupuncture_info}_dorsal_right/'
+hand_path_thrd = f'./{acupuncture_info}/{acupuncture_info}_palmar_left/'
+hand_path_frth = f'./{acupuncture_info}/{acupuncture_info}_palmar_right/'
 
 temp_paths = [hand_path_frst, hand_path_scnd, hand_path_thrd, hand_path_frth]
 changed_hands_path = [p+'change' for p in temp_paths if isdir(p)]
@@ -229,9 +227,9 @@ json_data = open_json_file(json_file)
 
 images_info = sorted(make_path_tuple(acupuncture_info, changed_hands_path), key=lambda x:x[1])
 
-# for i in range(len(x_moves)):
-#     translate_image(images_info, json_data, x_moves[i])
-# for i in range(len(dimensions)):
-#     scaling_image(images_info, json_data, dimensions[i])
-for i in range(len(angles)):
-    rotate_image(images_info, json_data, angles[i])
+for i in range(len(x_moves)):
+    translate_image(images_info, json_data, x_moves[i])
+for i in range(len(dimensions)):
+    scaling_image(images_info, json_data, dimensions[i])
+# for i in range(len(angles)):
+#     rotate_image(images_info, json_data, angles[i])
