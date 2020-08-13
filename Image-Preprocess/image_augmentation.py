@@ -227,8 +227,8 @@ def rotate_image_trnsfm(images_info, json_data, angle):
         new_x, new_y = rotate_box((x, y), cx, cy, height, width, angle)
         new_xy = (new_x, new_y)
 
-        for row in range(height):
-            for col in range(width):
+        for row in range(new_height):
+            for col in range(new_width):
                 r,g,b = rotated_img[row,col][0], rotated_img[row,col][1], rotated_img[row,col][2]
                 if r <= 0 and g <= 0 and b <= 0:
                     rotated_img[row,col] = np.array([255,255,255])                    
