@@ -49,6 +49,56 @@ def open_json_file(file_path):
 def save_json_file(json_data):
     with open(json_file, 'w') as outfile:
         json.dump(json_data, outfile, indent='\t')
+
+def rotate_bound(image, theta):
+    # grab the dimensions of the image and then determine the
+    # centre
+    (h, w) = image.shape[:2]
+    (cX, cY) = (w // 2, h // 2)
+
+    # grab the rotation matrix (applying the negative of the
+    # angle to rotate clockwise), then grab the sine and cosine
+    # (i.e., the rotation components of the matrix)
+    M = cv2.getRotationMatrix2D((cX, cY), theta, 1.0)
+    cos = np.abs(M[0, 0])
+    sin = np.abs(M[0, 1])
+
+    # compute the new bounding dimensions of the image
+    nW = int((h * sin) + (w * cos))
+    nH = int((h * cos) + (w * sin))
+
+    # adjust the rotation matrix to take into account translation
+    M[0, 2] += (nW / 2) - cX
+    M[1, 2] += (nH / 2) - cY
+
+    # perform the actual rotation and return the image
+    return cv2.warpAffine(image, M, (nW, nH), borderMode=cv2.BORDER_TRANSPARENT)
+
+def rotate_box(coord, cx, cy, h, w, theta):
+    
+    # opencv calculates standard transformation matrix
+    M = cv2.getRotationMatrix2D((cx, cy), theta, 1.0)
+    
+    # Grab  the rotation components of the matrix)
+    cos = np.abs(M[0, 0])
+    sin = np.abs(M[0, 1])
+    
+    # compute the new bounding dimensions of the image
+    nW = int((h * sin) + (w * cos))
+    nH = int((h * cos) + (w * sin))
+    
+    # adjust the rotation matrix to take into account translation
+    M[0, 2] += (nW / 2) - cx
+    M[1, 2] += (nH / 2) - cy
+    
+    # Prepare the vector to be transformed
+    v = [coord[0], coord[1],1]
+    
+    # Perform the actual rotation and return the image
+    calculated = np.dot(M,v)
+    new_bb = (calculated[0], calculated[1])
+    
+    return new_bb
           
 def translate_image(images_info, json_data, xmove):
 
@@ -107,13 +157,13 @@ def scaling_image(images_info, json_data, dim):
     if not(isdir(save_directory)):
         makedirs(save_directory)
     
-    x_offset = [0, 40, 80, 120, 160]
+    x_offset = [0, 80, 160, 240]
     # x_offset = [0, 20, 40, 60, 80, 100, 120, 140, 160, 180]
 
     for i in range(0, len(images_info)):
         img_path = images_info[i][0]
         img_hand_pos = images_info[i][1]
-        # 왼쪽 위로 줄어들게 된다: 700 - dim = xmove
+        
         img = cv2.resize(cv2.imread(img_path, cv2.IMREAD_UNCHANGED), dsize=(dim,dim))
         img_id = ((img_path.split('/')[-1]).split('_')[-1]).split('.')[0]
         height, width = img.shape[:2]
@@ -128,7 +178,7 @@ def scaling_image(images_info, json_data, dim):
                         l_img[row, col+xmove] = img[row, col]
                         
                 acupuncture_id = f"{acupuncture_info}_{img_id}"
-                acupuncture_new_id = acupuncture_id + f'_dm{dim}_sc{xmove}'
+                acupuncture_new_id = acupuncture_id + f'_sc{dim}_tr{xmove}'
                 x, y, xy = json_data[acupuncture_id][1].values()
                 new_x, new_y = x * dim / 700 + xmove, y * dim / 700
                 new_xy = (new_x, new_y)
@@ -149,52 +199,54 @@ def scaling_image(images_info, json_data, dim):
                 l_img = blank_image.copy()
     save_json_file(json_data)
 
-def rotate_image(images_info, json_data, angle):
+def rotate_image_trnsfm(images_info, json_data, angle):
 
-    save_directory = f'./{acupuncture_info}/_scaled'
+    save_directory = f'./{acupuncture_info}/_rotate_trnsfm'
     if not(isdir(save_directory)):
         makedirs(save_directory)
     
-    x_offset = [0, 40, 80, 120, 160]
-    # x_offset = [0, 20, 40, 60, 80, 100, 120, 140, 160, 180]
-
     for i in range(0, len(images_info)):
         img_path = images_info[i][0]
         img_hand_pos = images_info[i][1]
-        # 왼쪽 위로 줄어들게 된다: 700 - dim = xmove
-        img = cv2.resize(cv2.imread(img_path, cv2.IMREAD_UNCHANGED), dsize=(dim,dim))
-        img_id = ((img_path.split('/')[-1]).split('_')[-1]).split('.')[0]
-        height, width = img.shape[:2]
         
-        blank_image = np.zeros((700,700,3), np.uint8)
-        blank_image[:,:] = (255,255,255)
-        l_img = blank_image.copy()
-        for xmove in x_offset:
-            if dim + xmove < 700:
-                for row in range(len(img)):
-                    for col in range(len(img)):
-                        l_img[row, col+xmove] = img[row, col]
-                        
-                acupuncture_id = f"{acupuncture_info}_{img_id}"
-                acupuncture_new_id = acupuncture_id + f'_dim{dim}_scaling{xmove}'
-                x, y, xy = json_data[acupuncture_id][1].values()
-                new_x, new_y = x * dim / 700 + xmove, y * dim / 700
-                new_xy = (new_x, new_y)
+        # read the image file, then generate rotated image
+        img = cv2.imread(img_path, cv2.IMREAD_UNCHANGED)
+        rotated_img = rotate_bound(img, angle)
+        img_id = ((img_path.split('/')[-1]).split('_')[-1]).split('.')[0]
 
-                json_data[acupuncture_new_id] = list()
-                json_data[acupuncture_new_id].append({
-                    "acup_info": f"{acupuncture_info}",
-                    "hand_pos": f"{img_hand_pos}",
-                    "acup_size": f"{acupuncture_size}"
-                })
-                json_data[acupuncture_new_id].append({
-                    "acup_coord_x": new_x,
-                    "acup_coord_y": new_y,
-                    "acup_coord": new_xy
-                })
+        # height and width for images
+        height, width = img.shape[:2]
+        (cx, cy) = (width // 2, height // 2)
+        (new_height, new_width) = rotated_img.shape[:2]
+        (new_cx, new_cy) = (new_width // 2, new_height // 2)
+        
+        acupuncture_id = f"{acupuncture_info}_{img_id}"
+        acupuncture_new_id = acupuncture_id + f'_rt{angle}'
+        
+        x, y, xy = json_data[acupuncture_id][1].values()
+        new_x, new_y = rotate_box((x, y), cx, cy, height, width, angle)
+        new_xy = (new_x, new_y)
 
-                cv2.imwrite(f'./{save_directory}/{acupuncture_new_id}.png', l_img)
-                l_img = blank_image.copy()
+        for row in range(height):
+            for col in range(width):
+                r,g,b = rotated_img[row,col][0], rotated_img[row,col][1], rotated_img[row,col][2]
+                if r <= 0 and g <= 0 and b <= 0:
+                    rotated_img[row,col] = np.array([255,255,255])                    
+
+        json_data[acupuncture_new_id] = list()
+        json_data[acupuncture_new_id].append({
+            "acup_info": f"{acupuncture_info}",
+            "hand_pos": f"{img_hand_pos}",
+            "acup_size": f"{acupuncture_size}"
+        })
+        json_data[acupuncture_new_id].append({
+            "acup_coord_x": new_x,
+            "acup_coord_y": new_y,
+            "acup_coord": new_xy
+        })
+
+        cv2.imwrite(f'./{save_directory}/{acupuncture_new_id}.png', rotated_img)
+
     save_json_file(json_data)
 
 ##############################################################################################
@@ -206,9 +258,9 @@ acupuncture_info = input('혈자리를 입력해주세요. ex) 소충 ')
 
 # TODO: transformation(ongoing)
 
-x_moves = [-60, -30, 30, 60]
+x_moves = [-60, 60]
 dimensions = [400,500]
-angles = [-45, -30, 15, 15, 30, 45]
+angles = [-45]
 
 acupuncture_size = 3
 acupuncture_db = open_temp_db()
@@ -231,5 +283,5 @@ for i in range(len(x_moves)):
     translate_image(images_info, json_data, x_moves[i])
 for i in range(len(dimensions)):
     scaling_image(images_info, json_data, dimensions[i])
-# for i in range(len(angles)):
-#     rotate_image(images_info, json_data, angles[i])
+for i in range(len(angles)):
+    rotate_image_trnsfm(images_info, json_data, angles[i])

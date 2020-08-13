@@ -59,66 +59,6 @@
 			]
 		}
 	],
-	"sangyang_0000021_tr-30": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 300,
-			"acup_coord_y": 269,
-			"acup_coord": [
-				300,
-				269
-			]
-		}
-	],
-	"sangyang_0000002_tr-30": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 240,
-			"acup_coord_y": 185,
-			"acup_coord": [
-				240,
-				185
-			]
-		}
-	],
-	"sangyang_0000021_tr30": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 360,
-			"acup_coord_y": 269,
-			"acup_coord": [
-				360,
-				269
-			]
-		}
-	],
-	"sangyang_0000002_tr30": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 300,
-			"acup_coord_y": 185,
-			"acup_coord": [
-				300,
-				185
-			]
-		}
-	],
 	"sangyang_0000021_tr60": [
 		{
 			"acup_info": "sangyang",
@@ -149,7 +89,7 @@
 			]
 		}
 	],
-	"sangyang_0000021_dm400_sc0": [
+	"sangyang_0000021_sc400_tr0": [
 		{
 			"acup_info": "sangyang",
 			"hand_pos": "dorsal_left",
@@ -164,22 +104,7 @@
 			]
 		}
 	],
-	"sangyang_0000021_dm400_sc40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 228.57142857142858,
-			"acup_coord_y": 153.71428571428572,
-			"acup_coord": [
-				228.57142857142858,
-				153.71428571428572
-			]
-		}
-	],
-	"sangyang_0000021_dm400_sc80": [
+	"sangyang_0000021_sc400_tr80": [
 		{
 			"acup_info": "sangyang",
 			"hand_pos": "dorsal_left",
@@ -194,22 +119,7 @@
 			]
 		}
 	],
-	"sangyang_0000021_dm400_sc120": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 308.57142857142856,
-			"acup_coord_y": 153.71428571428572,
-			"acup_coord": [
-				308.57142857142856,
-				153.71428571428572
-			]
-		}
-	],
-	"sangyang_0000021_dm400_sc160": [
+	"sangyang_0000021_sc400_tr160": [
 		{
 			"acup_info": "sangyang",
 			"hand_pos": "dorsal_left",
@@ -224,7 +134,22 @@
 			]
 		}
 	],
-	"sangyang_0000002_dm400_sc0": [
+	"sangyang_0000021_sc400_tr240": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_left",
+			"acup_size": "3"
+		},
+		{
+			"acup_coord_x": 428.57142857142856,
+			"acup_coord_y": 153.71428571428572,
+			"acup_coord": [
+				428.57142857142856,
+				153.71428571428572
+			]
+		}
+	],
+	"sangyang_0000002_sc400_tr0": [
 		{
 			"acup_info": "sangyang",
 			"hand_pos": "dorsal_right",
@@ -239,22 +164,7 @@
 			]
 		}
 	],
-	"sangyang_0000002_dm400_sc40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 194.28571428571428,
-			"acup_coord_y": 105.71428571428571,
-			"acup_coord": [
-				194.28571428571428,
-				105.71428571428571
-			]
-		}
-	],
-	"sangyang_0000002_dm400_sc80": [
+	"sangyang_0000002_sc400_tr80": [
 		{
 			"acup_info": "sangyang",
 			"hand_pos": "dorsal_right",
@@ -269,22 +179,7 @@
 			]
 		}
 	],
-	"sangyang_0000002_dm400_sc120": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 274.2857142857143,
-			"acup_coord_y": 105.71428571428571,
-			"acup_coord": [
-				274.2857142857143,
-				105.71428571428571
-			]
-		}
-	],
-	"sangyang_0000002_dm400_sc160": [
+	"sangyang_0000002_sc400_tr160": [
 		{
 			"acup_info": "sangyang",
 			"hand_pos": "dorsal_right",
@@ -299,7 +194,22 @@
 			]
 		}
 	],
-	"sangyang_0000021_dm500_sc0": [
+	"sangyang_0000002_sc400_tr240": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_right",
+			"acup_size": "3"
+		},
+		{
+			"acup_coord_x": 394.2857142857143,
+			"acup_coord_y": 105.71428571428571,
+			"acup_coord": [
+				394.2857142857143,
+				105.71428571428571
+			]
+		}
+	],
+	"sangyang_0000021_sc500_tr0": [
 		{
 			"acup_info": "sangyang",
 			"hand_pos": "dorsal_left",
@@ -314,22 +224,7 @@
 			]
 		}
 	],
-	"sangyang_0000021_dm500_sc40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 275.7142857142857,
-			"acup_coord_y": 192.14285714285714,
-			"acup_coord": [
-				275.7142857142857,
-				192.14285714285714
-			]
-		}
-	],
-	"sangyang_0000021_dm500_sc80": [
+	"sangyang_0000021_sc500_tr80": [
 		{
 			"acup_info": "sangyang",
 			"hand_pos": "dorsal_left",
@@ -344,22 +239,7 @@
 			]
 		}
 	],
-	"sangyang_0000021_dm500_sc120": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_left",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 355.7142857142857,
-			"acup_coord_y": 192.14285714285714,
-			"acup_coord": [
-				355.7142857142857,
-				192.14285714285714
-			]
-		}
-	],
-	"sangyang_0000021_dm500_sc160": [
+	"sangyang_0000021_sc500_tr160": [
 		{
 			"acup_info": "sangyang",
 			"hand_pos": "dorsal_left",
@@ -374,7 +254,7 @@
 			]
 		}
 	],
-	"sangyang_0000002_dm500_sc0": [
+	"sangyang_0000002_sc500_tr0": [
 		{
 			"acup_info": "sangyang",
 			"hand_pos": "dorsal_right",
@@ -389,22 +269,7 @@
 			]
 		}
 	],
-	"sangyang_0000002_dm500_sc40": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 232.85714285714286,
-			"acup_coord_y": 132.14285714285714,
-			"acup_coord": [
-				232.85714285714286,
-				132.14285714285714
-			]
-		}
-	],
-	"sangyang_0000002_dm500_sc80": [
+	"sangyang_0000002_sc500_tr80": [
 		{
 			"acup_info": "sangyang",
 			"hand_pos": "dorsal_right",
@@ -419,22 +284,7 @@
 			]
 		}
 	],
-	"sangyang_0000002_dm500_sc120": [
-		{
-			"acup_info": "sangyang",
-			"hand_pos": "dorsal_right",
-			"acup_size": "3"
-		},
-		{
-			"acup_coord_x": 312.8571428571429,
-			"acup_coord_y": 132.14285714285714,
-			"acup_coord": [
-				312.8571428571429,
-				132.14285714285714
-			]
-		}
-	],
-	"sangyang_0000002_dm500_sc160": [
+	"sangyang_0000002_sc500_tr160": [
 		{
 			"acup_info": "sangyang",
 			"hand_pos": "dorsal_right",
@@ -446,6 +296,36 @@
 			"acup_coord": [
 				352.8571428571429,
 				132.14285714285714
+			]
+		}
+	],
+	"sangyang_0000021_rt-45": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_left",
+			"acup_size": "3"
+		},
+		{
+			"acup_coord_x": 537.6335136523794,
+			"acup_coord_y": 423.0822151001587,
+			"acup_coord": [
+				537.6335136523794,
+				423.0822151001587
+			]
+		}
+	],
+	"sangyang_0000002_rt-45": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_right",
+			"acup_size": "3"
+		},
+		{
+			"acup_coord_x": 554.6040764008566,
+			"acup_coord_y": 321.2588386092958,
+			"acup_coord": [
+				554.6040764008566,
+				321.2588386092958
 			]
 		}
 	]
