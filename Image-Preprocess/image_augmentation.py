@@ -249,14 +249,63 @@ def rotate_image_trnsfm(images_info, json_data, angle):
 
     save_json_file(json_data)
 
+def detect_edge():
+    img = cv2.imread('test2\Hand_0000002.png')
+
+    # convert to hsv
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    print(hsv[0])
+
+    #threshold using inRange
+    lower_range = (0,0,50)
+    upper_range = (120,120,255)
+    mask = cv2.inRange(hsv, lower_range, upper_range)
+    # print(mask[0][10])
+
+    # invert mask
+    mask = 255 - mask
+
+    cv2.imshow('mask', mask)
+    cv2.waitKey(0)
+
+    # apply morphology closing and opening to mask
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (15,15))
+    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+
+    result = img.copy()
+    result[mask==0] = (255,255,255)
+
+    # write result to disk
+    cv2.imwrite("man_face_mask.png", mask)
+    cv2.imwrite("man_face_white_background.png", result)
+
+    # display it
+    cv2.imshow("mask", mask)
+    cv2.imshow("result", result)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+    exit()
+
+
+    # edges = cv2.Canny(img, 100, 200)
+
+    # cv2.imshow('img', edges)
+    # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
+
+    # mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+
+
+
 ##############################################################################################
 
 # 혈점 정보, 점 사이즈, 손 위치 입력
-acupuncture_info = input('혈자리를 입력해주세요. ex) 소충 ')
+# acupuncture_info = input('혈자리를 입력해주세요. ex) 소충 ')
+acupuncture_info = "상양"
 
 ##############################################################################################
-
-# TODO: transformation(ongoing)
 
 x_moves = [-60, 60]
 dimensions = [400,500]
@@ -278,6 +327,8 @@ json_file = "./json_data/{}_info.json".format(acupuncture_info)
 json_data = open_json_file(json_file)
 
 images_info = sorted(make_path_tuple(acupuncture_info, changed_hands_path), key=lambda x:x[1])
+
+detect_edge()
 
 for i in range(len(x_moves)):
     translate_image(images_info, json_data, x_moves[i])
