@@ -249,53 +249,81 @@ def rotate_image_trnsfm(images_info, json_data, angle):
 
     save_json_file(json_data)
 
-def detect_edge():
-    img = cv2.imread('test2\Hand_0000002.png')
+def clear_background(img):
+    # img = cv2.imread('test2\Hand_0000002.png')
 
     # convert to hsv
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-    print(hsv[0])
 
-    #threshold using inRange
-    lower_range = (0,0,50)
-    upper_range = (120,120,255)
+    lower_range = (0,0,100)
+    upper_range = (358,45,255)
     mask = cv2.inRange(hsv, lower_range, upper_range)
-    # print(mask[0][10])
 
     # invert mask
     mask = 255 - mask
-
-    cv2.imshow('mask', mask)
-    cv2.waitKey(0)
+    # cv2.imshow('mask', mask)
+    # cv2.waitKey(0)
 
     # apply morphology closing and opening to mask
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (15,15))
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
     mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
     mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
 
     result = img.copy()
     result[mask==0] = (255,255,255)
+    
+    return result
+    
+def fill_background_image(images_info, json_data):
 
-    # write result to disk
-    cv2.imwrite("man_face_mask.png", mask)
-    cv2.imwrite("man_face_white_background.png", result)
+    save_directory = f'./{acupuncture_info}/_filled'
+    if not(isdir(save_directory)):
+        makedirs(save_directory)
+    
+    for i in range(0, len(images_info)):
+        img_path = images_info[i][0]
+        img_hand_pos = images_info[i][1]
+        img_id = ((img_path.split('/')[-1]).split('_')[-1]).split('.')[0]
+        
+        # read the image file, then generate rotated image
+        img = clear_background(cv2.imread(img_path, cv2.IMREAD_UNCHANGED))
+        height, width = img.shape[:2]
+        b_images = [(f,join('./background-images', f)) for f in listdir('./background-images')]
+        print(b_images)
+        
+        # fill the image background
+        for _ in b_images:
+            b_image = cv2.resize(cv2.imread(_[1], cv2.IMREAD_UNCHANGED), dsize=(700,700))    
+            l_img = img.copy()
+            for row in range(height):
+                for col in range(width):
+                    if np.array_equal(l_img[row,col], np.array([255,255,255])):
+                        l_img[row, col] = b_image[row,col]
 
-    # display it
-    cv2.imshow("mask", mask)
-    cv2.imshow("result", result)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+            acupuncture_id = f"{acupuncture_info}_{img_id}"
+            acupuncture_new_id = acupuncture_id + f'_fil_{_[0]}'
+            x, y, xy = json_data[acupuncture_id][1].values()
 
-    exit()
+            json_data[acupuncture_new_id] = list()
+            json_data[acupuncture_new_id].append({
+                "acup_info": f"{acupuncture_info}",
+                "hand_pos": f"{img_hand_pos}",
+                "acup_size": f"{acupuncture_size}"
+            })
+            json_data[acupuncture_new_id].append({
+                "acup_coord_x": x,
+                "acup_coord_y": y,
+                "acup_coord": xy
+            })
 
+            cv2.imwrite(f'./{save_directory}/{acupuncture_new_id}.png', l_img)
 
-    # edges = cv2.Canny(img, 100, 200)
+            # cv2.imshow(_[0], l_img)
+            # cv2.waitKey(0)
+            # cv2.destroyAllWindows
 
-    # cv2.imshow('img', edges)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
+    save_json_file(json_data)
 
-    # mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
 
 
 
@@ -328,7 +356,9 @@ json_data = open_json_file(json_file)
 
 images_info = sorted(make_path_tuple(acupuncture_info, changed_hands_path), key=lambda x:x[1])
 
-detect_edge()
+# image transformation
+##############################################################################################
+fill_background_image(images_info, json_data)
 
 for i in range(len(x_moves)):
     translate_image(images_info, json_data, x_moves[i])
@@ -336,3 +366,4 @@ for i in range(len(dimensions)):
     scaling_image(images_info, json_data, dimensions[i])
 for i in range(len(angles)):
     rotate_image_trnsfm(images_info, json_data, angles[i])
+##############################################################################################
