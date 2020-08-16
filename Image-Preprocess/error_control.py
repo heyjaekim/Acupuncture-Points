@@ -103,7 +103,7 @@ def image_quality_check(save_dir, change_dir, org_dir):
         cv2.imwrite(save_directory+ '/change_qc' + tmp[i], tmp_img)
         cv2.imwrite(save_directory+ '/org_qc' + tmp[i], tmp_img)
 
-def make_json(save_dir, change_left, org_left, change_right, org_right):
+def make_json(save_dir, change_left, org_left, change_right, org_right, info_left, info_right):
     
     image_files_change_left = list( f for f in listdir(change_left) if isfile(join(change_left,f))
     image_files_org_left = list( f for f in listdir(org_left) if isfile(join(org_left,f)))
@@ -112,8 +112,10 @@ def make_json(save_dir, change_left, org_left, change_right, org_right):
     image_files_org_right = list( f for f in listdir(org_right) if isfile(join(org_right,f)))
 
     acup = {}
-    image_files_change.sort()
-    image_files_org.sort()
+    image_files_change_left.sort()
+    image_files_org_left.sort()
+    image_files_change_right.sort()
+    image_files_org_right.sort()
 
     for i in range(len(image_files_change)):
         diff = np.array(cv2.imread(change + image_files_change_left[i])) - np.array(cv2.imread(org + image_files_org_left[i]))
@@ -127,7 +129,7 @@ def make_json(save_dir, change_left, org_left, change_right, org_right):
         x,y,z=np.where(diff > 0)
         y_, x_= 3 + x.min() , 3 + y.min()
         tmp = {}
-        acup[image_files_change[i][:-4]] = [info_left, {"acup_coord_x": x_, "acup_coord_y": y_, "acup_coord": [x_, y_]}]
+        acup[image_files_change[i][:-4]] = [info_right, {"acup_coord_x": x_, "acup_coord_y": y_, "acup_coord": [x_, y_]}]
 
     with open(acup + '_info_수정.json', 'w') as fp:
         json.dump(acup, fp, cls = NpEncoder)
@@ -158,7 +160,14 @@ save_dir = input("저장하려고 하는 디렉터리를 입력하시오.")
 change_dir = input('바뀐 디렉터리를 입력하시오.')
 org_dir = input('바뀌기 전 디렉터리를 입력하시오')
 inter_check(save_dir, change_dir, org_dir)
+
 # quality check
 image_quality_check(save_dir, change_dir, org_dir)
-# json
-make_json(save_dir, change_dir, org_dir)
+print('확인 해주세요.')
+
+# make new json
+change_left = input("왼손 디렉터리를 입력하세요")
+org_left = input("바뀐 왼손 디렉터리를 입력하세요")
+change_right = input("오른손 디렉터리를 입력하세요")
+org_right = input("바뀐 오른손 디렉터리를 입력하세요")
+make_json(save_dir, change_left, org_left, change_right, org_right, info_left, info_right)
