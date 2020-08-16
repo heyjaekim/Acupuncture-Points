@@ -358,12 +358,18 @@ images_info = sorted(make_path_tuple(acupuncture_info, changed_hands_path), key=
 
 # image transformation
 ##############################################################################################
+# 배경화면 채우기
 fill_background_image(images_info, json_data)
 
+# 이미지 좌우측으로 움직이기
 for i in range(len(x_moves)):
     translate_image(images_info, json_data, x_moves[i])
+
+# 이미지 좌우측 움직이기 + 축소시키기
 for i in range(len(dimensions)):
     scaling_image(images_info, json_data, dimensions[i])
+
+# 이미지 돌리기
 for i in range(len(angles)):
     rotate_image_trnsfm(images_info, json_data, angles[i])
 ##############################################################################################

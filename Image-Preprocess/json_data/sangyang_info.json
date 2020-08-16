@@ -28,5 +28,20 @@
 				269
 			]
 		}
+	],
+	"sangyang_0000406": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_left",
+			"acup_size": "3"
+		},
+		{
+			"acup_coord_x": 423,
+			"acup_coord_y": 180,
+			"acup_coord": [
+				423,
+				180
+			]
+		}
 	]
 }
