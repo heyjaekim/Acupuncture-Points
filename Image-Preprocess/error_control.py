@@ -161,23 +161,27 @@ info_right = {
         }
 
 acup = input("부위를 입력하시오.")
-image_dir = input('이미지 디렉터리를 입력하시오')
+image_dir = input('이미지 디렉터리를 입력하시오 ex) C:/Users/SungJin/Desktop/hand_img/gwanchung/')
+if image_dir[-1] != '/':
+    image_dir += '/'
+pos = input('palmar or dorsal?')
 info_left['acup_info'] = acup
 info_right['acup_info'] = acup
 
 ####################################################################################################
-# checking intersection & quality
-save_dir = image_dir+acup+'/'+acup+'_palmar_left'
-change_dir = image_dir+acup+'/'+acup+'_palmar_left/change'
-org_dir = image_dir+acup+'/'+acup+'_palmar_left/org'
+# checking intersection & quaility
+save_dir = image_dir+acup+'/'+acup+'_'+pos+'_left'
+print(save_dir)
+change_dir = image_dir+acup+'/'+acup+'_'+pos+'_left/change'
+org_dir = image_dir+acup+'/'+acup+'_'+pos+'_left/org'
 inter_check(save_dir, change_dir, org_dir, acup)
 print('left inter check finish')
 image_quality_check(save_dir, change_dir +'_', org_dir + '_')
 print('left quality check finish')
 
-save_dir = image_dir+acup+'/'+acup+'_palmar_right'
-change_dir = image_dir+acup+'/'+acup+'_palmar_right/change'
-org_dir = image_dir+acup+'/'+acup+'_palmar_right/org'
+save_dir = image_dir+acup+'/'+acup+'_'+pos+'_right'
+change_dir = image_dir+acup+'/'+acup+'_'+pos+'_right/change'
+org_dir = image_dir+acup+'/'+acup+'_'+pos+'_right/org'
 inter_check(save_dir, change_dir, org_dir, acup)
 print('right inter check finish')
 image_quality_check(save_dir, change_dir +'_', org_dir + '_')
@@ -186,8 +190,8 @@ print('right quality check finish')
 print('확인 해주세요.')
 
 # make new json
-change_left = image_dir+acup+'/'+acup+'_palmar_left/change_qc/'
-org_left = image_dir+acup+'/'+acup+'_palmar_left/org_qc/'
-change_right = image_dir+acup+'/'+acup+'_palmar_right/change_qc/'
-org_right = image_dir+acup+'/'+acup+'_palmar_right/org_qc/'
+change_left = image_dir+acup+'/'+acup+'_'+pos+'_left/change_qc/'
+org_left = image_dir+acup+'/'+acup+'_'+pos+'_left/org_qc/'
+change_right = image_dir+acup+'/'+acup+'_'+pos+'_right/change_qc/'
+org_right = image_dir+acup+'/'+acup+'_'+pos+'_right/org_qc/'
 make_json(image_dir, change_left, org_left, change_right, org_right, info_left, info_right)
