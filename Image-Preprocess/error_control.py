@@ -166,7 +166,7 @@ info_left['acup_info'] = acup
 info_right['acup_info'] = acup
 
 ####################################################################################################
-# checking intersection & quaility
+# checking intersection & quality
 save_dir = image_dir+acup+'/'+acup+'_palmar_left'
 change_dir = image_dir+acup+'/'+acup+'_palmar_left/change'
 org_dir = image_dir+acup+'/'+acup+'_palmar_left/org'
