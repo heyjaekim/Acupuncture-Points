@@ -1,5 +1,8 @@
+Acu_Dataset
 color_mnist2
 dataset
 Hands_sobu
 .ipynb_checkpoints/
+runs/
+checkpoints/
 __pycache__/

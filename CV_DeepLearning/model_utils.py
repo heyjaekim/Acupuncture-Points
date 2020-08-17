@@ -5,7 +5,6 @@ import torch.nn as nn
 from torchsummary import summary
 
 
-
 class MyResNet(ResNet):
     '''
     basic setting : ResNet-18 with Basic Block
@@ -44,3 +43,19 @@ class MyResNet(ResNet):
     
         return y_cls, y_coord
 
+
+def create_model(model_name = 'resnet34'):
+    if 'resnet' in model_name: 
+        block = model_cfgs[model_name][0]
+        cfg = model_cfgs[model_name][1]
+        return MyResNet(block =block, cfg = cfg )
+    return None    
+
+
+model_cfgs = {
+    'resnet18': [BasicBlock, [2,2,2,2]],
+    'resnet34': [BasicBlock, [3,4,6,3]],
+    'resnet50': [Bottleneck, [3,4,6,3]],
+    'resnet101': [Bottleneck, [3,4,23,3]],
+    'resnet152': [Bottleneck, [3,8,36,3]]
+}

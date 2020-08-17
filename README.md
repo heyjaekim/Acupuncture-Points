@@ -13,7 +13,7 @@
     1. Acupuncture-Webapp \
         : Flask와 React를 이용해 만든 애플리케이션
     2. CV_DeepLearning \
-        : 이미지 학습을 이요한 경혈 태깅 이미지 제너레이션
+        : 딥러닝 기술(컴퓨터 비전) 을 활용한 신체 경혈점 예측
     3. Data \
         : 주치 관련 데이터 크롤링, 문서 유사도 체크
     4. Image-Preprocess \

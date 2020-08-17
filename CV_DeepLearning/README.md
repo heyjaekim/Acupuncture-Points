@@ -9,16 +9,16 @@
 
 ---
 ### TODO LIST
-- [ ] Learning Rate Schduler
-- [ ] Train / Validation Splitter
-- [ ] Checkpoint Saver/Loader
-- [ ] Quick Test Data Checking 
-- [ ] Train Monitoring Utils (loss, time, pixel distance, real distance)
-- [ ] TB Utils
-- [ ] Parser
-- [ ] Model Cfgs
-- [ ] DataLoader (Hand Dataset)
-- [ ] Dataset Augmentation (Rotate, Flip, Crop, Add noise, erase, Cutmix)
+- [x] Learning Rate Schduler
+- [x] Train / Validation Splitter
+- [x] Checkpoint Saver/Loader
+- [x] Quick Test Data Checking 
+- [x] Train Monitoring Utils (loss, time, pixel distance, real distance)
+- [ ] TB Utils (almost done)
+- [ ] Parser (ongoing)
+- [ ] Model Cfgs (ongoing)
+- [x] DataLoader (Hand Dataset)
+- [ ] Dataset Augmentation (Rotate, Flip, Crop, Add noise, erase, Cutmix) (need to check)
 - [ ] XAI
 - [ ] Hyperparameter Optimization 
 - [ ] Execution Speed 
