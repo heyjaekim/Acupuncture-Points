@@ -5,11 +5,11 @@
 - **Colored Mnist Dataset** designed and used to check out basic performance
 ---
 ### TODO LIST
-- [ ] Learning Rate Schduler
-- [ ] Train / Validation Splitter
-- [ ] Checkpoint Saver/Loader
-- [ ] Quick Test Data Checking 
-- [ ] Train Monitoring Utils (loss, time, pixel distance, real distance)
+- [x] Learning Rate Schduler
+- [x] Train / Validation Splitter
+- [x] Checkpoint Saver/Loader
+- [x] Quick Test Data Checking 
+- [x] Train Monitoring Utils (loss, time, pixel distance, real distance)
 - [ ] TB Utils
 - [ ] Parser
 - [ ] Model Cfgs
