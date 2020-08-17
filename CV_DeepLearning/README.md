@@ -3,6 +3,10 @@
 ### 1. Image(Input) &rarr; 2. ConvNet (Feature Extraction) &rarr; 3. Coordinate Regression (Output)
 - Backbone : ResNet ( advancements will be made  )
 - **Colored Mnist Dataset** designed and used to check out basic performance
+
+- Toy Model
+![20200731 발표자료_최종 (15)](https://user-images.githubusercontent.com/63584973/89733880-7703b200-da93-11ea-8d2b-1b78dadedfcf.png)
+
 ---
 ### TODO LIST
 - [x] Learning Rate Schduler
