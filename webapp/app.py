@@ -6,14 +6,21 @@ from flask_dropzone import Dropzone
 from flask_admin.contrib.fileadmin import FileAdmin
 import os
 
+from symptom_search import Search_symptom
+
 
 app = Flask(__name__, static_url_path='/static')
 
 
-@app.route('/', methods=['GET'])
-def index(symptom=None):
+@app.route('/')
+def home():
+    return render_template('home.html')
 
-    return render_template('home-classic-one-page.html', symptom=symptom)
+
+@app.route('/service', methods=['GET'])
+def service(symptom=None):
+
+    return render_template('index.html', symptom=symptom)
 
 
 @app.route('/getsymp', methods=['POST', 'GET'])
@@ -25,8 +32,9 @@ def getsymp(temp=None):
 
     elif request.method == 'GET':
         temp = request.args.get('symptom')
-        return render_template('home-classic-one-page.html', symptom=temp)
-
+        a = Search_symptom(temp)
+        result = a.search_engine()[0][0]
+        return render_template('index.html', symptom=result)
 
 if __name__ == '__main__':
     app.run(debug=True, threaded=True)
