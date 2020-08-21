@@ -20,7 +20,7 @@ def home():
 @app.route('/service', methods=['GET'])
 def service(symptom=None):
 
-    return render_template('index.html', symptom=symptom)
+    return render_template('service.html', symptom=symptom)
 
 
 @app.route('/getsymp', methods=['POST', 'GET'])
@@ -28,13 +28,15 @@ def getsymp(temp=None):
 
     if request.method == 'POST':
         temp = request.form['symptom']
+        # return render_template('service.html', symptom=temp)
         pass
 
     elif request.method == 'GET':
         temp = request.args.get('symptom')
         a = Search_symptom(temp)
         result = a.search_engine()[0][0]
-        return render_template('index.html', symptom=result)
+        return render_template('service.html', symptom=temp, result=result)
+
 
 if __name__ == '__main__':
     app.run(debug=True, threaded=True)
