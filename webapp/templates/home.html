@@ -55,7 +55,7 @@
                     <div class="row">
                         <!-- start logo -->
                         <div class="col-md-2 col-xs-5">
-                            <a href="index.html" title="Pofo" class="logo"><img src="../static/images/logo.png" data-rjs="../static/images/logo@2x.png" class="logo-dark" alt="Pofo"><img src="../static/images/logo-white.png" data-rjs="../static/images/logo-white@2x.png" alt="Pofo" class="logo-light default"></a>
+                            <a href="service.html" title="Pofo" class="logo"><img src="../static/images/logo.png" data-rjs="../static/images/logo@2x.png" class="logo-dark" alt="Pofo"><img src="../static/images/logo-white.png" data-rjs="../static/images/logo-white@2x.png" alt="Pofo" class="logo-light default"></a>
                         </div>
                         <!-- end logo -->
                         <div class="col-md-7 col-xs-2 width-auto pull-right accordion-menu">
@@ -82,7 +82,7 @@
         </header>
         <!-- end header -->
         <!-- start hero section -->
-        <section id="home" class="no-padding parallax mobile-height wow fadeIn" data-stellar-background-ratio="0.5" style="background-image:url('http://placehold.it/1920x1200');">
+        <section id="home" class="no-padding parallax mobile-height wow fadeIn" data-stellar-background-ratio="0.5" style="background-image:url('https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F22259C4655F4654B01');">
             <div class="opacity-extra-medium bg-extra-dark-gray"></div>
             <div class="container position-relative full-screen">
                 <div class="slider-typography text-center">
@@ -149,7 +149,7 @@
         </section>
         <!-- end feature box section -->
         <!-- start parallax section -->
-        <section class="parallax wow fadeIn" data-stellar-background-ratio="0.3" style="background-image:url('http://placehold.it/1920x1200');">
+        <section class="parallax wow fadeIn" data-stellar-background-ratio="0.01" style="background-image:url('https://t1.daumcdn.net/thumb/R720x0/?fname=http://t1.daumcdn.net/brunch/service/user/1lOa/image/JRUvZ9yDlpv2HqBmsyJGq-vOL5Y.jpg');">
             <div class="opacity-extra-medium bg-black"></div>
             <div class="container position-relative">
                 <div class="row">
@@ -169,7 +169,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 center-col margin-eight-bottom sm-margin-40px-bottom xs-margin-30px-bottom text-center last-paragraph-no-margin">
                         <h5 class="alt-font font-weight-700 text-extra-dark-gray text-uppercase margin-15px-bottom">타겟 이용군</h5>
                         <p class="no-margin-bottom">통증이나 증상이 있음에도 불구하고 병원에 가지 못하거나, 가벼운 통증 완화를 위해 누구나 사용 가능하다.</p>
-                    </div>  
+                    </div>
                 </div>
                 <div class="row equalize xs-equalize-auto">
                     <!-- start Services item -->
@@ -327,13 +327,35 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-12 col-xs-12 cover-background sm-height-500px xs-height-350px wow fadeInRight" style="background:url('http://placehold.it/1200x854')"></div>
+                    <div class="col-md-6 col-sm-12 col-xs-12 cover-background sm-height-500px xs-height-350px wow fadeInRight" style="background:url('https://image.flaticon.com/icons/svg/2103/2103562.svg')"></div>
                 </div>
             </div>
         </section>
         <!-- end accordion section -->
         <!-- start masonry portfolio section -->
-    
+        <section id="work" class="no-padding-bottom wow fadeIn">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12 center-col margin-eight-bottom text-center last-paragraph-no-margin sm-margin-40px-bottom xs-margin-30px-bottom">
+                        <h5 class="alt-font font-weight-700 text-extra-dark-gray text-uppercase margin-15px-bottom">증상을 설명해주세요</h5><br>
+                        <form method="GET" action="/getsymp">
+                          <div>
+                            <input type="text" id="symptom" name="symptom" placeholder="Describe about your symptom">
+                          </div>
+                          <div class='button'>
+                            <input type="submit" value="Submit" hidden="True">
+                          </div>
+                        </form>
+                        <div>
+                            {% if symptom != None %}
+                                <h5> {{symptom}} 를 입력받았습니다. </h5>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
         <!-- end masonry portfolio section -->
         <!-- start progress bar section -->
         
@@ -416,19 +438,19 @@
                 </div>
                 <div class="row">
                     <!-- start team item -->
-                    <div class="col-md-3 col-sm-6 col-xs-12 team-block text-left team-style-2 sm-margin-seven-bottom xs-margin-40px-bottom wow slideInUp">
-                        <figure>
+                    <div class="col-md-2 col-sm-6 col-xs-12 team-block text-center team-style-2 sm-margin-seven-bottom xs-margin-40px-bottom wow slideInUp">
+                        <figure style="align-items: center;">
                             <div class="team-image xs-width-100">
-                                <img src="http://placehold.it/700x892" alt="">
+                                <img src="https://lms.sunde41.net/static/uploads/avatars/avatar_19.png" alt="">
                                 <div class="team-overlay bg-deep-pink"></div>
                                 <div class="team-member-position text-center margin-25px-top">
                                     <div class="text-extra-dark-gray font-weight-600 text-uppercase text-small alt-font">김성진</div>
-                                    <div class="text-extra-small text-uppercase text-medium-gray">Co-Founder / Design</div>
+                                    <div class="text-extra-small text-uppercase text-medium-gray">Sungjin Kim</div>
                                 </div>
                             </div>
                             <figcaption>
                                 <div class="overlay-content text-center icon-social-small">
-                                    <span class="text-small display-inline-block no-margin">Lorem Ipsum is simply dummy text of the printing and typesetting industry dummy text.</span>
+                                    <span class="text-small display-inline-block no-margin">NLP  Openpose</span>
                                     <div class="separator-line-horrizontal-full bg-deep-pink margin-eleven-tb xs-margin-20px-tb"></div>
                                     <a href="http://www.facebook.com" class="text-extra-dark-gray" target="_blank"><i class="fab fa-facebook-f"></i></a>
                                     <a href="http://www.twitter.com" class="text-extra-dark-gray" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -440,19 +462,19 @@
                     </div>
                     <!-- end team item -->
                     <!-- start team item -->
-                    <div class="col-md-3 col-sm-6 col-xs-12 team-block text-left team-style-2 sm-margin-seven-bottom xs-margin-40px-bottom wow slideInUp" data-wow-delay="0.2s">
+                    <div class="col-md-2 col-sm-6 col-xs-12 team-block text-center team-style-2 sm-margin-seven-bottom xs-margin-40px-bottom wow slideInUp" data-wow-delay="0.2s">
                         <figure>
                             <div class="team-image xs-width-100">
-                                <img src="http://placehold.it/700x892" alt="">
+                                <img src="https://lms.sunde41.net/static/uploads/avatars/avatar_23.jpeg" alt="">
                                 <div class="team-overlay bg-deep-pink"></div>
                                 <div class="team-member-position text-center margin-25px-top">
                                     <div class="text-extra-dark-gray font-weight-600 text-uppercase text-small alt-font">김재원</div>
-                                    <div class="text-extra-small text-uppercase text-medium-gray">Creative Director</div>
+                                    <div class="text-extra-small text-uppercase text-medium-gray">Jaewon Kim</div>
                                 </div>
                             </div>
                             <figcaption>
                                 <div class="overlay-content text-center icon-social-small">
-                                    <span class="text-small display-inline-block no-margin">Lorem Ipsum is simply dummy text of the printing and typesetting industry dummy text.</span>
+                                    <span class="text-small display-inline-block no-margin">Web  TaggingMacro</span>
                                     <div class="separator-line-horrizontal-full bg-deep-pink margin-eleven-tb xs-margin-20px-tb"></div>
                                     <a href="http://www.facebook.com" class="text-extra-dark-gray" target="_blank"><i class="fab fa-facebook-f"></i></a>
                                     <a href="http://www.twitter.com" class="text-extra-dark-gray" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -464,19 +486,19 @@
                     </div>
                     <!-- end team item -->
                     <!-- start team item -->
-                    <div class="col-md-3 col-sm-6 col-xs-12 team-block text-left team-style-2 sm-margin-seven-bottom xs-margin-40px-bottom wow slideInUp" data-wow-delay="0.2s">
+                    <div class="col-md-2 col-sm-6 col-xs-12 team-block text-center team-style-2 sm-margin-seven-bottom xs-margin-40px-bottom wow slideInUp" data-wow-delay="0.2s">
                         <figure>
                             <div class="team-image xs-width-100">
-                                <img src="http://placehold.it/700x892" alt="">
+                                <img src="https://lms.sunde41.net/static/uploads/avatars/avatar_24.png" alt="">
                                 <div class="team-overlay bg-deep-pink"></div>
                                 <div class="team-member-position text-center margin-25px-top">
                                     <div class="text-extra-dark-gray font-weight-600 text-uppercase text-small alt-font">김정규</div>
-                                    <div class="text-extra-small text-uppercase text-medium-gray">Creative Director</div>
+                                    <div class="text-extra-small text-uppercase text-medium-gray">Jeonggyu Kim</div>
                                 </div>
                             </div>
                             <figcaption>
                                 <div class="overlay-content text-center icon-social-small">
-                                    <span class="text-small display-inline-block no-margin">Lorem Ipsum is simply dummy text of the printing and typesetting industry dummy text.</span>
+                                    <span class="text-small display-inline-block no-margin">CVDeepLearning</span>
                                     <div class="separator-line-horrizontal-full bg-deep-pink margin-eleven-tb xs-margin-20px-tb"></div>
                                     <a href="http://www.facebook.com" class="text-extra-dark-gray" target="_blank"><i class="fab fa-facebook-f"></i></a>
                                     <a href="http://www.twitter.com" class="text-extra-dark-gray" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -488,19 +510,19 @@
                     </div>
                     <!-- end team item -->
                     <!-- start team item -->
-                    <div class="col-md-3 col-sm-6 col-xs-12 team-block text-left team-style-2 sm-margin-seven-bottom xs-margin-40px-bottom wow slideInUp" data-wow-delay="0.4s">
+                    <div class="col-md-2 col-sm-6 col-xs-12 team-block text-center team-style-2 sm-margin-seven-bottom xs-margin-40px-bottom wow slideInUp" data-wow-delay="0.4s">
                         <figure>
                             <div class="team-image xs-width-100">
-                                <img src="http://placehold.it/700x892" alt="">
+                                <img src="https://lms.sunde41.net/static/uploads/avatars/avatar_58.png" alt="">
                                 <div class="team-overlay bg-deep-pink"></div>
                                 <div class="team-member-position text-center margin-25px-top">
                                     <div class="text-extra-dark-gray font-weight-600 text-uppercase text-small alt-font">정지우</div>
-                                    <div class="text-extra-small text-uppercase text-medium-gray">Creative Studio Head</div>
+                                    <div class="text-extra-small text-uppercase text-medium-gray">Jiwoo Chung</div>
                                 </div>
                             </div>
                             <figcaption>
                                 <div class="overlay-content text-center icon-social-small">
-                                    <span class="text-small display-inline-block no-margin">Lorem Ipsum is simply dummy text of the printing and typesetting industry dummy text.</span>
+                                    <span class="text-small display-inline-block no-margin">Image Preprocessing  WebDesign</span>
                                     <div class="separator-line-horrizontal-full bg-deep-pink margin-eleven-tb xs-margin-20px-tb"></div>
                                     <a href="http://www.facebook.com" class="text-extra-dark-gray" target="_blank"><i class="fab fa-facebook-f"></i></a>
                                     <a href="http://www.twitter.com" class="text-extra-dark-gray" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -512,19 +534,19 @@
                     </div>
                     <!-- end team item -->
                     <!-- start team item -->
-                    <div class="col-md-3 col-sm-6 col-xs-12 team-block text-left team-style-2 wow slideInUp"  data-wow-delay="0.6s">
+                    <div class="col-md-2 col-sm-6 col-xs-12 team-block text-center team-style-2 wow slideInUp"  data-wow-delay="0.6s">
                         <figure>
                             <div class="team-image xs-width-100">
-                                <img src="http://placehold.it/700x892" alt="">
+                                <img src="https://lms.sunde41.net/static/uploads/avatars/avatar_66.jpg" alt="">
                                 <div class="team-overlay bg-deep-pink"></div>
                                 <div class="team-member-position text-center margin-25px-top">
                                     <div class="text-extra-dark-gray font-weight-600 text-uppercase text-small alt-font">최 선</div>
-                                    <div class="text-extra-small text-uppercase text-medium-gray">Co-Founder / Design</div>
+                                    <div class="text-extra-small text-uppercase text-medium-gray">Sun Choi</div>
                                 </div>
                             </div>
                             <figcaption>
                                 <div class="overlay-content text-center icon-social-small">
-                                    <span class="text-small display-inline-block no-margin">Lorem Ipsum is simply dummy text of the printing and typesetting industry dummy text.</span>
+                                    <span class="text-small display-inline-block no-margin">ImagePreprocessing TextDataCollecting</span>
                                     <div class="separator-line-horrizontal-full bg-deep-pink margin-eleven-tb xs-margin-20px-tb"></div>
                                     <a href="http://www.facebook.com" class="text-extra-dark-gray" target="_blank"><i class="fab fa-facebook-f"></i></a>
                                     <a href="http://www.twitter.com" class="text-extra-dark-gray" target="_blank"><i class="fab fa-twitter"></i></a>
