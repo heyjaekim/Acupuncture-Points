@@ -161,9 +161,7 @@ info_right = {
         }
 
 acup = input("부위를 입력하시오.")
-image_dir = input('이미지 디렉터리를 입력하시오 ex) C:/Users/SungJin/Desktop/hand_img/gwanchung/')
-if image_dir[-1] != '/':
-    image_dir += '/'
+image_dir = input('이미지 디렉터리를 입력하시오')
 pos = input('palmar or dorsal?')
 info_left['acup_info'] = acup
 info_right['acup_info'] = acup
