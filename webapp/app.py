@@ -69,6 +69,7 @@ def getsymp(symptom=None):
         result = a.search()[2]
         return render_template('service.html', symptom=symptom, result=result)
 
+
 @app.route('/upload_photo', methods=['GET', 'POST'])
 def upload_photo(symptom=None, result=None):
     if request.method == 'POST':
