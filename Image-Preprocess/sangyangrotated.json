@@ -1,0 +1,38 @@
+{
+	"sangyang_0000002_rt-101": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_right"
+		},
+		{
+			"acup_coord": [
+				587.2332048989881,
+				362.9533095613167
+			]
+		}
+	],
+	"sangyang_0000021_rt-21": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_left"
+		},
+		{
+			"acup_coord": [
+				462.35619538322527,
+				369.2126264628206
+			]
+		}
+	],
+	"sangyang_0000406_rt51": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_left"
+		},
+		{
+			"acup_coord": [
+				405.8255750989531,
+				328.2838783351687
+			]
+		}
+	]
+}

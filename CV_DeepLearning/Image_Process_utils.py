@@ -10,6 +10,7 @@ from torch.utils.data import Dataset
 import os 
 from pathlib import Path
 import json
+import cv2
 
 def arr_to_img (img_array, name = 'name',ftype = 'png', save = False):
     # convert to uint type from float data type 
@@ -85,26 +86,50 @@ def to_numpy(tensor_val):
 
 
 #####################################################################
+def clear_background(img):
+    # img = cv2.imread('test2\Hand_0000002.png')
 
-def gen_test_img_list(dir1='./testdata/original', dir2='./testdata/target'):
+    # convert to hsv
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    lower_range = (0,0,100)
+    upper_range = (358,45,255)
+    mask = cv2.inRange(hsv, lower_range, upper_range)
+    # invert mask
+    mask = 255 - mask
+    # cv2.imshow('mask', mask)
+    # cv2.waitKey(0)
+
+    # apply morphology closing and opening to mask
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))
+    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+
+    result = img.copy()
+    result[mask==0] = (255,255,255)
+    
+    return result
+
+
+def gen_test_img_list(dir1='./testdata/original'):
     ''' Want to create list of test-data images used for monitoring training progress
     '''
     test_imlist = []
+    target_imlist = []
     im_names = os.listdir(dir1)
     transform = transforms.Compose([transforms.Resize(size = 256),transforms.ToTensor()])
     for i in im_names:
-        img = Image.open(dir1 + '/' + i) 
-        img = img.rotate(-90)
-        img = transform(img)
-    # img = rescale(img, )
-        test_imlist.append(img)
+        img1 = img2 = cv2.imread(dir1 + '/' + i)
+        img1 = clear_background(img1)
+        img1 = cv2.cvtColor(img1, cv2.COLOR_BGR2RGB)
+        im_pil1 = Image.fromarray(img1)
+        img1 = transform(im_pil1)
+        test_imlist.append(img1)
 
-    target_imlist = []
-    target_names = os.listdir(dir2)
-    for i in target_names:
-        img = Image.open(dir2 + '/' +i) 
-        img = img.rotate(-90)
-        img = transform(img)
-        target_imlist.append(img)
+        img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2RGB)
+        im_pil2 = Image.fromarray(img2)
+        img2 = transform(im_pil2)
+        target_imlist.append(img2)
 
     return test_imlist, target_imlist
+
+

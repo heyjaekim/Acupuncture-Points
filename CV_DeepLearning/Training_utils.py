@@ -152,14 +152,15 @@ def validate(model, valid_loader, coord_loss, class_loss, epoch, writer, v_micro
 
     return (losses_cls.avg, losses_x.avg, losses_y.avg, total_loss.avg), v_micro, v_step
 
-def test(org_list, target_list, model, writer, name, step):
+def test(input_list, target_list, model, writer, name, step):
     '''
     input: tensor-valued image lists
     '''
     imlist = []
-    for i in range(len(org_list)):
-        _, out2 = model(org_list[i].unsqueeze(0).to('cuda'))
+    for i in range(len(input_list)):        
+        _, out2 = model(input_list[i].unsqueeze(0).to('cuda'))
         target = tensor_to_np(out2)[0]
+
         img = tensor_to_img(target_list[i])
         img = create_circle_patch(img, target[0], target[1], color = 'red')
         fig = plt.figure(figsize = (4,4))
