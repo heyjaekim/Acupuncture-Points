@@ -183,92 +183,63 @@
                 <!-- start feature box item -->
                 <div class="col-md-4 col-sm-4 col-xs-12 xs-margin-five-bottom last-paragraph-no-margin wow fadeInUp">
                     <div class="feature-box">
-                        <div class="content" onclick="myFunction()">
+                        <div class="content" onclick="serviceFunc()">
                             <i class="icon-browser text-medium-gray icon-large margin-25px-bottom sm-margin-15px-bottom"></i>
                             <div class="text-medium alt-font text-capitalize text-extra-dark-gray margin-10px-bottom sm-margin-5px-bottom">혈을 잡아주시오</div>
                             <p class="width-85 margin-lr-auto sm-width-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                         </div>
                     </div>
-                    <div class="panel-group accordion-style2" id="accordion1">
-                        <!-- start tab content -->
-                        <div class="panel panel-default" display="none">
-                            <div id="collapseOne" class="panel-collapse collapse in">
-                                {% include 'dropzone.html' %}
-                            </div>
-                        </div>
-                        <!-- end tab content -->
-                    </div>
                 </div>
                 <!-- end feature box item -->
                 <!-- start feature box item -->
                 <div class="col-md-4 col-sm-4 col-xs-12 xs-margin-five-bottom last-paragraph-no-margin wow fadeInUp">
                     <div class="feature-box">
-                        <div class="content">
+                        <div class="content" onclick="serviceFunc2()">
                             <i class="icon-book-open text-medium-gray icon-large margin-25px-bottom sm-margin-15px-bottom"></i>
                             <div class="text-medium alt-font text-capitalize text-extra-dark-gray margin-10px-bottom sm-margin-5px-bottom">한약재 추천</div>
                             <p class="width-85 margin-lr-auto sm-width-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                         </div>
                     </div>
-                    <div class="panel-group accordion-style2" id="accordion">
-                        <!-- start tab content -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                    <div class="panel-title">
-                                        <span class="alt-font font-weight-600 text-deep-pink tab-tag">02</span>
-                                        <span class="text-extra-dark-gray xs-width-80 display-inline-block"></span>
-                                        <i class="fas fa-angle-up pull-right text-extra-dark-gray "></i>
-                                    </div>
-                                </a>
-                            </div>
-                            <div id="collapseTwo" class="panel-collapse collapse in">
-                                {% include 'dropzone.html' %}
-                            </div>
-                        </div>
-                        <!-- end tab content -->
-                    </div>
                 </div>
                 <!-- end feature box item -->
                 <!-- start feature box item -->
                 <div class="col-md-4 col-sm-4 col-xs-12 xs-margin-five-bottom last-paragraph-no-margin wow fadeInUp">
                     <div class="feature-box">
-                        <div class="content">
+                        <div class="content" onclick="openMap()">
                             <i class="icon-wallet text-medium-gray icon-large margin-25px-bottom sm-margin-15px-bottom"></i>
                             <div class="text-medium alt-font text-capitalize text-extra-dark-gray margin-10px-bottom sm-margin-5px-bottom">가까운 진료소</div>
                             <p class="width-85 margin-lr-auto sm-width-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                         </div>
                     </div>
-                    <div class="panel-group accordion-style2" id="accordion">
-                        <!-- start tab content -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                    <div class="panel-title">
-                                        <span class="alt-font font-weight-600 text-deep-pink tab-tag">03</span>
-                                        <span class="text-extra-dark-gray xs-width-80 display-inline-block"></span>
-                                        <i class="fas fa-angle-up pull-right text-extra-dark-gray "></i>
-                                    </div>
-                                </a>
-                            </div>
-                            <div id="collapseThree" class="panel-collapse collapse in">
-                                {% include 'dropzone.html' %}
-                            </div>
-                        </div>
-                        <!-- end tab content -->
-                    </div>
                 </div>
-                
                 <!-- end feature box item -->
             </div>
-        </div>
-
-
-
-    
-
-        {% if hiddenspace1 == true %}
-            {% include 'dropzone.html' %}
-        {% endif %}
+            <div class="col">
+                <div class="panel-group accordion-style2" id="service1" display="none">
+                    <!-- start tab content -->
+                    <div class="panel panel-default">
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            aaaaaaaaaaaaaaaaaaaaaaaa
+                            {% include 'dropzone.html' %}
+                        </div>
+                    </div>
+                    <!-- end tab content -->
+                </div>
+                <div class="panel-group accordion-style2" id="service2" display="none">
+                    <!-- start tab content -->
+                    <div class="panel panel-default">
+                        <div id="collapseOne" class="panel-collapse collapse in">
+                            bbbbbbbbbbbbbbbbbbbbbbbb
+                            {% include 'dropzone.html' %}
+                        </div>
+                    </div>
+                    <!-- end tab content -->
+                </div>
+            </div>
+    </div>
+{#    <div class="panel-group accordion-style2" id="service3" display="none">#}
+{#        {% include 'map.html ' %}#}
+{#    </div>#}
     {% endif %}
 <!--</section>-->
 <!-- end about agency section -->
@@ -327,15 +298,34 @@
 <script type="text/javascript" src="../static/revolution/js/jquery.themepunch.tools.min.js"></script>
 <script type="text/javascript" src="../static/revolution/js/jquery.themepunch.revolution.min.js"></script>
 <script type="text/javascript" src="../static/js/main.js"></script>
+
 <script>
-    function myFunction() {
-      var x = document.getElementById("accordion1");
-      if (x.style.display === "none") {
-        x.style.display = "block";
-      } else {
-        x.style.display = "none";
-      }
+    var service1 = document.getElementById("service1");
+    var service2 = document.getElementById("service2");
+    {#var service3 = document.getElementById("service3");#}
+    function serviceFunc() {
+        if (service1.style.display == "none") {
+            service1.style.display = "block";
+            service2.style.display = "none";
+            {#service3.style.display = "none";#}
+      }else{
+            service1.style.display = "none";
+        }
+    }
+    function serviceFunc2() {
+        if (service2.style.display == "none") {
+            service1.style.display = "none";
+            service2.style.display = "block";
+            {#service3.style.display = "none";#}
+      }else{
+            service2.style.display = "none";
+        }
+    }
+
+    function openMap(){
+        window.open("map", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=200,left=200,width=700,height=700");
     }
 </script>
+            
 </body>
 </html>

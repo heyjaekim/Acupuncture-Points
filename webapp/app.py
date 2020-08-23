@@ -7,6 +7,7 @@ from flask_admin.contrib.fileadmin import FileAdmin
 import os
 
 from symptom_search import Search_symptom
+from HospitalGeo.Hospital_Geo import Nearest_Hospital
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 upload_dir = os.path.join(basedir, 'uploads')
@@ -49,6 +50,11 @@ def home():
 @app.route('/service', methods=['GET'])
 def service(symptom=None):
 
+    # need to add feature to get the current position
+    nh = Nearest_Hospital(127.08133592498548, 37.64928136787053)
+    folium_map = nh.result_map()
+    folium_map.save('templates/map.html')
+
     return render_template('service.html', symptom=symptom)
 
 
@@ -79,6 +85,11 @@ def upload_photo(symptom=None, result=None):
         symptom = request.args.get('symptom')
         result = request.args.get('result')
     return render_template('service.html', symptom=symptom, result=result)
+
+
+@app.route('/map')
+def openmap():
+    return render_template('map.html')
 
 
 if __name__ == '__main__':

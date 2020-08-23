@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://rawcdn.githack.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css"/>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_f204c941ef1c46aaacbc8f0bc4bf700e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_f204c941ef1c46aaacbc8f0bc4bf700e" ></div>
+        
+</body>
+<script>    
+    
+            var map_f204c941ef1c46aaacbc8f0bc4bf700e = L.map(
+                "map_f204c941ef1c46aaacbc8f0bc4bf700e",
+                {
+                    center: [37.64928136787053, 127.08133592498548],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 20,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_b50cc3d6126e46aca2d3b1947411d814 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_f204c941ef1c46aaacbc8f0bc4bf700e);
+        
+    
+            var marker_c5e435ab4b4048ae97eedd3d8f7cb838 = L.marker(
+                [37.64928136787053, 127.08133592498548],
+                {}
+            ).addTo(map_f204c941ef1c46aaacbc8f0bc4bf700e);
+        
+    
+            var icon_0800bf61f91f48a09180aaf148ab224f = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_c5e435ab4b4048ae97eedd3d8f7cb838.setIcon(icon_0800bf61f91f48a09180aaf148ab224f);
+        
+    
+            marker_c5e435ab4b4048ae97eedd3d8f7cb838.bindTooltip(
+                `<div>
+                     My location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_4ed468b113474b70bd4ecea62b3db23e = L.marker(
+                [37.6508417136906, 127.077525686582],
+                {}
+            ).addTo(map_f204c941ef1c46aaacbc8f0bc4bf700e);
+        
+    
+            marker_4ed468b113474b70bd4ecea62b3db23e.bindTooltip(
+                `<div>
+                     병원명 : 중계은행사거리마취통증의학과의원
+전화번호 : 02-931-7578
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_20ba2329ec9a41fe981e7a207376b83c = L.marker(
+                [37.64925261327217, 127.08122257961588],
+                {}
+            ).addTo(map_f204c941ef1c46aaacbc8f0bc4bf700e);
+        
+    
+            marker_20ba2329ec9a41fe981e7a207376b83c.bindTooltip(
+                `<div>
+                     병원명 : 중계은행사거리마취통증의학과의원
+전화번호 : 02-931-7578
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_176efd7f4e06434098814ab079616372 = L.marker(
+                [37.6505017776, 127.0759952081],
+                {}
+            ).addTo(map_f204c941ef1c46aaacbc8f0bc4bf700e);
+        
+    
+            marker_176efd7f4e06434098814ab079616372.bindTooltip(
+                `<div>
+                     병원명 : 중계은행사거리마취통증의학과의원
+전화번호 : 02-931-7578
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_3e2b3007eb1244d1ba3ab1a4f78178ea = L.marker(
+                [37.649400290444504, 127.08134511742941],
+                {}
+            ).addTo(map_f204c941ef1c46aaacbc8f0bc4bf700e);
+        
+    
+            marker_3e2b3007eb1244d1ba3ab1a4f78178ea.bindTooltip(
+                `<div>
+                     병원명 : 중계은행사거리마취통증의학과의원
+전화번호 : 02-931-7578
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_81a042800d9741c191f69f33549dca08 = L.marker(
+                [37.64928136787053, 127.08133592498548],
+                {}
+            ).addTo(map_f204c941ef1c46aaacbc8f0bc4bf700e);
+        
+    
+            marker_81a042800d9741c191f69f33549dca08.bindTooltip(
+                `<div>
+                     병원명 : 중계은행사거리마취통증의학과의원
+전화번호 : 02-931-7578
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
