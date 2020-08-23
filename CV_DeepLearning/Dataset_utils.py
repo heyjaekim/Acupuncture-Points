@@ -43,32 +43,47 @@ class CoordDataSet (Dataset):
 
 
 class HandDataSet (CoordDataSet):
-    def __init__(self, json_file, rootdir, train = True, transform = None, imgformat = 'png'):
+    def __init__(self, json_file, rootdir, train = True, transform = None, imgformat = 'png', hand_flag = False):
         super(HandDataSet, self).__init__(json_file, rootdir, transform)
-        # working directory 에 json file 있어야함
-        # rootdir 는 image가 있는 디렉토리
-        self.transform = transform # 이거 꼭 필요함.. 
+
+        self.transform = transform 
+        self.hand_flag = hand_flag
+
         # check if there is a mismatch
         self.imgformat = imgformat
-        keys = list(self.json_data.keys())
-        kw = self.json_data[keys[0]][0]['acup_info']
-        self.kw = kw
-        keys_modified = [ keys[i].replace(kw, 'Hand') for i in range(len(keys)) ]
+        # img files 
         os_dir = os.listdir(rootdir)
         os_saved = [ os_dir[i][:-4] for i in range(len(os_dir)) ]
-        print(set(os_saved) ^ set(keys_modified))
-        assert  set(os_saved) ^ set(keys_modified) == set(), 'Observed file-tag mismatch!'
-        # keys
-        self.json_keys = list(self.json_data) 
 
+        # json keys
+        keys = list(self.json_data) 
+        kw = self.json_data[keys[0]][0]['acup_info']
+        self.kw = kw
+
+        
+        # original dataset has 'Hand' in its name 
+        if 'Hand' in os_saved[0]: 
+            self.hand_flag = True
+            keys_modified = [ keys[i].replace(kw, 'Hand') for i in range(len(keys)) ]
+            print(set(os_saved) ^ set(keys_modified))
+            assert  set(os_saved) ^ set(keys_modified) == set(), 'Observed file-tag mismatch!'
+
+        else:
+            print(set(os_saved) ^ set(keys))
+            assert  set(os_saved) ^ set(keys) == set(), 'Observed file-tag mismatch!'
+
+        # keys
+        self.json_keys = keys
 
 
     def __len__(self):
         return len(self.json_data)
 
     def __getitem__(self, idx):
-        key = self.json_keys[idx]
-        img_name = key.replace(self.kw, 'Hand')
+        key = img_name = self.json_keys[idx]
+        if self.hand_flag: 
+            img_name = key.replace(self.kw, 'Hand')
+        
         img_path = os.path.join(self.img_dir, img_name)
         img = Image.open(img_path + '.' + self.imgformat)
 

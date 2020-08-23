@@ -1,0 +1,110 @@
+{
+	"sangyang_0000021_fil_image1.jpg": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_left"
+		},
+		{
+			"acup_coord": [
+				330,
+				269
+			]
+		}
+	],
+	"sangyang_0000021_fil_image2.jpg": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_left"
+		},
+		{
+			"acup_coord": [
+				330,
+				269
+			]
+		}
+	],
+	"sangyang_0000021_fil_image3.jpg": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_left"
+		},
+		{
+			"acup_coord": [
+				330,
+				269
+			]
+		}
+	],
+	"sangyang_0000406_fil_image1.jpg": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_left"
+		},
+		{
+			"acup_coord": [
+				423,
+				180
+			]
+		}
+	],
+	"sangyang_0000406_fil_image2.jpg": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_left"
+		},
+		{
+			"acup_coord": [
+				423,
+				180
+			]
+		}
+	],
+	"sangyang_0000406_fil_image3.jpg": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_left"
+		},
+		{
+			"acup_coord": [
+				423,
+				180
+			]
+		}
+	],
+	"sangyang_0000002_fil_image1.jpg": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_right"
+		},
+		{
+			"acup_coord": [
+				270,
+				185
+			]
+		}
+	],
+	"sangyang_0000002_fil_image2.jpg": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_right"
+		},
+		{
+			"acup_coord": [
+				270,
+				185
+			]
+		}
+	],
+	"sangyang_0000002_fil_image3.jpg": [
+		{
+			"acup_info": "sangyang",
+			"hand_pos": "dorsal_right"
+		},
+		{
+			"acup_coord": [
+				270,
+				185
+			]
+		}
+	]
+}

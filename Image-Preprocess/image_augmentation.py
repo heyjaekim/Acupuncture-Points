@@ -4,6 +4,8 @@ import cv2
 import copy
 import json
 import numpy as np
+from PIL import Image
+import matplotlib.pyplot as plt
 
 def open_temp_db():
     db = []
@@ -49,6 +51,11 @@ def open_json_file(file_path):
 def save_json_file(json_data):
     with open(json_file, 'w') as outfile:
         json.dump(json_data, outfile, indent='\t')
+
+def save_json_file2(json_data, json_file):
+    with open(json_file, 'w') as outfile:
+        json.dump(json_data, outfile, indent='\t')
+
 
 def rotate_bound(image, theta):
     # grab the dimensions of the image and then determine the
@@ -199,20 +206,37 @@ def scaling_image(images_info, json_data, dim):
                 l_img = blank_image.copy()
     save_json_file(json_data)
 
-def rotate_image_trnsfm(images_info, json_data, angle):
-
-    save_directory = f'./{acupuncture_info}/_rotate_trnsfm'
+def rotate_image_trnsfm(org_path, json_data, save_name, save_path):
+    
+    img_info = os.listdir(org_path)
+    acu_info = list(json_data)[0].split('_')[0]
+    
+    save_directory = save_path + '/' + save_name
     if not(isdir(save_directory)):
         makedirs(save_directory)
+
+    img_directory = save_directory + '/' + save_name 
+    if not(isdir(img_directory)):
+        makedirs(img_directory)
+    # json_file
+    json_new = dict()
     
-    for i in range(0, len(images_info)):
-        img_path = images_info[i][0]
-        img_hand_pos = images_info[i][1]
+    angle_list = np.random.randint(low = -180, high = 180, size = len(img_info))
+        
+    for i in range(0, len(img_info)):
+        img_path = org_path + '/' + img_info[i]
+        img_id = img_info[i].split('_')[-1].split('.')[0]
+        angle = angle_list[i]
+            
+        # json tag
+        acupuncture_id = f"{acu_info}_{img_id}"
+        acupuncture_new_id = acupuncture_id + f'_rt{angle}'
+        x, y, xy = json_data[acupuncture_id][1].values()
+        img_hand_pos =  json_data[acupuncture_id][0]['hand_pos']
         
         # read the image file, then generate rotated image
         img = cv2.imread(img_path, cv2.IMREAD_UNCHANGED)
         rotated_img = rotate_bound(img, angle)
-        img_id = ((img_path.split('/')[-1]).split('_')[-1]).split('.')[0]
 
         # height and width for images
         height, width = img.shape[:2]
@@ -220,34 +244,30 @@ def rotate_image_trnsfm(images_info, json_data, angle):
         (new_height, new_width) = rotated_img.shape[:2]
         (new_cx, new_cy) = (new_width // 2, new_height // 2)
         
-        acupuncture_id = f"{acupuncture_info}_{img_id}"
-        acupuncture_new_id = acupuncture_id + f'_rt{angle}'
-        
-        x, y, xy = json_data[acupuncture_id][1].values()
         new_x, new_y = rotate_box((x, y), cx, cy, height, width, angle)
+        
+        # change to 700 x 700 
+        new_x, new_y = int(new_x * 700 / new_width ), int(new_y * 700 / new_height )
         new_xy = (new_x, new_y)
+        
 
-        for row in range(new_height):
-            for col in range(new_width):
-                r,g,b = rotated_img[row,col][0], rotated_img[row,col][1], rotated_img[row,col][2]
-                if r <= 0 and g <= 0 and b <= 0:
-                    rotated_img[row,col] = np.array([255,255,255])                    
-
-        json_data[acupuncture_new_id] = list()
-        json_data[acupuncture_new_id].append({
+        json_new[acupuncture_new_id] = list()
+        json_new[acupuncture_new_id].append({
             "acup_info": f"{acupuncture_info}",
-            "hand_pos": f"{img_hand_pos}",
-            "acup_size": f"{acupuncture_size}"
+            "hand_pos": f"{img_hand_pos}"
         })
-        json_data[acupuncture_new_id].append({
-            "acup_coord_x": new_x,
-            "acup_coord_y": new_y,
+        json_new[acupuncture_new_id].append({
             "acup_coord": new_xy
         })
+        
+        im_mask1 = 255 * (rotated_img == 0)
+        rotated_img = (im_mask1 + rotated_img).astype('uint8')
+        # resize to 700 x 700
+        rotated_img = cv2.resize( rotated_img , dsize=(700,700)) 
+        
+        cv2.imwrite(f'./{img_directory}/{acupuncture_new_id}.png', rotated_img)
 
-        cv2.imwrite(f'./{save_directory}/{acupuncture_new_id}.png', rotated_img)
-
-    save_json_file(json_data)
+    save_json_file2(json_new, save_directory + '/' + acu_info + '_' + save_name + '.json')
 
 def clear_background(img):
     # img = cv2.imread('test2\Hand_0000002.png')
@@ -274,55 +294,119 @@ def clear_background(img):
     
     return result
     
-def fill_background_image(images_info, json_data):
+def img_from_mask2(img, mask ):
+    '''
+    mask : 2d array of true/false
+    img : 3d array with rgb channels
+    '''
+    r = img[:,:,0] + 255*mask[:,:,0] 
+    g = img[:,:,1] + 255*mask[:,:,1]  
+    b = img[:,:,2] + 255*mask[:,:,2]  
+    rgb = np.dstack((r,g,b))
+    rgb[rgb > 255] = 0
+    return rgb
 
-    save_directory = f'./{acupuncture_info}/_filled'
+dir1 = './background-images/'
+imdirs = os.listdir(dir1)
+imlist = [ plt.imread(dir1 + i) for i in imdirs ]
+
+def rand_crop_img (img, size = 250, change_col = True, *args):
+    '''
+    gets nd array greater than (256x256) as an input
+    returns randomly cropped image (256x256) as an output
+    channel values are uint of 0 to 255
+    '''
+    if img.dtype == 'float32':
+        img = (img * 255 / np.max(img)).astype('uint8')
+    im_pil = Image.fromarray(img.astype('uint8'), 'RGB')
+
+    x_c = np.random.randint(0, im_pil.size[0] - size)
+    y_c = np.random.randint(0, im_pil.size[1] - size)
+    img_cropped = im_pil.crop((x_c, y_c, x_c + size, y_c + size)) 
+    img_cropped = np.asarray(img_cropped) / 255.0
+
+    if change_col == True:
+        # change color distn 
+        for j in range(3):
+            img_cropped[:, :, j] = (img_cropped[:, :, j] + np.random.uniform(0, 0.25) ) / 2.0
+            img_cropped = img_cropped / np.max(img_cropped)
+
+    return img_cropped
+
+random_indx = np.random.randint(low = 1,high = 5, size = len(imlist))
+#print('testing images')
+#plt.imshow(rand_crop_img(imlist[random_indx[0]]))
+
+
+def fill_background_image(org_path, json_data, save_name, save_path, imlist):
+    '''
+    img_info : list of image names (os.listdir) in the original path 
+    '''
+    img_info = os.listdir(org_path)
+    # acup info
+    acu_info = list(json_data)[0].split('_')[0]
+    # directory for saving image
+    save_directory = save_path + '/' + save_name
     if not(isdir(save_directory)):
         makedirs(save_directory)
     
-    for i in range(0, len(images_info)):
-        img_path = images_info[i][0]
-        img_hand_pos = images_info[i][1]
-        img_id = ((img_path.split('/')[-1]).split('_')[-1]).split('.')[0]
+    img_directory = save_directory + '/' + save_name 
+    if not(isdir(img_directory)):
+        makedirs(img_directory)
+    # json_file
+    json_new = dict()
+    
+    # random index
+    random_indx = np.random.randint(low = 0,high = 4, size = len(img_info))
+    
+    for i in range(0, len(img_info)):
+        img_path = org_path + '/' + img_info[i]
+        #img_id = img_info[i].split('_')[-1].split('.')[0]
+        #img_id = name_list[1]
+        names = img_info[i].split('_')
+        img_id = names[1].split('.')[0]
         
-        # read the image file, then generate rotated image
+        if chg_flag = True:
+            chg_id = names[2].split('.')[0]
+            acupuncture_id = f"{acu_info}_{img_id}_{chg_id}"
+        
+        
+        # json tag
+        acupuncture_id = f"{acu_info}_{img_id}"
+        acupuncture_new_id = acupuncture_id + '_'+save_name
+        xy = json_data[acupuncture_id][1]['acup_coord']
+        img_hand_pos =  json_data[acupuncture_id][0]['hand_pos']
+        
+        json_new[acupuncture_new_id] = list()
+        json_new[acupuncture_new_id].append({
+            "acup_info": f"{acu_info}",
+            "hand_pos": f"{img_hand_pos}"
+        })
+        json_new[acupuncture_new_id].append({
+            "acup_coord": xy
+        })
+        
+        # read the image file, then generate image
         img = clear_background(cv2.imread(img_path, cv2.IMREAD_UNCHANGED))
         height, width = img.shape[:2]
-        b_images = [(f,join('./background-images', f)) for f in listdir('./background-images')]
-        print(b_images)
+        im_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB) # np format
+
+        # get img mask
+        im_mask1 = 1* (im_rgb != 255)
+        im_mask2 = 1* (im_rgb == 255)
         
-        # fill the image background
-        for _ in b_images:
-            b_image = cv2.resize(cv2.imread(_[1], cv2.IMREAD_UNCHANGED), dsize=(700,700))    
-            l_img = img.copy()
-            for row in range(height):
-                for col in range(width):
-                    if np.array_equal(l_img[row,col], np.array([255,255,255])):
-                        l_img[row, col] = b_image[row,col]
-
-            acupuncture_id = f"{acupuncture_info}_{img_id}"
-            acupuncture_new_id = acupuncture_id + f'_fil_{_[0]}'
-            x, y, xy = json_data[acupuncture_id][1].values()
-
-            json_data[acupuncture_new_id] = list()
-            json_data[acupuncture_new_id].append({
-                "acup_info": f"{acupuncture_info}",
-                "hand_pos": f"{img_hand_pos}",
-                "acup_size": f"{acupuncture_size}"
-            })
-            json_data[acupuncture_new_id].append({
-                "acup_coord_x": x,
-                "acup_coord_y": y,
-                "acup_coord": xy
-            })
-
-            cv2.imwrite(f'./{save_directory}/{acupuncture_new_id}.png', l_img)
-
-            # cv2.imshow(_[0], l_img)
-            # cv2.waitKey(0)
-            # cv2.destroyAllWindows
-
-    save_json_file(json_data)
+        npimg = rand_crop_img( imlist[ random_indx[i]])
+        uint_img = (npimg * 255 / np.max(npimg)).astype('uint8')
+        b_image = cv2.resize( uint_img , dsize=(height,width)) 
+        
+        new_img = img_from_mask2( b_image, im_mask1 ) +  img_from_mask2( im_rgb, im_mask2 )
+        # get PIL img
+        img_pil = Image.fromarray(new_img.astype('uint8'), 'RGB')   
+        img_pil.save(img_directory + '/' + acupuncture_new_id + '.png')
+        
+        if i % 10 == 0:
+            print('completed ' + str(i) + ' images')
+    save_json_file2(json_new, save_directory + '/' + acu_info + '_' + save_name + '.json')
 
 
 

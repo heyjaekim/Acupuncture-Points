@@ -1,5 +1,51 @@
 <!doctype html>
 <html class="no-js" lang="en">
+<head>
+    <!-- title -->
+    <title>손을 주시오 진단 하겠오</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
+    <meta name="author" content="ThemeZaa">
+    <!-- description -->
+    <meta name="description" content="POFO is a highly creative, modern, visually stunning and Bootstrap responsive multipurpose agency and portfolio HTML5 template with 25 ready home page demos.">
+    <!-- keywords -->
+    <meta name="keywords" content="creative, modern, clean, bootstrap responsive, html5, css3, portfolio, blog, agency, templates, multipurpose, one page, corporate, start-up, studio, branding, designer, freelancer, carousel, parallax, photography, personal, masonry, grid, coming soon, faq">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="../static/images/favicon.png">
+    <link rel="apple-touch-icon" href="../static/images/apple-touch-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../static/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../static/images/apple-touch-icon-114x114.png">
+    <!-- animation -->
+    <link rel="stylesheet" href="../static/css/animate.css" />
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
+    <!-- et line icon -->
+    <link rel="stylesheet" href="../static/css/et-line-icons.css" />
+    <!-- font-awesome icon -->
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css" />
+    <!-- themify icon -->
+    <link rel="stylesheet" href="../static/css/themify-icons.css">
+    <!-- swiper carousel -->
+    <link rel="stylesheet" href="../static/css/swiper.min.css">
+    <!-- justified gallery  -->
+    <link rel="stylesheet" href="../static/css/justified-gallery.min.css">
+    <!-- magnific popup -->
+    <link rel="stylesheet" href="../static/css/magnific-popup.css" />
+    <!-- revolution slider -->
+    <link rel="stylesheet" type="text/css" href="../static/revolution/css/settings.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="../static/revolution/css/layers.css">
+    <link rel="stylesheet" type="text/css" href="../static/revolution/css/navigation.css">
+    <!-- bootsnav -->
+    <link rel="stylesheet" href="../static/css/bootsnav.css">
+    <!-- style -->
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <!-- responsive css -->
+    <link rel="stylesheet" href="../static/css/responsive.css" />
+    <!--[if IE]>
+    <script src="../static/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
 <body class="width-100">
 <!-- start header -->
 <header>
@@ -110,9 +156,10 @@
                 <form method="GET" action="/getsymp">
                     <div>
                         <input type="text" id="symptom-input-text" name="symptom" placeholder="Describe about your symptom">
+                        <input type="submit" value="Submit" hidden="True">
                     </div>
                     <div class='button'>
-                        <input type="submit" value="Submit" hidden="True">
+                        {% include 'voice-record.html' %}
                     </div>
                 </form>
             </div>
@@ -121,7 +168,7 @@
 </section>
 <!-- end hero section -->
 <!-- start about agency section -->
-<section class="wow fadeIn">
+<!--<section class="wow fadeIn">-->
     {% if symptom != None %}
         <div class="container">
             <div class="row">
@@ -136,11 +183,20 @@
                 <!-- start feature box item -->
                 <div class="col-md-4 col-sm-4 col-xs-12 xs-margin-five-bottom last-paragraph-no-margin wow fadeInUp">
                     <div class="feature-box">
-                        <div class="content">
+                        <div class="content" onclick="myFunction()">
                             <i class="icon-browser text-medium-gray icon-large margin-25px-bottom sm-margin-15px-bottom"></i>
-                            <div class="text-medium alt-font text-capitalize text-extra-dark-gray margin-10px-bottom sm-margin-5px-bottom">Live Website Builder</div>
+                            <div class="text-medium alt-font text-capitalize text-extra-dark-gray margin-10px-bottom sm-margin-5px-bottom">혈을 잡아주시오</div>
                             <p class="width-85 margin-lr-auto sm-width-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                         </div>
+                    </div>
+                    <div class="panel-group accordion-style2" id="accordion1">
+                        <!-- start tab content -->
+                        <div class="panel panel-default" display="none">
+                            <div id="collapseOne" class="panel-collapse collapse in">
+                                {% include 'dropzone.html' %}
+                            </div>
+                        </div>
+                        <!-- end tab content -->
                     </div>
                 </div>
                 <!-- end feature box item -->
@@ -149,9 +205,27 @@
                     <div class="feature-box">
                         <div class="content">
                             <i class="icon-book-open text-medium-gray icon-large margin-25px-bottom sm-margin-15px-bottom"></i>
-                            <div class="text-medium alt-font text-capitalize text-extra-dark-gray margin-10px-bottom sm-margin-5px-bottom">Live Content Creator</div>
+                            <div class="text-medium alt-font text-capitalize text-extra-dark-gray margin-10px-bottom sm-margin-5px-bottom">한약재 추천</div>
                             <p class="width-85 margin-lr-auto sm-width-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                         </div>
+                    </div>
+                    <div class="panel-group accordion-style2" id="accordion">
+                        <!-- start tab content -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                    <div class="panel-title">
+                                        <span class="alt-font font-weight-600 text-deep-pink tab-tag">02</span>
+                                        <span class="text-extra-dark-gray xs-width-80 display-inline-block"></span>
+                                        <i class="fas fa-angle-up pull-right text-extra-dark-gray "></i>
+                                    </div>
+                                </a>
+                            </div>
+                            <div id="collapseTwo" class="panel-collapse collapse in">
+                                {% include 'dropzone.html' %}
+                            </div>
+                        </div>
+                        <!-- end tab content -->
                     </div>
                 </div>
                 <!-- end feature box item -->
@@ -160,17 +234,43 @@
                     <div class="feature-box">
                         <div class="content">
                             <i class="icon-wallet text-medium-gray icon-large margin-25px-bottom sm-margin-15px-bottom"></i>
-                            <div class="text-medium alt-font text-capitalize text-extra-dark-gray margin-10px-bottom sm-margin-5px-bottom">Create Unique Demos</div>
+                            <div class="text-medium alt-font text-capitalize text-extra-dark-gray margin-10px-bottom sm-margin-5px-bottom">가까운 진료소</div>
                             <p class="width-85 margin-lr-auto sm-width-100">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
                         </div>
                     </div>
+                    <div class="panel-group accordion-style2" id="accordion">
+                        <!-- start tab content -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                    <div class="panel-title">
+                                        <span class="alt-font font-weight-600 text-deep-pink tab-tag">03</span>
+                                        <span class="text-extra-dark-gray xs-width-80 display-inline-block"></span>
+                                        <i class="fas fa-angle-up pull-right text-extra-dark-gray "></i>
+                                    </div>
+                                </a>
+                            </div>
+                            <div id="collapseThree" class="panel-collapse collapse in">
+                                {% include 'dropzone.html' %}
+                            </div>
+                        </div>
+                        <!-- end tab content -->
+                    </div>
                 </div>
+                
                 <!-- end feature box item -->
             </div>
         </div>
-        {% include 'dropzone.html' %}
+
+
+
+    
+
+        {% if hiddenspace1 == true %}
+            {% include 'dropzone.html' %}
+        {% endif %}
     {% endif %}
-</section>
+<!--</section>-->
 <!-- end about agency section -->
 
 
@@ -226,63 +326,16 @@
 <!-- revolution -->
 <script type="text/javascript" src="../static/revolution/js/jquery.themepunch.tools.min.js"></script>
 <script type="text/javascript" src="../static/revolution/js/jquery.themepunch.revolution.min.js"></script>
-<!-- revolution slider extensions (load below extensions JS files only on local file systems to make the slider work! The following part can be removed on server for on demand loading) -->
-<!--<script type="text/javascript" src="revolution/js/extensions/revolution.extension.actions.min.js"></script>
-<script type="text/javascript" src="revolution/js/extensions/revolution.extension.carousel.min.js"></script>
-<script type="text/javascript" src="revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
-<script type="text/javascript" src="revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
-<script type="text/javascript" src="revolution/js/extensions/revolution.extension.migration.min.js"></script>
-<script type="text/javascript" src="revolution/js/extensions/revolution.extension.navigation.min.js"></script>
-<script type="text/javascript" src="revolution/js/extensions/revolution.extension.parallax.min.js"></script>
-<script type="text/javascript" src="revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
-<script type="text/javascript" src="revolution/js/extensions/revolution.extension.video.min.js"></script>-->
-<!-- setting -->
 <script type="text/javascript" src="../static/js/main.js"></script>
+<script>
+    function myFunction() {
+      var x = document.getElementById("accordion1");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+</script>
 </body>
-<head>
-        <!-- title -->
-        <title>POFO – Creative Agency, Corporate and Portfolio Multi-purpose Template</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
-        <meta name="author" content="ThemeZaa">
-        <!-- description -->
-        <meta name="description" content="POFO is a highly creative, modern, visually stunning and Bootstrap responsive multipurpose agency and portfolio HTML5 template with 25 ready home page demos.">
-        <!-- keywords -->
-        <meta name="keywords" content="creative, modern, clean, bootstrap responsive, html5, css3, portfolio, blog, agency, templates, multipurpose, one page, corporate, start-up, studio, branding, designer, freelancer, carousel, parallax, photography, personal, masonry, grid, coming soon, faq">
-        <!-- favicon -->
-        <link rel="shortcut icon" href="../static/images/favicon.png">
-        <link rel="apple-touch-icon" href="../static/images/apple-touch-icon-57x57.png">
-        <link rel="apple-touch-icon" sizes="72x72" href="../static/images/apple-touch-icon-72x72.png">
-        <link rel="apple-touch-icon" sizes="114x114" href="../static/images/apple-touch-icon-114x114.png">
-        <!-- animation -->
-        <link rel="stylesheet" href="../static/css/animate.css" />
-        <!-- bootstrap -->
-        <link rel="stylesheet" href="../static/css/bootstrap.min.css" />
-        <!-- et line icon -->
-        <link rel="stylesheet" href="../static/css/et-line-icons.css" />
-        <!-- font-awesome icon -->
-        <link rel="stylesheet" href="../static/css/font-awesome.min.css" />
-        <!-- themify icon -->
-        <link rel="stylesheet" href="../static/css/themify-icons.css">
-        <!-- swiper carousel -->
-        <link rel="stylesheet" href="../static/css/swiper.min.css">
-        <!-- justified gallery  -->
-        <link rel="stylesheet" href="../static/css/justified-gallery.min.css">
-        <!-- magnific popup -->
-        <link rel="stylesheet" href="../static/css/magnific-popup.css" />
-        <!-- revolution slider -->
-        <link rel="stylesheet" type="text/css" href="../static/revolution/css/settings.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="../static/revolution/css/layers.css">
-        <link rel="stylesheet" type="text/css" href="../static/revolution/css/navigation.css">
-        <!-- bootsnav -->
-        <link rel="stylesheet" href="../static/css/bootsnav.css">
-        <!-- style -->
-        <link rel="stylesheet" href="../static/css/style.css" />
-        <!-- responsive css -->
-        <link rel="stylesheet" href="../static/css/responsive.css" />
-        <!--[if IE]>
-        <script src="../static/js/html5shiv.js"></script>
-        <![endif]-->
-    </head>
 </html>
