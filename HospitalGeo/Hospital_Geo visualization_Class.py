@@ -88,3 +88,7 @@ class Nearest_Hospital:
                 folium.Marker([hos_loc[i][5], hos_loc[i][6]], tooltip = '병원명 : '+hos_loc[0][0] +'\n' + '전화번호 : ' + hos_loc[0][1]).add_to(m)
 
         return m
+
+###############################################
+NH = Nearest_Hospital(127.08133592498548, 37.64928136787053)
+NH.result_map()
