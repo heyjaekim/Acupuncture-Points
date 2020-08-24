@@ -5,6 +5,7 @@ import json
 import folium
 import sqlite3
 import requests
+from math import ceil, floor
 
 
 class Nearest_Hospital:
@@ -41,13 +42,40 @@ class Nearest_Hospital:
         '''
         get customer's specifi location
         '''
-        geoUrl = 'http://api.vworld.kr/req/address?service=address&request=getAddress&version=2.0&crs=epsg:4326&point=' + str(self.Lon) + ',' + str(self.Lat) + '&format=xml&type=road&zipcode=true&simple=false&key=35C83A30-300F-3C4C-9224-D8712B43726D'
-        response = requests.get(geoUrl)
-        xmldict = xmltodict.parse(response.text)
-        geoResult = json.loads(json.dumps(xmldict))
+        try:
+            geoUrl = 'http://api.vworld.kr/req/address?service=address&request=getAddress&version=2.0&crs=epsg:4326&point=' + str(self.Lon) + ',' + str(self.Lat) + '&format=xml&type=road&zipcode=true&simple=false&key=35C83A30-300F-3C4C-9224-D8712B43726D'
+            response = requests.get(geoUrl)
+            xmldict = xmltodict.parse(response.text)
+            geoResult = json.loads(json.dumps(xmldict))
+            result = geoResult['response']['result']['item']['structure']['level1'], geoResult['response']['result']['item']['structure']['level2'], geoResult['response']['result']['item']['structure']['level4L']
+            return result
+        except KeyError:
+            def float_round(num, places=0, direction=floor):
+                return direction(num * (10 ** places)) / float(10 ** places)
+            self.Lon = float_round(float(self.Lon), 3)
+            if type(self.Lon) is str:
+                self.Lon = float_round(float(self.Lon), 4)
+            for i in range(1,10,1):
+                flt = float(f".000{i}")
+                # print(type(self.Lon), type(flt))
+                self.Lon += flt
+                self.Lon = str(self.Lon)
+                try:
+                    geoUrl = 'http://api.vworld.kr/req/address?service=address&request=getAddress&version=2.0&crs=epsg:4326&point=' + str(
+                        self.Lon) + ',' + str(
+                        self.Lat) + '&format=xml&type=road&zipcode=true&simple=false&key=35C83A30-300F-3C4C-9224-D8712B43726D'
+                    response = requests.get(geoUrl)
+                    xmldict = xmltodict.parse(response.text)
+                    geoResult = json.loads(json.dumps(xmldict))
+                    result = geoResult['response']['result']['item']['structure']['level1'], \
+                           geoResult['response']['result']['item']['structure']['level2'], \
+                           geoResult['response']['result']['item']['structure']['level4L']
+                    print(result)
+                    return result
+                except KeyError:
+                    pass
 
-        return geoResult['response']['result']['item']['structure']['level1'], geoResult['response']['result']['item']['structure']['level2'], geoResult['response']['result']['item']['structure']['level4L']
-    
+
     
     def search_hosp(self, level1, level2, level4L):
         '''
@@ -69,8 +97,9 @@ class Nearest_Hospital:
         '''
         get customer's location and make map
         '''
-        
+
         custo_loc = self.location()
+
         l1, l2, l4 = custo_loc[0].__repr__() , custo_loc[1].__repr__() , custo_loc[2].__repr__()
         hos_loc = self.search_hosp(l1, l2, l4)
         

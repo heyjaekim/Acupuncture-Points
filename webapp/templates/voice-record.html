@@ -8,16 +8,35 @@
 <body>
 
 <button id="recordButton">Record/Stop</button>
+{#<submit id="recordSubmit" method="GET" action="/getvoice">submit</submit>#}
+
+
 
 <script>
-    var recorder, gumStream;
+    var recorder, gumStream, url, preview;
     var recordButton = document.getElementById("recordButton");
+    {#var#}
     recordButton.addEventListener("click", toggleRecording);
 
     function toggleRecording() {
         if (recorder && recorder.state == "recording") {
             recorder.stop();
             gumStream.getAudioTracks()[0].stop();
+
+                var form = new FormData();
+                form.append('audiofile', recorder.data);
+                //Chrome inspector shows that the post data includes a file and a title.
+                $.ajax({
+                    type: 'POST',
+                    url: '/service',
+                    data: form,
+                    cache: false,
+                    processData: false,
+                    contentType: false
+                }).done(function (data) {
+                    console.log(data);
+                });
+
         } else {
             navigator.mediaDevices.getUserMedia({
                 audio: true
@@ -25,8 +44,8 @@
                 gumStream = stream;
                 recorder = new MediaRecorder(stream);
                 recorder.ondataavailable = function(e) {
-                    var url = URL.createObjectURL(e.data);
-                    var preview = document.createElement('audio');
+                    url = URL.createObjectURL(e.data);
+                    preview = document.createElement('audio');
                     preview.controls = true;
                     preview.src = url;
                     document.body.appendChild(preview);

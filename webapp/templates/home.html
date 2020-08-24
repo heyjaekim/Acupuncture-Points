@@ -46,7 +46,7 @@
             <script src="js/html5shiv.js"></script>
         <![endif]-->
     </head>
-    <body>
+    <body onload="geoFindMe()">
         <!-- start header -->
         <header>
             <!-- start navigation -->
@@ -607,5 +607,28 @@
         <script type="text/javascript" src="revolution/js/extensions/revolution.extension.video.min.js"></script>-->
         <!-- setting -->
         <script type="text/javascript" src="../static/js/main.js"></script>
+        <script>
+            function geoFindMe() {
+                if (navigator.geolocation) { // GPS를 지원하면
+                    navigator.geolocation.getCurrentPosition(function (position) {
+                        var latitude = position.coords.latitude;
+                        var longitude = position.coords.longitude;
+                        $.ajax({
+                            type: "POST",
+                            url: "/",
+                            contentType: "application/json",
+                            data: JSON.stringify({'lat': latitude, 'lng': longitude}),
+                            dataType: "json",
+                            success: function (response) {
+                                console.log(response);
+                            },
+                            error: function (err) {
+                                console.log(err);
+                            }
+                        });
+                    })
+                }
+             }
+                </script>
     </body>
 </html>
