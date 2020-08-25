@@ -76,11 +76,9 @@ def home():
 @app.route('/service', methods=['GET', 'POST'])
 def service():
     global voice_symptom
-    global voice_result
-    global voice_first_symp
-    global voice_second_symp
 
     if request.method == "POST":
+
         f = request.files['audio_data']
         # with open('voice.wav', 'wb') as voice:
         #     f.save(voice)
@@ -88,14 +86,10 @@ def service():
         csr_inst = csr('./voice.wav')
         voice_symptom = csr_inst.convert()
         print(voice_symptom)
+
         try:
-            a = Search_symptom()
-            symptom = a.spacing_kkma(request.args.get(voice_symptom))
-            b = a.tokenizer2(symptom)
-            voice_first_symp = a.search(b[0])[-1]
-            voice_second_symp = a.search(b[1])[-1]
-            voice_result = voice_first_symp + " · " + voice_second_symp
             return render_template('service.html', symptom=None)
+
         except TypeError:
             print("증상을 정확히 말씀해주세요")
             pass
@@ -108,9 +102,9 @@ def getsymp(symptom=None):
         pass
 
     elif request.method == 'GET':
-        foods=set()
-        acups=set()
-        result=""
+        new_acups = set()
+        new_foods = set()
+        result = ""
 
         a = Search_symptom()
         symptom = request.args.get('symptom')
@@ -119,16 +113,18 @@ def getsymp(symptom=None):
         for s in symp_lst:
             try:
                 found_symp = a.search(s)[-1]
-                print(found_symp)
-                acups = acups.update({_ for _ in KMT.search_Acup(found_symp)})
-                foods = foods.update({(k,v,len(v)) for k,v in KMT.search_Food(found_symp)})
+                acups = { _ for _ in KMT.search_Acup(found_symp)}
+                foods = {(k, v, len(v)) if v else (k, " - ", 10) for k,v in KMT.search_Food(found_symp)}
+                new_acups = new_acups.union(acups) if new_acups else acups
+                new_foods = new_foods.union(foods) if new_foods else foods
                 result += " · " + found_symp if result != "" else found_symp
-                print(result)
-            except (TypeError and AttributeError):
+            except TypeError:
                 pass
+        print(sorted(new_foods))
+        print(len(new_foods))
 
         return render_template('service.html', symptom=symptom, result=result,
-                               acups=acups, foods=foods)
+                               acups=sorted(new_acups), foods=sorted(new_foods))
 
 
 @app.route('/upload_photo', methods=['GET', 'POST'])
@@ -156,15 +152,27 @@ def openmap():
 @app.route('/getvoice', methods=['GET'])
 def getvoice():
     if request.method == 'GET':
+        new_acups = set()
+        new_foods = set()
+        voice_result = ""
 
-        matched_acups = {_ for _ in KMT.search_Acup(voice_first_symp)}.union(
-            {_ for _ in KMT.search_Acup(voice_second_symp)})
-
-        matched_foods = {(k, v, len(v)) for k, v in KMT.search_Food(voice_first_symp)}.union(
-            {(k, v, len(v)) for k, v in KMT.search_Food(voice_second_symp)})
+        a = Search_symptom()
+        symp_lst = a.tokenizer2(voice_symptom)
+        for s in symp_lst:
+            try:
+                found_symp = a.search(s)[-1]
+                acups = {_ for _ in KMT.search_Acup(found_symp)}
+                foods = {(k, v, len(v)) if v else (k, " - ", 10) for k, v in KMT.search_Food(found_symp)}
+                new_acups = new_acups.union(acups) if new_acups else acups
+                new_foods = new_foods.union(foods) if new_foods else foods
+                voice_result += " · " + found_symp if voice_result != "" else found_symp
+            except TypeError:
+                pass
+        print(sorted(new_foods))
+        print(len(new_foods))
 
         return render_template('service.html', symptom=voice_symptom, result=voice_result,
-                               acups=matched_acups, foods=matched_foods)
+                               acups=sorted(new_acups), foods=sorted(new_foods))
 
 
 

@@ -7,9 +7,9 @@ class KMT:
     @classmethod
     def search_Food(self, Symptom):
         try:
-            conn = sqlite3.connect('./Text_Searching/Symptom_Matching/Acup_last.db')
+            conn = sqlite3.connect('./Text_Searching/Symptom_Matching/symptom.db')
         except sqlite3.OperationalError:
-            conn = sqlite3.connect('./Acup_last.db')
+            conn = sqlite3.connect('./symptom.db')
         cur = conn.cursor()
         cur.execute('''
         SELECT Food_name, How_to_eat
@@ -24,9 +24,9 @@ class KMT:
     def search_Acup(self, Symptom):
 
         try:
-            conn = sqlite3.connect('./Text_Searching/Symptom_Matching/Acup_last.db')
+            conn = sqlite3.connect('./Text_Searching/Symptom_Matching/symptom.db')
         except sqlite3.OperationalError:
-            conn = sqlite3.connect('./Acup_last.db')
+            conn = sqlite3.connect('./symptom.db')
         cur = conn.cursor()
         cur.execute('''
             SELECT Acup_Method.Acup_id
@@ -49,5 +49,5 @@ class KMT:
             acup_.append(acup[0])
         return acup_
 ############################
-# print(KMT.search_Acup('두통'), KMT.search_Food('두통'))
-# print(len(KMT.search_Food('두통')))
+# print(KMT.search_Acup('심병'))
+# print(KMT.search_Food('심병'))
