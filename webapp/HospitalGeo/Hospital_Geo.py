@@ -40,7 +40,7 @@ class Nearest_Hospital:
     
     def location(self):
         '''
-        get customer's specifi location
+        get customer's specific location
         '''
         try:
             geoUrl = 'http://api.vworld.kr/req/address?service=address&request=getAddress&version=2.0&crs=epsg:4326&point=' \
@@ -76,7 +76,7 @@ class Nearest_Hospital:
                         result = geoResult['response']['result']['item']['structure']['level1'], \
                                geoResult['response']['result']['item']['structure']['level2'], \
                                geoResult['response']['result']['item']['structure']['level4L']
-                        print(result)
+                        print(f"closest Location: {result}")
                         return result
                     except KeyError:
                         pass
@@ -90,12 +90,12 @@ class Nearest_Hospital:
         conn = sqlite3.connect('./HospitalGeo/hospital_last.db')
         cur = conn.cursor()
         cur.execute('''
-        SELECT dutyName, dutyTel1, dutyDivNam, dutyAddr, dutyMapimg,wgs84Lat, wgs84Lon 
+        SELECT dutyName, dutyTel1, dutyDivNam, dutyAddr, dutyMapimg, wgs84Lat, wgs84Lon 
         FROM Hospital as H
         WHERE H.Add_level1 = ''' + level1 +'''
-        and H.Add_level2 = ''' + level2 +'''
-        and H.Add_level3 = ''' + level4L)
+        and H.Add_level2 = ''' + level2)
         res = cur.fetchall()
+        # print(res)
         return res
     
     
@@ -115,12 +115,13 @@ class Nearest_Hospital:
         
         
         for i in range(len(hos_loc)):
-
-            if self.get_harversion_distance(self.Lon, self.Lat, float(hos_loc[i][6]), float(hos_loc[i][5])) < distance:
-                folium.Marker([hos_loc[i][5], hos_loc[i][6]], tooltip = '병원명 : '+hos_loc[i][0] +'\n' + '전화번호 : ' + hos_loc[i][1]).add_to(m)
-
+            try:
+                if self.get_harversion_distance(self.Lon, self.Lat, float(hos_loc[i][6]), float(hos_loc[i][5])) < distance:
+                    folium.Marker([hos_loc[i][5], hos_loc[i][6]], tooltip = '병원명 : '+hos_loc[i][0] +'\n' + '전화번호 : ' + hos_loc[i][1]).add_to(m)
+            except:
+                pass
         return m
 
 ###############################################
-#NH = Nearest_Hospital(127.08133592498548, 37.64928136787053)
-#NH.result_map()
+NH = Nearest_Hospital(127.08133592498548, 37.64928136787053)
+NH.result_map()

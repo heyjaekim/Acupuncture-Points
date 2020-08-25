@@ -6,13 +6,13 @@ from flask_admin.contrib.fileadmin import FileAdmin
 
 import os
 
-from Text_Searching.Symptom_Search.symptom_search_2 import Search_symptom
+from Text_Searching.Symptom_Search.search_symptom import Search_symptom
 from Text_Searching.Symptom_Matching.Matching_Symptom import KMT
 from HospitalGeo.Hospital_Geo import Nearest_Hospital
 from Text_Searching.speech2text import csr
 
 # ## image processing stuff ##
-# from CV_DL.CV_check_Utils import clear_background
+# from CV_DL.CV_check_Utils import *
 # from torchvision import transforms
 # from PIL import Image
 # import torch
@@ -44,14 +44,13 @@ Dropzone(app)
 admin = Admin(name='test')
 
 admin.init_app(app)
-# admin.add_view(ModelView(User, db.session))
 admin.add_view(FileAdmin(upload_dir, name='Uploads'))
 
 ###########################################################
 
 # initialize models
 # baseline : resnet-34 ;
-model = create_model()
+# model = create_model()
 
 ###########################################################
 
@@ -67,7 +66,7 @@ def home():
 
         # need to add feature to get the current position
         nh = Nearest_Hospital(lng, lat)
-        # nh = Nearest_Hospital(127.08133592498548, 37.64928136787053)
+        # nh = Nearest_Hospital(127.00441798640304, 37.53384172231443)
         folium_map = nh.result_map()
         folium_map.save('templates/map.html')
 
@@ -78,6 +77,9 @@ def home():
 def service():
     global voice_symptom
     global voice_result
+    global voice_first_symp
+    global voice_second_symp
+
     if request.method == "POST":
         f = request.files['audio_data']
         # with open('voice.wav', 'wb') as voice:
@@ -87,8 +89,12 @@ def service():
         voice_symptom = csr_inst.convert()
         print(voice_symptom)
         try:
-            a = Search_symptom(voice_symptom)
-            voice_result = a.search()[2]
+            a = Search_symptom()
+            symptom = a.spacing_kkma(request.args.get(voice_symptom))
+            b = a.tokenizer2(symptom)
+            voice_first_symp = a.search(b[0])[-1]
+            voice_second_symp = a.search(b[1])[-1]
+            voice_result = voice_first_symp + " · " + voice_second_symp
             return render_template('service.html', symptom=None)
         except TypeError:
             print("증상을 정확히 말씀해주세요")
@@ -102,15 +108,27 @@ def getsymp(symptom=None):
         pass
 
     elif request.method == 'GET':
+        foods=set()
+        acups=set()
+        result=""
 
+        a = Search_symptom()
         symptom = request.args.get('symptom')
-        a = Search_symptom(symptom)
-        result = a.search()[2]
-        matched_acups = KMT.search_Acup(result)
-        matched_foods = [(k,v,len(v)) for k,v in KMT.search_Food(result)]
+        symp_lst = a.tokenizer2(symptom)
+
+        for s in symp_lst:
+            try:
+                found_symp = a.search(s)[-1]
+                print(found_symp)
+                acups = acups.update({_ for _ in KMT.search_Acup(found_symp)})
+                foods = foods.update({(k,v,len(v)) for k,v in KMT.search_Food(found_symp)})
+                result += " · " + found_symp if result != "" else found_symp
+                print(result)
+            except (TypeError and AttributeError):
+                pass
 
         return render_template('service.html', symptom=symptom, result=result,
-                               acups=matched_acups, foods=matched_foods)
+                               acups=acups, foods=foods)
 
 
 @app.route('/upload_photo', methods=['GET', 'POST'])
@@ -138,11 +156,16 @@ def openmap():
 @app.route('/getvoice', methods=['GET'])
 def getvoice():
     if request.method == 'GET':
-        matched_acups = KMT.search_Acup(voice_result)
-        matched_foods = [(k,v,len(v)) for k,v in KMT.search_Food(voice_result)]
+
+        matched_acups = {_ for _ in KMT.search_Acup(voice_first_symp)}.union(
+            {_ for _ in KMT.search_Acup(voice_second_symp)})
+
+        matched_foods = {(k, v, len(v)) for k, v in KMT.search_Food(voice_first_symp)}.union(
+            {(k, v, len(v)) for k, v in KMT.search_Food(voice_second_symp)})
 
         return render_template('service.html', symptom=voice_symptom, result=voice_result,
                                acups=matched_acups, foods=matched_foods)
+
 
 
 
