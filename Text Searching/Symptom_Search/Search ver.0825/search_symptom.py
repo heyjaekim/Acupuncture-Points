@@ -5,6 +5,7 @@ import struct
 from struct import pack, unpack
 from os import listdir
 from konlpy.tag import Okt
+from konlpy.tag import Kkma
 from math import sqrt
 from math import log
 import json
@@ -21,6 +22,22 @@ class Search_symptom:
         self.pattern7 = re.compile(r'[a-z]')
         self.pattern8 = re.compile(r'[/,.]')
         self.okt = Okt()
+        self.kkma = Kkma()
+
+    def spacing_kkma(self, wrongSentence):
+        pattern = re.compile('[ㄱ-ㅎㅏ-ㅣ]')
+        tagged = self.kkma.pos(wrongSentence)
+        corrected = ""
+        for i in tagged:
+            if i[1][0] in "JEXSO":
+                corrected += i[0]
+            else:
+                corrected += " "+i[0]
+        if corrected[0] == " ":
+            corrected = corrected[1:]
+
+        res = pattern.sub('', corrected)
+        return res
 
     def tokenizer1(self, doc): # 어절
 
@@ -53,6 +70,7 @@ class Search_symptom:
 
     def fileids(self, path = './symp/'):
         return [path+_ for _ in listdir(path) if re.search('[.]txt$', _)]
+
 
     def search(self, query):
         TF = lambda f, mf, a: a + (1 - a)*(f / mf)
@@ -109,6 +127,7 @@ query = '머리아프고, 속이 울렁거린다'
 
 
 a = Search_symptom()
-b = tokenizer2(query)
-print(a.search_engine(b[0]))
-print(a.search_engine(b[1]))
+query_change = a.spacing_kkma(query)
+b = a.tokenizer2(query_change)
+print(a.search(b[0]))
+print(a.search(b[1]))
