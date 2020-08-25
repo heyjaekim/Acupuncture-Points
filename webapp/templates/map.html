@@ -23,7 +23,7 @@
             <meta name="viewport" content="width=device-width,
                 initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <style>
-                #map_07f290fcef1444b7aa1595ea21176286 {
+                #map_44f8a67e78ab48c7b3d450b4cc3c027c {
                     position: relative;
                     width: 100.0%;
                     height: 100.0%;
@@ -35,15 +35,15 @@
 </head>
 <body>    
     
-            <div class="folium-map" id="map_07f290fcef1444b7aa1595ea21176286" ></div>
+            <div class="folium-map" id="map_44f8a67e78ab48c7b3d450b4cc3c027c" ></div>
         
 </body>
 <script>    
     
-            var map_07f290fcef1444b7aa1595ea21176286 = L.map(
-                "map_07f290fcef1444b7aa1595ea21176286",
+            var map_44f8a67e78ab48c7b3d450b4cc3c027c = L.map(
+                "map_44f8a67e78ab48c7b3d450b4cc3c027c",
                 {
-                    center: [37.5371163, 127.00710000000001],
+                    center: [37.537, 127.0],
                     crs: L.CRS.EPSG3857,
                     zoom: 20,
                     zoomControl: true,
@@ -55,27 +55,117 @@
 
         
     
-            var tile_layer_0cd290485ef84f46b231fe57ff75f159 = L.tileLayer(
+            var tile_layer_b407acc1fd6a49518abeb3db18bd2d0c = L.tileLayer(
                 "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
                 {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
-            ).addTo(map_07f290fcef1444b7aa1595ea21176286);
+            ).addTo(map_44f8a67e78ab48c7b3d450b4cc3c027c);
         
     
-            var marker_1c006be2b04241c799599d0dc27043cb = L.marker(
-                [37.5371163, 127.00710000000001],
+            var marker_269d99d8f19b4528b0fc71b8c44839bd = L.marker(
+                [37.537, 127.0],
                 {}
-            ).addTo(map_07f290fcef1444b7aa1595ea21176286);
+            ).addTo(map_44f8a67e78ab48c7b3d450b4cc3c027c);
         
     
-            var icon_b9ba0228decd4cbebe5b3e63e15da42a = L.AwesomeMarkers.icon(
+            var icon_cc276f4bf2fe493695daf39fbbf6eb9b = L.AwesomeMarkers.icon(
                 {"extraClasses": "fa-rotate-0", "icon": "info-sign", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
             );
-            marker_1c006be2b04241c799599d0dc27043cb.setIcon(icon_b9ba0228decd4cbebe5b3e63e15da42a);
+            marker_269d99d8f19b4528b0fc71b8c44839bd.setIcon(icon_cc276f4bf2fe493695daf39fbbf6eb9b);
         
     
-            marker_1c006be2b04241c799599d0dc27043cb.bindTooltip(
+            marker_269d99d8f19b4528b0fc71b8c44839bd.bindTooltip(
                 `<div>
                      My location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_31ce45f99b75463491d19e75bade836f = L.marker(
+                [37.534986622, 126.9972755302],
+                {}
+            ).addTo(map_44f8a67e78ab48c7b3d450b4cc3c027c);
+        
+    
+            marker_31ce45f99b75463491d19e75bade836f.bindTooltip(
+                `<div>
+                     병원명 : 국제의원
+전화번호 : 02-790-0857
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_325fcc61cf414f348d48f9dcea8cdca3 = L.marker(
+                [37.535628164824324, 126.99949311756252],
+                {}
+            ).addTo(map_44f8a67e78ab48c7b3d450b4cc3c027c);
+        
+    
+            marker_325fcc61cf414f348d48f9dcea8cdca3.bindTooltip(
+                `<div>
+                     병원명 : 맨해튼치과의원
+전화번호 : 02-749-3837
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_f938b15a3de949d3a1245efaa2b39c36 = L.marker(
+                [37.534835224365864, 126.99620747334727],
+                {}
+            ).addTo(map_44f8a67e78ab48c7b3d450b4cc3c027c);
+        
+    
+            marker_f938b15a3de949d3a1245efaa2b39c36.bindTooltip(
+                `<div>
+                     병원명 : 에버피부과의원
+전화번호 : 02-795-9553
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_bcc5f06a760e4742a3bb914516cef5d6 = L.marker(
+                [37.5384969459, 127.0011314774],
+                {}
+            ).addTo(map_44f8a67e78ab48c7b3d450b4cc3c027c);
+        
+    
+            marker_bcc5f06a760e4742a3bb914516cef5d6.bindTooltip(
+                `<div>
+                     병원명 : 예원의원
+전화번호 : 02-790-8525
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_95a6b771582a47cda14712b785405a56 = L.marker(
+                [37.53680307067655, 127.00001810322821],
+                {}
+            ).addTo(map_44f8a67e78ab48c7b3d450b4cc3c027c);
+        
+    
+            marker_95a6b771582a47cda14712b785405a56.bindTooltip(
+                `<div>
+                     병원명 : 이엔치과의원
+전화번호 : 02-712-2400
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_4cc106c5451347adb3c72ced6f4686af = L.marker(
+                [37.535177647, 126.9979045968],
+                {}
+            ).addTo(map_44f8a67e78ab48c7b3d450b4cc3c027c);
+        
+    
+            marker_4cc106c5451347adb3c72ced6f4686af.bindTooltip(
+                `<div>
+                     병원명 : 이태원제일한의원
+전화번호 : 02-790-1075
                  </div>`,
                 {"sticky": true}
             );

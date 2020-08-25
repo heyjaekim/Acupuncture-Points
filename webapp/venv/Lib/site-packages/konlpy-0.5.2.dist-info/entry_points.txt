@@ -1,0 +1,7 @@
+[console_scripts]
+stream_daum = konlpy.stream.daum:main
+stream_dcinside = konlpy.stream.dcinside:main
+stream_google = konlpy.stream.google_trend:main
+stream_naver = konlpy.stream.naver:main
+stream_twitter = konlpy.stream.twitter:main
+

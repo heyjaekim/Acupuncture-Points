@@ -168,6 +168,7 @@
             </div>
         </div>
     </div>
+    {% if symptom == None %}
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-8 col-sm-9 col-xs-12 center-col margin-eight-bottom text-center last-paragraph-no-margin sm-margin-40px-bottom xs-margin-30px-bottom">
@@ -180,12 +181,10 @@
                     <input type="submit" value="Submit" hidden="True">
                 </div>
             </form>
-            {% if symptom == None %}
                 {% include 'record.html' %}
-            {% endif %}
         </div>
     </div>
-    </div>
+    {% endif %}
 </section>
 <!-- end hero section -->
 <!-- start about agency section -->
@@ -262,7 +261,27 @@
                 <!-- start tab content -->
                 <div class="panel panel-default">
                     <div id="collapseOne" class="panel-collapse collapse in">
-                        한약재 추천
+                        {% if foods != None %}
+                            {% for i in foods %}
+                                <!-- start features box -->
+                                <div class="col-md-4 col-sm-4 col-xs-12 sm-margin-four-bottom last-paragraph-no-margin xs-margin-30px-bottom wow fadeInUp">
+                                    <div class="bg-white text-center">
+                                        <a href=""><img src="http://placehold.it/750x500" alt=""></a>
+                                        <div class="padding-45px-all sm-padding-15px-all inner-match-height">
+                                            <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">{{ i[0] }}</span>
+                                            <p> {% if i[2] < 22 %}
+                                                    {{ i[1] }}
+                                                    <div>&nbsp</div>
+                                                {% else %}
+                                                    {{ i[1] }}
+                                                {% endif %}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end feature box -->
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
                 <!-- end tab content -->
@@ -337,7 +356,6 @@
         if (service1.style.display == "none") {
             service1.style.display = "block";
             service2.style.display = "none";
-            {#service3.style.display = "none";#}
         } else {
             service1.style.display = "none";
         }
@@ -347,7 +365,6 @@
         if (service2.style.display == "none") {
             service1.style.display = "none";
             service2.style.display = "block";
-            {#service3.style.display = "none";#}
         } else {
             service2.style.display = "none";
         }
@@ -356,30 +373,6 @@
     function openMap() {
         window.open("map", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=700,height=700");
     }
-
-    {#function geoFindMe() {#}
-    {#    if (navigator.geolocation) { // GPS를 지원하면#}
-    {#        navigator.geolocation.getCurrentPosition(function (position) {#}
-    {#            var latitude = position.coords.latitude;#}
-    {#            var longitude = position.coords.longitude;#}
-    {#            $.ajax({#}
-    {#                type: "POST",#}
-    {#                url: "/home",#}
-    {#                contentType: "application/json",#}
-    {#                data: JSON.stringify({'lat': latitude, 'lng': longitude}),#}
-    {#                dataType: "json",#}
-    {#                success: function (response) {#}
-    {#                    console.log(response);#}
-    {#                },#}
-    {#                error: function (err) {#}
-    {#                    console.log(err);#}
-    {#                }#}
-    {#            });#}
-    {#        })#}
-    {#    }#}
-    {# }#}
-
-
 </script>
 
 </body>

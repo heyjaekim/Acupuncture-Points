@@ -43,37 +43,43 @@ class Nearest_Hospital:
         get customer's specifi location
         '''
         try:
-            geoUrl = 'http://api.vworld.kr/req/address?service=address&request=getAddress&version=2.0&crs=epsg:4326&point=' + str(self.Lon) + ',' + str(self.Lat) + '&format=xml&type=road&zipcode=true&simple=false&key=35C83A30-300F-3C4C-9224-D8712B43726D'
+            geoUrl = 'http://api.vworld.kr/req/address?service=address&request=getAddress&version=2.0&crs=epsg:4326&point=' \
+                     + str(self.Lon) + ',' + str(self.Lat) \
+                     + '&format=xml&type=road&zipcode=true&simple=false&key=35C83A30-300F-3C4C-9224-D8712B43726D'
             response = requests.get(geoUrl)
             xmldict = xmltodict.parse(response.text)
             geoResult = json.loads(json.dumps(xmldict))
-            result = geoResult['response']['result']['item']['structure']['level1'], geoResult['response']['result']['item']['structure']['level2'], geoResult['response']['result']['item']['structure']['level4L']
+            result = geoResult['response']['result']['item']['structure']['level1'], \
+                     geoResult['response']['result']['item']['structure']['level2'], \
+                     geoResult['response']['result']['item']['structure']['level4L']
             return result
         except KeyError:
             def float_round(num, places=0, direction=floor):
                 return direction(num * (10 ** places)) / float(10 ** places)
             self.Lon = float_round(float(self.Lon), 3)
-            if type(self.Lon) is str:
-                self.Lon = float_round(float(self.Lon), 4)
-            for i in range(1,10,1):
-                flt = float(f".000{i}")
-                # print(type(self.Lon), type(flt))
-                self.Lon += flt
-                self.Lon = str(self.Lon)
-                try:
-                    geoUrl = 'http://api.vworld.kr/req/address?service=address&request=getAddress&version=2.0&crs=epsg:4326&point=' + str(
-                        self.Lon) + ',' + str(
-                        self.Lat) + '&format=xml&type=road&zipcode=true&simple=false&key=35C83A30-300F-3C4C-9224-D8712B43726D'
-                    response = requests.get(geoUrl)
-                    xmldict = xmltodict.parse(response.text)
-                    geoResult = json.loads(json.dumps(xmldict))
-                    result = geoResult['response']['result']['item']['structure']['level1'], \
-                           geoResult['response']['result']['item']['structure']['level2'], \
-                           geoResult['response']['result']['item']['structure']['level4L']
-                    print(result)
-                    return result
-                except KeyError:
-                    pass
+            self.Lat = float_round(float(self.Lat), 3)
+
+            for j in range(1,10,1):
+                flt_lat = float(f".000{j}")
+                Lat = str(self.Lat + flt_lat)
+                for i in range(1,10,1):
+                    flt = float(f".000{i}")
+                    Lon = str(self.Lon + flt)
+
+                    try:
+                        geoUrl = 'http://api.vworld.kr/req/address?service=address&request=getAddress&version=2.0&crs=epsg:4326&point=' \
+                                 + str(Lon) + ',' + str(Lat) \
+                                 + '&format=xml&type=road&zipcode=true&simple=false&key=35C83A30-300F-3C4C-9224-D8712B43726D'
+                        response = requests.get(geoUrl)
+                        xmldict = xmltodict.parse(response.text)
+                        geoResult = json.loads(json.dumps(xmldict))
+                        result = geoResult['response']['result']['item']['structure']['level1'], \
+                               geoResult['response']['result']['item']['structure']['level2'], \
+                               geoResult['response']['result']['item']['structure']['level4L']
+                        print(result)
+                        return result
+                    except KeyError:
+                        pass
 
 
     
@@ -111,7 +117,7 @@ class Nearest_Hospital:
         for i in range(len(hos_loc)):
 
             if self.get_harversion_distance(self.Lon, self.Lat, float(hos_loc[i][6]), float(hos_loc[i][5])) < distance:
-                folium.Marker([hos_loc[i][5], hos_loc[i][6]], tooltip = '병원명 : '+hos_loc[0][0] +'\n' + '전화번호 : ' + hos_loc[0][1]).add_to(m)
+                folium.Marker([hos_loc[i][5], hos_loc[i][6]], tooltip = '병원명 : '+hos_loc[i][0] +'\n' + '전화번호 : ' + hos_loc[i][1]).add_to(m)
 
         return m
 

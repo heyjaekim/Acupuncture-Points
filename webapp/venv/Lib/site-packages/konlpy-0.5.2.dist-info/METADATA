@@ -1,0 +1,36 @@
+Metadata-Version: 2.1
+Name: konlpy
+Version: 0.5.2
+Summary: Python package for Korean natural language processing.
+Home-page: http://konlpy.org
+Author: Team KoNLPy
+Author-email: konlpy@googlegroups.com
+License: GPL v3
+Keywords: Korean,CJK,NLP,natural language processing,CL,computational linguistics,tagging,tokenizing,linguistics,text analytics
+Platform: UNKNOWN
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Education
+Classifier: Intended Audience :: Information Technology
+Classifier: Intended Audience :: Science/Research
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Topic :: Scientific/Engineering
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Scientific/Engineering :: Information Analysis
+Classifier: Topic :: Text Processing
+Classifier: Topic :: Text Processing :: Filters
+Classifier: Topic :: Text Processing :: General
+Classifier: Topic :: Text Processing :: Linguistic
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)
+Requires-Dist: JPype1 (>=0.7.0)
+Requires-Dist: beautifulsoup4 (==4.6.0)
+Requires-Dist: colorama
+Requires-Dist: lxml (>=4.1.0)
+Requires-Dist: numpy (>=1.6)
+Requires-Dist: tweepy (>=3.7.0)
+
+Korean, the 13th most widely spoken language in the world, is a beautiful, yet complex language. Myriad Korean NLP engines were built by numerous researchers, to computationally extract meaningful features from the labyrinthine text.
+
+KoNLPy is not just to create another, but to unify and build upon their shoulders, and see one step further. It is built particularly in the Python (programming) language, not only because of its its simplicity and elegance, but its powerful string processing modules and applicability to various tasks - including crawling, Web programming, and data analysis.
+
