@@ -85,7 +85,7 @@ class Nearest_Hospital:
         for i in range(len(hos_loc)):
 
             if self.get_harversion_distance(self.Lon, self.Lat, float(hos_loc[i][6]), float(hos_loc[i][5])) < distance:
-                folium.Marker([hos_loc[i][5], hos_loc[i][6]], tooltip = '병원명 : '+hos_loc[0][0] +'\n' + '전화번호 : ' + hos_loc[0][1]).add_to(m)
+                folium.Marker([hos_loc[i][5], hos_loc[i][6]], tooltip = '병원명 : '+hos_loc[i][0] +'\n' + '전화번호 : ' + hos_loc[i][1]).add_to(m)
 
         return m
 
