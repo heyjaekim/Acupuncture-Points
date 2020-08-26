@@ -7,12 +7,12 @@ class KMT:
     @classmethod
     def search_Food(self, Symptom):
         try:
-            conn = sqlite3.connect('./Text_Searching/Symptom_Matching/symptom.db')
+            conn = sqlite3.connect('./Text_Searching/Symptom_add_Foodlink.db')
         except sqlite3.OperationalError:
-            conn = sqlite3.connect('./symptom.db')
+            conn = sqlite3.connect('../Symptom_add_Foodlink.db')
         cur = conn.cursor()
         cur.execute('''
-        SELECT Food_name, How_to_eat
+        SELECT Food_name, How_to_eat, Image_Link
         FROM Food, Symptom
         WHERE Symptom.Symp_name == "'''+str(Symptom)+'''" 
         AND Food.Symp_id == Symptom.Symp_id;
@@ -24,9 +24,9 @@ class KMT:
     def search_Acup(self, Symptom):
 
         try:
-            conn = sqlite3.connect('./Text_Searching/Symptom_Matching/symptom.db')
+            conn = sqlite3.connect('./Text_Searching/Symptom_add_Foodlink.db')
         except sqlite3.OperationalError:
-            conn = sqlite3.connect('./symptom.db')
+            conn = sqlite3.connect('../Symptom_add_Foodlink.db')
         cur = conn.cursor()
         cur.execute('''
             SELECT Acup_Method.Acup_id

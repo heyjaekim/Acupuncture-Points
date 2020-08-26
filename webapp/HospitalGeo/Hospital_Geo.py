@@ -47,6 +47,7 @@ class Nearest_Hospital:
                      + str(self.Lon) + ',' + str(self.Lat) \
                      + '&format=xml&type=road&zipcode=true&simple=false&key=35C83A30-300F-3C4C-9224-D8712B43726D'
             response = requests.get(geoUrl)
+            print(f"geo response: {response}")
             xmldict = xmltodict.parse(response.text)
             geoResult = json.loads(json.dumps(xmldict))
             result = geoResult['response']['result']['item']['structure']['level1'], \
@@ -123,5 +124,5 @@ class Nearest_Hospital:
         return m
 
 ###############################################
-NH = Nearest_Hospital(127.08133592498548, 37.64928136787053)
-NH.result_map()
+# NH = Nearest_Hospital(127.08133592498548, 37.64928136787053)
+# NH.result_map()

@@ -130,7 +130,7 @@ def getsymp(symptom=None):
             try:
                 found_symp = a.search(s)[-1]
                 acups = { _ for _ in KMT.search_Acup(found_symp)}
-                foods = {(k, v, len(v)) if v else (k, " - ", 10) for k,v in KMT.search_Food(found_symp)}
+                foods = {(k, v, len(v), i) if v else (k, " - ", 10) for k,v,i in KMT.search_Food(found_symp)}
                 new_acups = new_acups.union(acups) if new_acups else acups
                 new_foods = new_foods.union(foods) if new_foods else foods
                 result += " · " + found_symp if result != "" else found_symp
@@ -138,10 +138,6 @@ def getsymp(symptom=None):
                 pass
         print(sorted(new_foods))
         print(len(new_foods))
-
-        # resp = get(
-        #     'http://storage.doopedia.co.kr/upload/_upload/image5/1809/07/180907022219575/180907022219575_thumb_1024.jpg')
-        # img = Image.open(BytesIO(resp.content))
 
         return render_template('service.html', symptom=symptom, result=result,
                                acups=sorted(new_acups), foods=sorted(new_foods))
@@ -182,7 +178,7 @@ def getvoice():
             try:
                 found_symp = a.search(s)[-1]
                 acups = {_ for _ in KMT.search_Acup(found_symp)}
-                foods = {(k, v, len(v)) if v else (k, " - ", 10) for k, v in KMT.search_Food(found_symp)}
+                foods = {(k, v, len(v), img) if v else (k, " - ", 10) for k, v, img in KMT.search_Food(found_symp)}
                 new_acups = new_acups.union(acups) if new_acups else acups
                 new_foods = new_foods.union(foods) if new_foods else foods
                 voice_result += " · " + found_symp if voice_result != "" else found_symp
