@@ -102,6 +102,10 @@ function toggleRecording() {
     }
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function createDownloadLink(blob) {
 
     var url = URL.createObjectURL(blob);
@@ -134,4 +138,9 @@ function createDownloadLink(blob) {
 
     //add the feature to click upload link
     upload.click(upload.href);
+
+    //sleep for 2 seconds
+    sleep(2000).then(() => { goto-voice-page.click(); });
+
+
 }

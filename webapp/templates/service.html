@@ -184,7 +184,7 @@
             {% include 'record.html' %}
             {% if voice != None %}
                 <form method="GET" action="/getvoice">
-                    <button id="goto-voice-page" onload="openVoicePage()" style="display: none">Get Symptom</button>
+                    <button id="goto-voice-page" style="display: none">Get Symptom</button>
                 </form>
             {% endif %}
         </div>
@@ -271,15 +271,16 @@
                                 <!-- start features box -->
                                 <div class="col-md-4 col-sm-4 col-xs-12 sm-margin-four-bottom last-paragraph-no-margin xs-margin-30px-bottom wow fadeInUp">
                                     <div class="bg-white text-center">
-                                        <a href=""><img src="{{ i[3] }}" alt="img" width="750" height="500"></a>
+                                        <a href="{{ i[3] }}"><img src="{{ i[3] }}" alt="img" width="750" height="500"></a>
                                         <div class="padding-45px-all sm-padding-15px-all inner-match-height">
                                             <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">{{ i[0] }}</span>
-                                            <div> {% if i[2] < 10 %}
+                                            <p> {% if i[2] < 15 %}
                                                     {{ i[1] }}
+                                                    <h5>&nbsp</h5>
                                                 {% else %}
                                                     {{ i[1] }}
                                                 {% endif %}
-                                            </div>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -378,12 +379,13 @@
         window.open("map", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=700,height=700");
     }
 
+    <!--
     var gotoVoicePage = document.getElementById("goto-voice-page");
     function openVoicePage(){
         gotoVoicePage.display = "block";
         console.log("goto-voice-page clicked")
         gotoVoicePage.click();
-    }
+    }-->
 </script>
 
 </body>

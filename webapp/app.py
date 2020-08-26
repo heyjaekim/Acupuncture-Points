@@ -120,6 +120,7 @@ def getsymp(symptom=None):
     elif request.method == 'GET':
         new_acups = set()
         new_foods = set()
+        new_symps = set()
         result = ""
 
         a = Search_symptom()
@@ -130,12 +131,15 @@ def getsymp(symptom=None):
             try:
                 found_symp = a.search(s)[-1]
                 acups = { _ for _ in KMT.search_Acup(found_symp)}
-                foods = {(k, v, len(v), i) if v else (k, " - ", 10) for k,v,i in KMT.search_Food(found_symp)}
+                foods = {(k, v, len(v), img) if v else (k, " - ", 10, img) for k,v,img in KMT.search_Food(found_symp)}
                 new_acups = new_acups.union(acups) if new_acups else acups
                 new_foods = new_foods.union(foods) if new_foods else foods
-                result += " · " + found_symp if result != "" else found_symp
+                new_symps.add(found_symp)
             except TypeError:
                 pass
+
+        for _ in new_symps:
+            result += " · " + _ if result != "" else _
         print(sorted(new_foods))
         print(len(new_foods))
 
@@ -162,7 +166,10 @@ def upload_photo(symptom=None, result=None):
 
 @app.route('/map')
 def openmap():
-    return render_template('map.html')
+    # smap is for symptoms and map coordinates
+    global smap
+
+    return render_template('map.html', smap=None)
 
 
 @app.route('/getvoice', methods=['GET'])
@@ -178,7 +185,7 @@ def getvoice():
             try:
                 found_symp = a.search(s)[-1]
                 acups = {_ for _ in KMT.search_Acup(found_symp)}
-                foods = {(k, v, len(v), img) if v else (k, " - ", 10) for k, v, img in KMT.search_Food(found_symp)}
+                foods = {(k, v, len(v), img) if v else (k, " - ", 10, img) for k, v, img in KMT.search_Food(found_symp)}
                 new_acups = new_acups.union(acups) if new_acups else acups
                 new_foods = new_foods.union(foods) if new_foods else foods
                 voice_result += " · " + found_symp if voice_result != "" else found_symp

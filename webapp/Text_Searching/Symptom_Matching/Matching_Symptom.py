@@ -7,9 +7,9 @@ class KMT:
     @classmethod
     def search_Food(self, Symptom):
         try:
-            conn = sqlite3.connect('./Text_Searching/Symptom_add_Foodlink.db')
+            conn = sqlite3.connect('./Text_Searching/Symptom_add_Food_2.db')
         except sqlite3.OperationalError:
-            conn = sqlite3.connect('../Symptom_add_Foodlink.db')
+            conn = sqlite3.connect('../Symptom_add_Food_2.db')
         cur = conn.cursor()
         cur.execute('''
         SELECT Food_name, How_to_eat, Image_Link
@@ -24,9 +24,9 @@ class KMT:
     def search_Acup(self, Symptom):
 
         try:
-            conn = sqlite3.connect('./Text_Searching/Symptom_add_Foodlink.db')
+            conn = sqlite3.connect('./Text_Searching/Symptom_add_Food_2.db')
         except sqlite3.OperationalError:
-            conn = sqlite3.connect('../Symptom_add_Foodlink.db')
+            conn = sqlite3.connect('../Symptom_add_Food_2.db')
         cur = conn.cursor()
         cur.execute('''
             SELECT Acup_Method.Acup_id
@@ -37,17 +37,18 @@ class KMT:
         Acup_list = list()
         for i in range(len(res_code_)):
             Acup_list.append(res_code_[i][0])
-        
+        # print(Acup_list)
         acup_ = []
         for i in range(len(Acup_list)):
             cur.execute('''
             SELECT Acup.Acup_name, Acup.Acup_position
             FROM Acup
-            WHERE Acup_id == "'''+str(Acup_list.pop())+'''";
+            WHERE Acup_name == "'''+str(Acup_list.pop())+'''";
             ''')
             acup = cur.fetchall()
+            # print(acup)
             acup_.append(acup[0])
         return acup_
 ############################
-# print(KMT.search_Acup('심병'))
+print(KMT.search_Acup('심병'))
 # print(KMT.search_Food('심병'))
