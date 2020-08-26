@@ -50,5 +50,5 @@ class KMT:
             acup_.append(acup[0])
         return acup_
 ############################
-print(KMT.search_Acup('심병'))
+# print(KMT.search_Acup('심병'))
 # print(KMT.search_Food('심병'))

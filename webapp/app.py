@@ -83,7 +83,7 @@ def get_voice_file():
     csr_inst = csr('./voice.wav')
     global voice_symptom
     voice_symptom = csr_inst.convert()
-    print("done1")
+    # print("done1")
 
 
 @app.route('/service', methods=['GET', 'POST'])
@@ -101,15 +101,15 @@ def service():
         thread1.join()
         try:
             print(voice_symptom)
-            print("done2")
+            # print("done2")
             return render_template('service.html', symptom=None, voice=voice_symptom)
-            print("done3")
+            # print("done3")
 
         except TypeError:
             print("증상을 정확히 말씀해주세요")
             pass
     else:
-        return render_template('service.html', symptom=None)
+        return render_template('service.html', symptom=None, voice=None)
 
 
 @app.route('/getsymp', methods=['POST', 'GET'])
@@ -140,11 +140,11 @@ def getsymp(symptom=None):
 
         for _ in new_symps:
             result += " · " + _ if result != "" else _
-        print(sorted(new_foods))
-        print(len(new_foods))
+        # print(sorted(new_foods))
+        # print(len(new_foods))
 
         return render_template('service.html', symptom=symptom, result=result,
-                               acups=sorted(new_acups), foods=sorted(new_foods))
+                               acups=sorted(new_acups), foods=sorted(new_foods), voice=None)
 
 
 @app.route('/upload_photo', methods=['GET', 'POST'])
@@ -167,9 +167,9 @@ def upload_photo(symptom=None, result=None):
 @app.route('/map')
 def openmap():
     # smap is for symptoms and map coordinates
-    global smap
+    # global smap
 
-    return render_template('map.html', smap=None)
+    return render_template('map.html')
 
 
 @app.route('/getvoice', methods=['GET'])
@@ -191,11 +191,11 @@ def getvoice():
                 voice_result += " · " + found_symp if voice_result != "" else found_symp
             except TypeError:
                 pass
-        print(sorted(new_foods))
-        print(len(new_foods))
+        # print(sorted(new_foods))
+        # print(len(new_foods))
 
         return render_template('service.html', symptom=voice_symptom, result=voice_result,
-                               acups=sorted(new_acups), foods=sorted(new_foods))
+                               acups=sorted(new_acups), foods=sorted(new_foods), voice=None)
 
 
 # @app.route('/CV')
