@@ -181,7 +181,12 @@
                     <input type="submit" value="Submit" hidden="True">
                 </div>
             </form>
-                {% include 'record.html' %}
+            {% include 'record.html' %}
+            {% if voice != None %}
+                <form method="GET" action="/getvoice">
+                    <button id="goto-voice-page" onload="openVoicePage()" style="display: none">Get Symptom</button>
+                </form>
+            {% endif %}
         </div>
     </div>
     {% endif %}
@@ -269,13 +274,12 @@
                                         <a href=""><img src="http://placehold.it/750x500" alt=""></a>
                                         <div class="padding-45px-all sm-padding-15px-all inner-match-height">
                                             <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">{{ i[0] }}</span>
-                                            <p> {% if i[2] < 22 %}
+                                            <div> {% if i[2] < 10 %}
                                                     {{ i[1] }}
-                                                    <div>&nbsp</div>
                                                 {% else %}
                                                     {{ i[1] }}
                                                 {% endif %}
-                                            </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -372,6 +376,13 @@
 
     function openMap() {
         window.open("map", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=700,height=700");
+    }
+
+    var gotoVoicePage = document.getElementById("goto-voice-page");
+    function openVoicePage(){
+        gotoVoicePage.display = "block";
+        console.log("goto-voice-page clicked")
+        gotoVoicePage.click();
     }
 </script>
 

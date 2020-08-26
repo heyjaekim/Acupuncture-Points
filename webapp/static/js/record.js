@@ -3,82 +3,108 @@ URL = window.URL || window.webkitURL;
 var gumStream;                      //stream from getUserMedia()
 var rec;                            //Recorder.js object
 var input;                          //MediaStreamAudioSourceNode we'll be recording
+var toggle = false;                 //Recorder toggle
+var count = 0;                      //count the number of clicks, would be used for record stopper
+var settime;
 
 // shim for AudioContext when it's not avb.
 var AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioContext //audio context to help us record
 
 var recordButton = document.getElementById("recordButton");
-var stopButton = document.getElementById("stopButton");
+// var uploadURL = document.getElementById("uploadURL");
 
 //add events to those 2 buttons
-recordButton.addEventListener("click", startRecording);
-stopButton.addEventListener("click", stopRecording);
+recordButton.addEventListener("click", toggleRecording);
+// recordButton.addEventListener("click", uploadURLs);
 
-function startRecording() {
-    console.log("recordButton clicked");
-
-    /*
-        Simple constraints object, for more advanced audio features see
-        https://addpipe.com/blog/audio-constraints-getusermedia/
-    */
-
-    var constraints = { audio: true, video:false }
-
-    recordButton.disabled = true;
-    stopButton.disabled = false;
-
-    navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
-        console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
-
-        audioContext = new AudioContext();
-
-
-        /*  assign to gumStream for later use  */
-        gumStream = stream;
-
-        /* use the stream */
-        input = audioContext.createMediaStreamSource(stream);
+function toggleRecording() {
+    if (toggle == false) {
+        toggle = true
+        count += 1;
+        console.log("recordButton clicked");
 
         /*
-            Create the Recorder object and configure to record mono sound (1 channel)
-            Recording 2 channels  will double the file size
+            Simple constraints object, for more advanced audio features see
+            https://addpipe.com/blog/audio-constraints-getusermedia/
         */
-        rec = new Recorder(input,{numChannels:1})
 
-        //start the recording process
-        rec.record()
+        var constraints = {audio: true, video: false}
 
-        console.log("Recording started");
+        // recordButton.disabled = true;
+        // stopButton.disabled = false;
 
-    }).catch(function(err) {
-        //enable the record button if getUserMedia() fails
-        recordButton.disabled = false;
-        stopButton.disabled = true;
-    });
-}
+        navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
+            console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
 
-function stopRecording() {
-    console.log("stopButton clicked");
+            audioContext = new AudioContext();
 
-    //disable the stop button, enable the record too allow for new recordings
-    stopButton.disabled = true;
-    recordButton.disabled = false;
-    
-    //tell the recorder to stop the recording
-    rec.stop();
 
-    //stop microphone access
-    gumStream.getAudioTracks()[0].stop();
+            /*  assign to gumStream for later use  */
+            gumStream = stream;
 
-    //create the wav blob and pass it on to createDownloadLink
-    rec.exportWAV(createDownloadLink);
+            /* use the stream */
+            input = audioContext.createMediaStreamSource(stream);
+
+            /*
+                Create the Recorder object and configure to record mono sound (1 channel)
+                Recording 2 channels  will double the file size
+            */
+            rec = new Recorder(input, {numChannels: 1})
+            //start the recording process
+            rec.record()
+
+            console.log("Recording started");
+
+        }).catch(function (err) {
+            //enable the record button if getUserMedia() fails
+            // recordButton.disabled = false;
+            // stopButton.disabled = true;
+        });
+        settime = setTimeout(function(){
+            toggle = false;
+            count += 1;
+            console.log("stopButton clicked again");
+
+            //disable the stop button, enable the record too allow for new recordings
+            // stopButton.disabled = true;
+            // recordButton.disabled = false;
+
+            //tell the recorder to stop the recording
+            rec.stop();
+
+            //stop microphone access
+            gumStream.getAudioTracks()[0].stop();
+
+            //create the wav blob and pass it on to createDownloadLink
+            rec.exportWAV(createDownloadLink);
+        }, 5000);
+    } else {
+        toggle = false;
+        count += 1;
+        console.log("stopButton clicked");
+        clearTimeout(settime);
+
+        //disable the stop button, enable the record too allow for new recordings
+        // stopButton.disabled = true;
+        // recordButton.disabled = false;
+
+        //tell the recorder to stop the recording
+        rec.stop();
+
+        //stop microphone access
+        gumStream.getAudioTracks()[0].stop();
+
+        //create the wav blob and pass it on to createDownloadLink
+        rec.exportWAV(createDownloadLink);
+
+
+    }
 }
 
 function createDownloadLink(blob) {
 
     var url = URL.createObjectURL(blob);
-    var li = document.createElement('li');
     var link = document.createElement('a')
 
     //name of .wav file to use during upload and download (without extendion)
@@ -105,9 +131,7 @@ function createDownloadLink(blob) {
           xhr.open("POST","/service",true);
           xhr.send(fd);
     })
-//    li.appendChild(document.createTextNode (" "))//add a space in between
-    li.appendChild(upload)//add the upload link to li
 
-    //add the li element to the ol
-    recordingsList.appendChild(li);
+    //add the feature to click upload link
+    upload.click(upload.href);
 }

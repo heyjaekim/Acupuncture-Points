@@ -3,8 +3,12 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 from flask_dropzone import Dropzone
 from flask_admin.contrib.fileadmin import FileAdmin
+from PIL import Image
 
-import os
+from os import path
+from requests import get
+from io import BytesIO
+from threading import Thread, Event
 
 from Text_Searching.Symptom_Search.search_symptom import Search_symptom
 from Text_Searching.Symptom_Matching.Matching_Symptom import KMT
@@ -19,8 +23,8 @@ from Text_Searching.speech2text import csr
 # import cv2
 
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-upload_dir = os.path.join(basedir, 'uploads')
+basedir = path.abspath(path.dirname(__file__))
+upload_dir = path.join(basedir, 'uploads')
 
 ###########################################################
 
@@ -73,28 +77,40 @@ def home():
     return render_template('home.html')
 
 
+voice_symptom = ""
+
+def get_voice_file():
+    csr_inst = csr('./voice.wav')
+    global voice_symptom
+    voice_symptom = csr_inst.convert()
+    print("done1")
+
+
 @app.route('/service', methods=['GET', 'POST'])
 def service():
-    global voice_symptom
 
     if request.method == "POST":
-
         f = request.files['audio_data']
         # with open('voice.wav', 'wb') as voice:
         #     f.save(voice)
         print('file uploaded successfully')
-        csr_inst = csr('./voice.wav')
-        voice_symptom = csr_inst.convert()
-        print(voice_symptom)
 
+        thread1 = Thread(target=get_voice_file)
+        thread1.start()
+
+        thread1.join()
         try:
-            return render_template('service.html', symptom=None)
+            print(voice_symptom)
+            print("done2")
+            return render_template('service.html', symptom=None, voice=voice_symptom)
+            print("done3")
 
         except TypeError:
             print("증상을 정확히 말씀해주세요")
             pass
     else:
         return render_template('service.html', symptom=None)
+
 
 @app.route('/getsymp', methods=['POST', 'GET'])
 def getsymp(symptom=None):
@@ -123,6 +139,10 @@ def getsymp(symptom=None):
         print(sorted(new_foods))
         print(len(new_foods))
 
+        # resp = get(
+        #     'http://storage.doopedia.co.kr/upload/_upload/image5/1809/07/180907022219575/180907022219575_thumb_1024.jpg')
+        # img = Image.open(BytesIO(resp.content))
+
         return render_template('service.html', symptom=symptom, result=result,
                                acups=sorted(new_acups), foods=sorted(new_foods))
 
@@ -132,7 +152,7 @@ def upload_photo(symptom=None, result=None):
     if request.method == 'POST':
         # 파일 올릴때만 request.files 를 써야한다고 함
         f = request.files.get('file')
-        f.save(os.path.join(upload_dir, f.filename))
+        f.save(path.join(upload_dir, f.filename))
         symptom = request.args.get('symptom')
         result = request.args.get('result')
         matched_acups = KMT.search_Acup(symptom)
@@ -175,14 +195,12 @@ def getvoice():
                                acups=sorted(new_acups), foods=sorted(new_foods))
 
 
-
-
 # @app.route('/CV')
 # def DL_predict():
 #
 #     # checkpoint
 #     checkpoint_dir = './CV_DL/hapgok0823_1759org+rot+fill+rotfill_model_best.pth.tar'
-#     if os.path.isfile(checkpoint_dir):
+#     if path.isfile(checkpoint_dir):
 #         checkpoint = torch.load(checkpoint_dir)
 #         model.load_state_dict(checkpoint['state_dict'])
 #     # transformation
@@ -214,7 +232,7 @@ def getvoice():
 #     print('Coord:' ,(x, y))
 #     # PIL Image
 #     # Image.fromarray(cv2.cvtColor(new_img, cv2.COLOR_BGR2RGB))
-#     return DL_Prediction(new_img, coord)
+#     # return DL_Prediction(new_img, coord)
 
 
 if __name__ == '__main__':
