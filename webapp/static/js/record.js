@@ -12,11 +12,9 @@ var AudioContext = window.AudioContext || window.webkitAudioContext;
 var audioContext //audio context to help us record
 
 var recordButton = document.getElementById("recordButton");
-// var uploadURL = document.getElementById("uploadURL");
 
-//add events to those 2 buttons
+//add events to the toggle recording button
 recordButton.addEventListener("click", toggleRecording);
-// recordButton.addEventListener("click", uploadURLs);
 
 function toggleRecording() {
     if (toggle == false) {
@@ -24,15 +22,8 @@ function toggleRecording() {
         count += 1;
         console.log("recordButton clicked");
 
-        /*
-            Simple constraints object, for more advanced audio features see
-            https://addpipe.com/blog/audio-constraints-getusermedia/
-        */
-
         var constraints = {audio: true, video: false}
 
-        // recordButton.disabled = true;
-        // stopButton.disabled = false;
 
         navigator.mediaDevices.getUserMedia(constraints).then(function (stream) {
             console.log("getUserMedia() success, stream created, initializing Recorder.js ...");
@@ -66,10 +57,6 @@ function toggleRecording() {
             count += 1;
             console.log("stopButton clicked again");
 
-            //disable the stop button, enable the record too allow for new recordings
-            // stopButton.disabled = true;
-            // recordButton.disabled = false;
-
             //tell the recorder to stop the recording
             rec.stop();
 
@@ -78,16 +65,12 @@ function toggleRecording() {
 
             //create the wav blob and pass it on to createDownloadLink
             rec.exportWAV(createDownloadLink);
-        }, 5000);
+        }, 5000); // timeout to record
     } else {
         toggle = false;
         count += 1;
         console.log("stopButton clicked");
         clearTimeout(settime);
-
-        //disable the stop button, enable the record too allow for new recordings
-        // stopButton.disabled = true;
-        // recordButton.disabled = false;
 
         //tell the recorder to stop the recording
         rec.stop();
@@ -139,8 +122,11 @@ function createDownloadLink(blob) {
     //add the feature to click upload link
     upload.click(upload.href);
 
+    var gotoVoicePage = document.getElementById("goto-voice-page");
     //sleep for 2 seconds
-    sleep(2000).then(() => { goto-voice-page.click(); });
-
+    sleep(3000).then(() => {
+        console.log("clicked goto-voice-page");
+        gotoVoicePage.click();
+    });
 
 }
