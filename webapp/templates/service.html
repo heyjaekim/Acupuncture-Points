@@ -55,18 +55,7 @@
         <div class="container-fluid nav-header-container height-100px padding-three-half-lr xs-height-70px xs-padding-15px-lr">
             <!-- start header navigation -->
             <div class="row">
-<!--
-                <div class="col-md-4 col-sm-4 col-xs-6 hidden-xs text-left">
-                    <div class="social-icon">
-                        <a href="https://www.facebook.com/" title="Facebook" target="_blank"><i
-                                class="fab fa-facebook-f text-extra-dark-gray" aria-hidden="true"></i></a>
-                        <a href="https://twitter.com/" title="Twitter" target="_blank"><i
-                                class="fab fa-twitter text-extra-dark-gray"></i></a>
-                        <a href="https://dribbble.com/" title="Dribbble" target="_blank"><i
-                                class="fab fa-dribbble text-extra-dark-gray"></i></a>
-                    </div>
-                </div>
--->
+
                 <!-- start logo -->
                 <div class="col-md-4 col-sm-4 col-xs-6 xs-text-left">
                     <a class="logo" href="service"><img src="../static/images/logo/logo.png" data-rjs="images/logo/logo@2x.png" class="default" alt="KB13"></a>
@@ -254,7 +243,16 @@
                 <!-- start tab content -->
                 <div class="panel panel-default">
                     <div id="collapseOne" class="panel-collapse collapse in">
-                        {% include 'dropzone.html' %}
+                        <!-- start features box -->
+                            <div class="col-md-4 col-sm-4 col-xs-12 sm-margin-four-bottom last-paragraph-no-margin xs-margin-30px-bottom wow fadeInUp center-col">
+                                <div class="bg-white text-center">
+                                    <p><img src="../image.png" alt="dl_img" width="500" height="500"/></p>
+                                    <div class="padding-45px-all sm-padding-15px-all inner-match-height">
+                                        <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">TAKE A LOOK AT YOUR BEAUTIFUL HAND ACUPUNCTURE POINTS</span>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- end feature box -->
                     </div>
                 </div>
                 <!-- end tab content -->
@@ -268,17 +266,14 @@
                                 <!-- start features box -->
                                 <div class="col-md-4 col-sm-4 col-xs-12 sm-margin-four-bottom last-paragraph-no-margin xs-margin-30px-bottom wow fadeInUp">
                                     <div class="bg-white text-center">
-                                        <a href="{{ i[3] }}"><img src="{{ i[3] }}" alt="img" width="750" height="500"></a>
+                                        <a href="{{ i[3] }}"><img src="{{ i[3] }}" alt="img" style="width:750px; height:300px;" /></a>
                                         <div class="padding-45px-all sm-padding-15px-all inner-match-height">
                                             <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">{{ i[0] }}</span>
-                                            <p> {% if i[2] > 15 %}
-                                                    {{ i[1] }}
-                                                {% elif i[2] >10 15 %}
+                                            <p> {% if i[2] < 15 %}
                                                     {{ i[1] }}
                                                     <h5>&nbsp</h5>
                                                 {% else %}
                                                     {{ i[1] }}
-                                                    <h5>&nbsp</h5>
                                                 {% endif %}
                                             </p>
                                         </div>

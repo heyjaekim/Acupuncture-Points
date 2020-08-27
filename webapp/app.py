@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 from flask_dropzone import Dropzone
@@ -16,6 +16,8 @@ from Text_Searching.speech2text import csr
 from CV_DL.CV_check_Utils import *
 from torchvision import transforms
 from PIL import Image
+from io import StringIO, BytesIO
+import base64
 import torch
 import cv2
 
@@ -137,8 +139,6 @@ def getsymp(symptom=None):
 
         for _ in new_symps:
             result += " · " + _ if result != "" else _
-        # print(sorted(new_foods))
-        # print(len(new_foods))
 
         return render_template('service.html', symptom=symptom, result=result,
                                acups=sorted(new_acups), foods=sorted(new_foods))
@@ -174,6 +174,7 @@ def getvoice():
     if request.method == 'GET':
         new_acups = set()
         new_foods = set()
+        new_symps = set()
         voice_result = ""
 
         a = Search_symptom()
@@ -185,17 +186,22 @@ def getvoice():
                 foods = {(k, v, len(v), img) if v else (k, " - ", 10, img) for k, v, img in KMT.search_Food(found_symp)}
                 new_acups = new_acups.union(acups) if new_acups else acups
                 new_foods = new_foods.union(foods) if new_foods else foods
-                voice_result += " · " + found_symp if voice_result != "" else found_symp
+                new_symps.add(found_symp)
             except TypeError:
                 pass
-        # print(sorted(new_foods))
-        # print(len(new_foods))
+
+        for _ in new_symps:
+            voice_result += " · " + _ if voice_result != "" else _
 
         return render_template('service.html', symptom=voice_symptom, result=voice_result,
                                acups=sorted(new_acups), foods=sorted(new_foods))
 
-@app.route('/CV')
-def DL_predict():
+
+###########################################################
+# METHODS #
+
+@app.route('/image.png')
+def dl_predict():
 
     # checkpoint
     checkpoint_dir = './CV_DL/hapgok0823_1759org+rot+fill+rotfill_model_best.pth.tar'
@@ -205,8 +211,14 @@ def DL_predict():
     # transformation
     transform = transforms.ToTensor()
 
+    # call up all files in uploads
+    # mypath = "./uploads"
+    # img_files = [f for f in listdir(mypath) if path.isfile(path.join(mypath,f))]
+    # img_results = []
+
     # open image
-    img1 = img2 = cv2.resize(cv2.imread('./uploads/test2.jpg'), dsize=(256, 256))
+    f = "./uploads/test2.jpg"
+    img1 = img2 = cv2.resize(cv2.imread(f), dsize=(256, 256))
     img2 = cv2.cvtColor(clear_background(img2), cv2.COLOR_BGR2RGB)
     img2 = transform(Image.fromarray(img2))
 
@@ -223,17 +235,21 @@ def DL_predict():
         _, result = model(img2.unsqueeze(0))
         x, y = result.detach().numpy().squeeze()
 
-    # open_cv editted new image
+    # open_cv edited new image
     coord = (x, y)
     dot_size = 2
     new_img = cv2.circle(img1, (int(x), int(y)), dot_size, (0, 0, 255), -1)
     print('Label: ', checkpoint_dir.split('/')[2].split('_')[0][:-4])
     print('Coord:', coord)
     # PIL Image
-    Image.fromarray(cv2.cvtColor(new_img, cv2.COLOR_BGR2RGB))
-    # new_img, = DL_Prediction(new_img, coord)
-    # return render_template('',image,coord=DL_Prediction(new_img, coord))
-    return render_template('service.html')
+    new_img = Image.fromarray(cv2.cvtColor(new_img, cv2.COLOR_BGR2RGB))
+
+    file_object = BytesIO()
+    new_img.save(file_object, 'PNG')
+    file_object.seek(0)
+
+    return send_file(file_object, mimetype='image/PNG')
+
 
 if __name__ == '__main__':
     app.run()
