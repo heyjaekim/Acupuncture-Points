@@ -264,18 +264,12 @@
                         {% if foods != None %}
                             {% for i in foods %}
                                 <!-- start features box -->
-                                <div class="col-md-4 col-sm-4 col-xs-12 sm-margin-four-bottom last-paragraph-no-margin xs-margin-30px-bottom wow fadeInUp">
+                                <div class="col-md-4 col-sm-4 col-xs-12 sm-margin-four-bottom last-paragraph-no-margin xs-margin-30px-bottom wow fadeInUp" style="height: 500px">
                                     <div class="bg-white text-center">
                                         <a href="{{ i[3] }}"><img src="{{ i[3] }}" alt="img" style="width:750px; height:300px;" /></a>
                                         <div class="padding-45px-all sm-padding-15px-all inner-match-height">
                                             <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">{{ i[0] }}</span>
-                                            <p> {% if i[2] < 15 %}
-                                                    {{ i[1] }}
-                                                    <h5>&nbsp</h5>
-                                                {% else %}
-                                                    {{ i[1] }}
-                                                {% endif %}
-                                            </p>
+                                            <div> {{ i[1] }} </div>
                                         </div>
                                     </div>
                                 </div>
