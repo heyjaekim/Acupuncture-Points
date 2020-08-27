@@ -3,12 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 from flask_dropzone import Dropzone
 from flask_admin.contrib.fileadmin import FileAdmin
-from PIL import Image
 
 from os import path
-from requests import get
-from io import BytesIO
-from threading import Thread, Event
+from threading import Thread
 
 from Text_Searching.Symptom_Search.search_symptom import Search_symptom
 from Text_Searching.Symptom_Matching.Matching_Symptom import KMT
@@ -16,11 +13,11 @@ from HospitalGeo.Hospital_Geo import Nearest_Hospital
 from Text_Searching.speech2text import csr
 
 # ## image processing stuff ##
-# from CV_DL.CV_check_Utils import *
-# from torchvision import transforms
-# from PIL import Image
-# import torch
-# import cv2
+from CV_DL.CV_check_Utils import *
+from torchvision import transforms
+from PIL import Image
+import torch
+import cv2
 
 
 basedir = path.abspath(path.dirname(__file__))
@@ -54,7 +51,7 @@ admin.add_view(FileAdmin(upload_dir, name='Uploads'))
 
 # initialize models
 # baseline : resnet-34 ;
-# model = create_model()
+model = create_model()
 
 ###########################################################
 
@@ -102,14 +99,14 @@ def service():
         try:
             print(voice_symptom)
             # print("done2")
-            return render_template('service.html', symptom=None, voice=voice_symptom)
+            return render_template('service.html', symptom=None)
             # print("done3")
 
         except TypeError:
             print("증상을 정확히 말씀해주세요")
             pass
     else:
-        return render_template('service.html', symptom=None, voice=None)
+        return render_template('service.html', symptom=None)
 
 
 @app.route('/getsymp', methods=['POST', 'GET'])
@@ -144,7 +141,7 @@ def getsymp(symptom=None):
         # print(len(new_foods))
 
         return render_template('service.html', symptom=symptom, result=result,
-                               acups=sorted(new_acups), foods=sorted(new_foods), voice=None)
+                               acups=sorted(new_acups), foods=sorted(new_foods))
 
 
 @app.route('/upload_photo', methods=['GET', 'POST'])
@@ -195,48 +192,48 @@ def getvoice():
         # print(len(new_foods))
 
         return render_template('service.html', symptom=voice_symptom, result=voice_result,
-                               acups=sorted(new_acups), foods=sorted(new_foods), voice=None)
+                               acups=sorted(new_acups), foods=sorted(new_foods))
 
+@app.route('/CV')
+def DL_predict():
 
-# @app.route('/CV')
-# def DL_predict():
-#
-#     # checkpoint
-#     checkpoint_dir = './CV_DL/hapgok0823_1759org+rot+fill+rotfill_model_best.pth.tar'
-#     if path.isfile(checkpoint_dir):
-#         checkpoint = torch.load(checkpoint_dir)
-#         model.load_state_dict(checkpoint['state_dict'])
-#     # transformation
-#     transform = transforms.ToTensor()
-#
-#     # open image
-#     img1 = img2 = cv2.resize(cv2.imread('./uploads/test2.jpg'), dsize=(256, 256))
-#     img2 = cv2.cvtColor(clear_background(img2), cv2.COLOR_BGR2RGB)
-#     img2 = transform(Image.fromarray(img2))
-#
-#     # get coordinate results
-#     if torch.cuda.is_available():
-#         print('running on GPU')
-#         model.to('cuda')
-#         _, result = model(img2.unsqueeze(0).to('cuda'))
-#         result.cpu().detach().numpy()
-#         x, y = result.cpu().detach().numpy().squeeze()
-#     else:
-#         print('running on CPU')
-#         model.to('cpu')
-#         _, result = model(img2.unsqueeze(0))
-#         x, y = result.detach().numpy().squeeze()
-#
-#     # open_cv editted new image
-#     coord = (x, y)
-#     dot_size = 2
-#     new_img = cv2.circle(img1, (int(x), int(y)), dot_size, (0, 0, 255), -1)
-#     print('Label: ', checkpoint_dir.split('/')[2].split('_')[0][:-4])
-#     print('Coord:' ,(x, y))
-#     # PIL Image
-#     # Image.fromarray(cv2.cvtColor(new_img, cv2.COLOR_BGR2RGB))
-#     # return DL_Prediction(new_img, coord)
+    # checkpoint
+    checkpoint_dir = './CV_DL/hapgok0823_1759org+rot+fill+rotfill_model_best.pth.tar'
+    if path.isfile(checkpoint_dir):
+        checkpoint = torch.load(checkpoint_dir)
+        model.load_state_dict(checkpoint['state_dict'])
+    # transformation
+    transform = transforms.ToTensor()
 
+    # open image
+    img1 = img2 = cv2.resize(cv2.imread('./uploads/test2.jpg'), dsize=(256, 256))
+    img2 = cv2.cvtColor(clear_background(img2), cv2.COLOR_BGR2RGB)
+    img2 = transform(Image.fromarray(img2))
+
+    # get coordinate results
+    if torch.cuda.is_available():
+        print('running on GPU')
+        model.to('cuda')
+        _, result = model(img2.unsqueeze(0).to('cuda'))
+        result.cpu().detach().numpy()
+        x, y = result.cpu().detach().numpy().squeeze()
+    else:
+        print('running on CPU')
+        model.to('cpu')
+        _, result = model(img2.unsqueeze(0))
+        x, y = result.detach().numpy().squeeze()
+
+    # open_cv editted new image
+    coord = (x, y)
+    dot_size = 2
+    new_img = cv2.circle(img1, (int(x), int(y)), dot_size, (0, 0, 255), -1)
+    print('Label: ', checkpoint_dir.split('/')[2].split('_')[0][:-4])
+    print('Coord:', coord)
+    # PIL Image
+    Image.fromarray(cv2.cvtColor(new_img, cv2.COLOR_BGR2RGB))
+    # new_img, = DL_Prediction(new_img, coord)
+    # return render_template('',image,coord=DL_Prediction(new_img, coord))
+    return render_template('service.html')
 
 if __name__ == '__main__':
     app.run()

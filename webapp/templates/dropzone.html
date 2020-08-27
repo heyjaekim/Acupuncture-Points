@@ -4,15 +4,45 @@
     <meta charset="UTF-8">
     <title>Flask-Dropzone Demo: Custom Options</title>
     {{ dropzone.load_css() }}
-    {{ dropzone.style('border: 2px dashed #0087F7; margin: 10%; min-height: 400px;') }}
-</head>
-<body>
-    {{ dropzone.create(action='upload_photo') }}
-    <div class="wrapper" style="text-align: center;">
-        <button id="upload-btn">Upload</button>
-    </div>
+    {{ dropzone.style('border: 2px dashed #0087F7; margin: 7%; min-height: 200px; min-width:50px;') }}
     {{ dropzone.load_js() }}
     {{ dropzone.config(custom_init='dz = this;document.getElementById("upload-btn").addEventListener("click", function handler(e) {dz.processQueue();});',
                          custom_options='autoProcessQueue: false, addRemoveLinks: true, parallelUploads: 20,') }}
+</head>
+<body>
+    <div id="upload-photo" style="display:inline">
+        {{ dropzone.create(action='upload_photo') }}
+        <div class="wrapper" style="text-align: center">
+            <button id="upload-btn">Upload</button>
+        </div>
+    </div>
+
+
+
+    <script>
+        let uploadPhoto = document.getElementById("upload-photo")
+
+        {#function geoFindMe() {#}
+        {#        if (navigator.geolocation) { // GPS를 지원하면#}
+        {#            navigator.geolocation.getCurrentPosition(function (position) {#}
+        {#                var latitude = position.coords.latitude;#}
+        {#                var longitude = position.coords.longitude;#}
+        {#                $.ajax({#}
+        {#                    type: "POST",#}
+        {#                    url: "/",#}
+        {#                    contentType: "application/json",#}
+        {#                    data: JSON.stringify({'lat': latitude, 'lng': longitude}),#}
+        {#                    dataType: "json",#}
+        {#                    success: function (response) {#}
+        {#                        console.log(response);#}
+        {#                    },#}
+        {#                    error: function (err) {#}
+        {#                        console.log(err);#}
+        {#                    }#}
+        {#                });#}
+        {#            })#}
+        {#        }#}
+        {#     }#}
+    </script>
 </body>
 </html>
