@@ -99,23 +99,27 @@ def login():
         # username = request.files.get('username')
         username = ""
         if data['new_userid']:
-            userid = data['new_userid']
-            password = data['password']
-            username = data['username']
+            try:
+                userid = data['new_userid']
+                password = data['password']
+                username = data['username']
 
-            conn = sqlite3.connect('./Collect_Data.db')
-            cur = conn.cursor()
-            count = cur.execute("SELECT COUNT(Patient_id) FROM Patient").fetchall()
-            pid = "p" + str(count[0][0])
-            print(pid, userid, password, username)
+                conn = sqlite3.connect('./Collect_Data.db')
+                cur = conn.cursor()
+                count = cur.execute("SELECT COUNT(Patient_id) FROM Patient").fetchall()
+                pid = "p" + str(count[0][0])
+                print(pid, userid, password, username)
 
-            cur.execute('''INSERT INTO Patient (Patient_id, ID, Username, Gender, Password)
-                        VALUES(?,?,?,?,?)''', (pid, userid, password, "", username))
-            conn.commit()
-            print("Inserted")
-            # "WHERE NOT EXISTS(SELECT 1 FROM Patient WHERE ID='" + userid + "')"
-            return render_template('login.html', username=username)
-        elif data['userid']:
+                cur.execute('''INSERT INTO Patient (Patient_id, ID, Username, Gender, Password)
+                            VALUES(?,?,?,?,?)''', (pid, userid, password, "", username))
+                conn.commit()
+                print("Inserted")
+                # "WHERE NOT EXISTS(SELECT 1 FROM Patient WHERE ID='" + userid + "')"
+                return render_template('login.html', userid=userid)
+            except sqlite3.IntegrityError:
+                print("Sqlite3 Integrity Error")
+                return render_template('login.html', userid="Username already exists")
+        else:
             userid = data['userid']
             password = data['password']
             username = data['username']
@@ -130,7 +134,6 @@ def login():
             #                         VALUES(?,?,?,?,?)''', (pid, userid, password, "", username))
             # conn.commit()
             print("Logged in")
-
     else:
         # if data:
         #     userid = data['userid']
@@ -151,7 +154,7 @@ def login():
         #     return render_template('service.html', symptom=None)
         # else:
         print('login GET')
-        return render_template('login.html', result="Fail")
+        return render_template('login.html', username=None)
     # id = request.get_json()['id']
     # password = request.get_json()['password']
     # cur.execute("SELECT * FROM Patient WHERE ID == '" + id + "'")
@@ -173,7 +176,7 @@ def register():
 def service():
 
     if request.method == "POST":
-        if request.files['audio_data']:
+        if request.files:
             f = request.files['audio_data']
             # uncomment here to try tour voice
             # with open('voice.wav', 'wb') as voice:
