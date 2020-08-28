@@ -1,23 +1,30 @@
-from flask import Flask, render_template, request, send_file
+import sqlite3
+
+from flask import Flask, jsonify, request, render_template, send_file
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin import Admin
 from flask_dropzone import Dropzone
 from flask_admin.contrib.fileadmin import FileAdmin
+from flask_cors import CORS
+from flask_bcrypt import Bcrypt
+from flask_jwt_extended import JWTManager
+from flask_jwt_extended import (create_access_token)
+
 
 from os import path
 from threading import Thread
+from datetime import datetime
 
 from Text_Searching.Symptom_Search.search_symptom import Search_symptom
 from Text_Searching.Symptom_Matching.Matching_Symptom import KMT
-from HospitalGeo.Hospital_Geo import Nearest_Hospital
 from Text_Searching.speech2text import csr
+from HospitalGeo.Hospital_Geo import Nearest_Hospital
 
 # ## image processing stuff ##
 from CV_DL.CV_check_Utils import *
 from torchvision import transforms
 from PIL import Image
-from io import StringIO, BytesIO
-import base64
+from io import BytesIO
 import torch
 import cv2
 
@@ -27,27 +34,34 @@ upload_dir = path.join(basedir, 'uploads')
 
 ###########################################################
 
+# FLASK APP CONFIGURATIONS
 app = Flask(__name__)
-# app = Flask(__name__, static_url_path='/static')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app = Flask(__name__, static_url_path='/static')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Collect_Data.db'
 app.config['SECRET_KEY'] = 'jae'
 app.config['UPLOADED_PATH'] = upload_dir
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
 
-###########################################################
 
-# db SQLAlchemy
+
+# DB SQLAlchemy AND SETTINGS
 db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+jwt = JWTManager(app)
+CORS(app)
+
+# FLASK-DROPZONE
 Dropzone(app)
+
 
 ###########################################################
 
 # Flask and Flask-SQLAlchemy initialization here
 
-admin = Admin(name='test')
-
+admin = Admin(name='User_Data')
 admin.init_app(app)
 admin.add_view(FileAdmin(upload_dir, name='Uploads'))
+voice_symptom = ""
 
 ###########################################################
 
@@ -76,37 +90,109 @@ def home():
     return render_template('home.html')
 
 
-voice_symptom = ""
+@app.route('/user/login', methods=['GET', 'POST'])
+def login():
+    data = request.get_json()
+    if request.method == "POST":
+        # userid = request.files.get('userid')
+        # password = request.files.get('password')
+        # username = request.files.get('username')
+        username = ""
+        if data['new_userid']:
+            userid = data['new_userid']
+            password = data['password']
+            username = data['username']
 
-def get_voice_file():
-    csr_inst = csr('./voice.wav')
-    global voice_symptom
-    voice_symptom = csr_inst.convert()
-    # print("done1")
+            conn = sqlite3.connect('./Collect_Data.db')
+            cur = conn.cursor()
+            count = cur.execute("SELECT COUNT(Patient_id) FROM Patient").fetchall()
+            pid = "p" + str(count[0][0])
+            print(pid, userid, password, username)
+
+            cur.execute('''INSERT INTO Patient (Patient_id, ID, Username, Gender, Password)
+                        VALUES(?,?,?,?,?)''', (pid, userid, password, "", username))
+            conn.commit()
+            print("Inserted")
+            # "WHERE NOT EXISTS(SELECT 1 FROM Patient WHERE ID='" + userid + "')"
+            return render_template('login.html', username=username)
+        elif data['userid']:
+            userid = data['userid']
+            password = data['password']
+            username = data['username']
+
+            # conn = sqlite3.connect('./Collect_Data.db')
+            # cur = conn.cursor()
+            # count = cur.execute("SELECT COUNT(Patient_id) FROM Patient").fetchall()
+            # pid = "p" + str(count[0][0])
+            # print(pid, userid, password, username)
+            #
+            # cur.execute('''INSERT INTO Patient (Patient_id, ID, Username, Gender, Password)
+            #                         VALUES(?,?,?,?,?)''', (pid, userid, password, "", username))
+            # conn.commit()
+            print("Logged in")
+
+    else:
+        # if data:
+        #     userid = data['userid']
+        #     password = data['password']
+        #     username = data['username']
+        #
+        #     # conn = sqlite3.connect('./Collect_Data.db')
+        #     # cur = conn.cursor()
+        #     # count = cur.execute("SELECT COUNT(Patient_id) FROM Patient").fetchall()
+        #     # pid = "p" + str(count[0][0])
+        #     # print(pid, userid, password, username)
+        #     #
+        #     # cur.execute('''INSERT INTO Patient (Patient_id, ID, Username, Gender, Password)
+        #     #                         VALUES(?,?,?,?,?)''', (pid, userid, password, "", username))
+        #     # conn.commit()
+        #     print("Logged in")
+        #
+        #     return render_template('service.html', symptom=None)
+        # else:
+        print('login GET')
+        return render_template('login.html', result="Fail")
+    # id = request.get_json()['id']
+    # password = request.get_json()['password']
+    # cur.execute("SELECT * FROM Patient WHERE ID == '" + id + "'")
+    # rv = cur.fetchall()
+    #
+    # if bcrypt.check_password_hash(rv['password'], password):
+    #     access_token = create_access_token(
+    #         identity={'name': rv['name'], 'sex': rv['sex']})
+    #     result = access_token
+    # else:
+    #     result = jsonify({"error": "Invalid username and password"})
+
+@app.route('/user/register')
+def register():
+    return render_template('register.html')
 
 
 @app.route('/service', methods=['GET', 'POST'])
 def service():
 
     if request.method == "POST":
-        f = request.files['audio_data']
-        # with open('voice.wav', 'wb') as voice:
-        #     f.save(voice)
-        print('file uploaded successfully')
+        if request.files['audio_data']:
+            f = request.files['audio_data']
+            # uncomment here to try tour voice
+            # with open('voice.wav', 'wb') as voice:
+            #     f.save(voice)
+            print('file uploaded successfully')
 
-        thread1 = Thread(target=get_voice_file)
-        thread1.start()
+            thread1 = Thread(target=get_voice_file)
+            thread1.start()
 
-        thread1.join()
-        try:
-            print(voice_symptom)
-            # print("done2")
+            thread1.join()
+            try:
+                print(voice_symptom)
+                return render_template('service.html', symptom=None)
+
+            except TypeError:
+                print("증상을 정확히 말씀해주세요")
+                pass
+        else:
             return render_template('service.html', symptom=None)
-            # print("done3")
-
-        except TypeError:
-            print("증상을 정확히 말씀해주세요")
-            pass
     else:
         return render_template('service.html', symptom=None)
 
@@ -163,10 +249,14 @@ def upload_photo(symptom=None, result=None):
 
 @app.route('/map')
 def openmap():
-    # smap is for symptoms and map coordinates
-    # global smap
 
     return render_template('map.html')
+
+
+def get_voice_file():
+    csr_inst = csr('./voice.wav')
+    global voice_symptom
+    voice_symptom = csr_inst.convert()
 
 
 @app.route('/getvoice', methods=['GET'])
@@ -198,7 +288,7 @@ def getvoice():
 
 
 ###########################################################
-# METHODS #
+# Image Processing #
 
 @app.route('/image.png')
 def dl_predict():
@@ -210,11 +300,6 @@ def dl_predict():
         model.load_state_dict(checkpoint['state_dict'])
     # transformation
     transform = transforms.ToTensor()
-
-    # call up all files in uploads
-    # mypath = "./uploads"
-    # img_files = [f for f in listdir(mypath) if path.isfile(path.join(mypath,f))]
-    # img_results = []
 
     # open image
     f = "./uploads/test2.jpg"
@@ -252,4 +337,4 @@ def dl_predict():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
