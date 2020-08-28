@@ -10,16 +10,23 @@
 
   
 ## Repository 구조
-    1. Acupuncture-Webapp \
+    1. Acupuncture-Webapp 
         : Flask와 React를 이용해 만든 애플리케이션
-    2. CV_DeepLearning \
+    2. CV_DeepLearning 
         : 딥러닝 기술(컴퓨터 비전) 을 활용한 신체 경혈점 예측
-    3. Data \
-        : 주치 관련 데이터 크롤링, 문서 유사도 체크
-    4. Image-Preprocess \
-        : 이미지 태깅, 이미지 데이터 트랜스포메이션, 제이슨 데이터 추합
-    5. Text-Searching \
-        : inverted index 기반 정보검색을 활용한 사용자 입력 기반 혈자리 추천
+    3. EDA 
+        : 이미지 데이터와 그에 관한 정보를 탐색하여 유의미한 관계가 있는지 검토
+    4. HospitalGeo 
+        : 주변 병원을 검색
+    5. Image-Preprocess 
+        : 이미지 태깅, 이미지 데이터 트랜스포메이션, json 데이터 추합 등
+    6. Login 
+        : 개인화를 위한 로그인
+    7. Text-Searching 
+        : inverted index 기반 정보검색을 활용한 사용자 입력 기반 혈자리, 음식 및 약재 추천
+    8. webapp 
+        : 웹앱 구현
+    
   
 ## COMMIT/공유사항 등의 작성방법
     1. COMMIT : 코드 push 시에 현재 본인이 작업중이거나/업데이트한 작업에 대해서 최대한 자세히 적는다.
