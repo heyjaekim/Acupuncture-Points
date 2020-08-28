@@ -98,12 +98,12 @@ class Search_symptom:
         TF = lambda f, mf, a: a + (1 - a)*(f / mf)
         IDF = lambda N, df: log(N / df)
 
-        with open('FILES.json','r',encoding = 'utf-8') as f:
+        with open('./Text_Searching/Symptom_Search/FILES.json','r',encoding = 'utf-8') as f:
             FILES = json.load(f)
         N = len(FILES)
 
-        wposting = 'wsymptom.dat'
-        with open('globalDictionary.json','r', encoding = 'utf-8') as f:
+        wposting = './Text_Searching/Symptom_Search/wsymptom.dat'
+        with open('./Text_Searching/Symptom_Search/globalDictionary.json','r', encoding = 'utf-8') as f:
             globalDictionary = json.load(f)
 
         queryDictionary = defaultdict(int)
@@ -145,11 +145,11 @@ class Search_symptom:
                 return _, f.read().strip(), self.pattern7.sub('',self.pattern8.sub('', FILES[_[0]]['path']))
 
 ######################################################################################################
-query = '머리아프고, 속이 울렁거린다'
-
-
-a = Search_symptom()
-#query_change = a.spacing_kkma(query)
-b = a.tokenizer2(query)
-print(a.search(b[0]))
-print(a.search(b[1]))
+# query = '머리아프고, 속이 울렁거린다'
+#
+#
+# a = Search_symptom()
+# #query_change = a.spacing_kkma(query)
+# b = a.tokenizer2(query)
+# print(a.search(b[0]))
+# print(a.search(b[1]))
