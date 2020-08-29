@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="ko">
 <head>
     <!-- title -->
     <title>손을 주시오 진단 하겠오</title>
@@ -147,8 +147,8 @@
             <div class="col-md-9 col-sm-9 col-xs-12 display-table one-third-screen md-height-350px sm-height-500px xs-height-auto text-center wow bounceInRight xs-height-auto">
                 <div class="display-table-cell vertical-align-middle">
                     <div class="font-weight-300 alt-font title-large text-extra-dark-gray display-inline-block vertical-align-bottom">
-                        <p class="margin-5px-bottom" style="font-size:93%">손을 주시오,</p>
-                        <span class="font-weight-600 text-bold-underline position-relative ">혈을 잡겠오</span>
+                        <p class="margin-5px-bottom" style="font-size:93%">어서오세요,</p>
+                        <span class="font-weight-600 text-bold-underline position-relative ">{{ pid }}님</span>
                     </div>
                     <div class="text-medium-gray text-small text-uppercase margin-40px-top letter-spacing-2 alt-font xs-margin-10px-top">
                         고려대학교 빅데이터 13조
@@ -226,7 +226,7 @@
             <!-- start feature box item -->
             <div class="col-md-4 col-sm-4 col-xs-12 xs-margin-five-bottom last-paragraph-no-margin wow fadeInUp">
                 <div class="feature-box">
-                    <div class="content" id="find-me" onclick="openMap()">
+                    <div class="content" id="find-me" onclick="serviceFunc3()"> <!-- onclick="openMap()" -->
                         <i class="icon-map-pin text-medium-gray icon-large margin-25px-bottom sm-margin-15px-bottom"></i>
                         <div class="text-medium alt-font text-capitalize text-extra-dark-gray margin-10px-bottom sm-margin-5px-bottom">
                             가까운 진료소
@@ -246,6 +246,7 @@
                         <!-- start features box -->
                             <div class="col-md-4 col-sm-4 col-xs-12 sm-margin-four-bottom last-paragraph-no-margin xs-margin-30px-bottom wow fadeInUp center-col">
                                 <div class="bg-white text-center">
+                                    {% include "dropzone.html" %}
                                     <p><img src="../image.png" alt="dl_img" width="500" height="500"/></p>
                                     <div class="padding-45px-all sm-padding-15px-all inner-match-height">
                                         <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">TAKE A LOOK AT YOUR BEAUTIFUL HAND ACUPUNCTURE POINTS</span>
@@ -276,6 +277,15 @@
                                 <!-- end feature box -->
                             {% endfor %}
                         {% endif %}
+                    </div>
+                </div>
+                <!-- end tab content -->
+            </div>
+            <div class="panel-group accordion-style2" id="service3" style="display: none">
+                <!-- start tab content -->
+                <div class="panel panel-default">
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <iframe src="/map" style="width: 100%; height: 700px;"></iframe>
                     </div>
                 </div>
                 <!-- end tab content -->
@@ -345,11 +355,13 @@
 <script>
     var service1 = document.getElementById("service1");
     var service2 = document.getElementById("service2");
+    var service3 = document.getElementById("service3");
 
     function serviceFunc() {
         if (service1.style.display == "none") {
             service1.style.display = "block";
             service2.style.display = "none";
+            service3.style.display = "none";
         } else {
             service1.style.display = "none";
         }
@@ -359,15 +371,27 @@
         if (service2.style.display == "none") {
             service1.style.display = "none";
             service2.style.display = "block";
+            service3.style.display = "none";
         } else {
             service2.style.display = "none";
         }
     }
 
-    function openMap() {
-        window.open("map", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=700,height=700");
+    function serviceFunc3() {
+        if (service3.style.display == "none") {
+            service1.style.display = "none";
+            service2.style.display = "none";
+            service3.style.display = "block";
+        } else {
+            service3.style.display = "none";
+        }
     }
 
+    {#function openMap() {#}
+    {#    window.open("map", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=700,height=700");#}
+    {# }#}
+
+    
 
     {#var gotoVoicePage = document.getElementById("goto-voice-page");#}
     {#function openVoicePage(){#}

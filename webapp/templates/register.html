@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="../static/images/icons/favicon.ico"/>
+	<link rel="icon" type="image/png" href="../static/images/favicon/favicon.ico"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../static/vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -35,7 +35,7 @@
                     <span class="login100-form-title p-b-41">
                         Register Account
                     </span>
-                    <form class="login100-form validate-form p-b-33 p-t-5" method="GET" action="/user/login">
+                    <div class="login100-form validate-form p-b-33 p-t-5">
 
                         <div class="wrap-input100 validate-input" data-validate = "Enter user id">
                             <input class="input100" id="userid" type="text" name="userid" placeholder="User ID">
@@ -51,14 +51,14 @@
                             <input class="input100" id="username" type="text" name="username" placeholder="User Name">
                             <span class="focus-input100" data-placeholder="&#xe80f;"></span>
                         </div>
-
-                        <div class="container-login100-form-btn m-t-36">
-                            <button class="login100-form-btn" id="register-userid">
-                                등록하기
-                            </button>
-                        </div>
-
-                    </form>
+                        <form method="GET" action="/user/login">
+                            <div class="container-login100-form-btn m-t-36">
+                                <button class="login100-form-btn" id="register-userid">
+                                    등록하기
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

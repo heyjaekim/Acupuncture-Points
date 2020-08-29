@@ -2,6 +2,7 @@ import sqlite3
 
 from flask import Flask, jsonify, request, render_template, send_file
 from flask_sqlalchemy import SQLAlchemy
+from flask_admin.contrib.sqla import ModelView
 from flask_admin import Admin
 from flask_dropzone import Dropzone
 from flask_admin.contrib.fileadmin import FileAdmin
@@ -37,11 +38,14 @@ upload_dir = path.join(basedir, 'uploads')
 # FLASK APP CONFIGURATIONS
 app = Flask(__name__)
 app = Flask(__name__, static_url_path='/static')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Collect_Data.db'
-app.config['SECRET_KEY'] = 'jae'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users_info.db'
+app.config['SECRET_KEY'] = 'adminsecretkey'
 app.config['UPLOADED_PATH'] = upload_dir
 app.config['FLASK_ADMIN_SWATCH'] = 'cerulean'
+app.config['JWT_SECRET_KEY'] = 'secret'
 
+
+###########################################################
 
 
 # DB SQLAlchemy AND SETTINGS
@@ -53,6 +57,22 @@ CORS(app)
 # FLASK-DROPZONE
 Dropzone(app)
 
+class Patient(db.Model):
+    Pid = db.Column(db.VARCHAR, nullable=False, primary_key=True)
+    Userid = db.Column(db.VARCHAR, unique=True, nullable=False)
+    Password = db.Column(db.VARCHAR, nullable=False)
+    Username = db.Column(db.VARCHAR, nullable=True)
+    Gender = db.Column(db.VARCHAR, nullable=True)
+
+class Searching_log(db.Model):
+    Pid = db.Column(db.VARCHAR, primary_key=True)
+    Search_num = db.Column(db.INTEGER, nullable=False)
+    Time_stamp = db.Column(db.DATETIME)
+    Searching_keyword = db.Column(db.VARCHAR)
+
+# db.session.add(Patient(name="Flask", email="example@example.com"))
+# db.session.commit()
+
 
 ###########################################################
 
@@ -60,8 +80,12 @@ Dropzone(app)
 
 admin = Admin(name='User_Data')
 admin.init_app(app)
+admin.add_view(ModelView(Patient, db.session))
+admin.add_view(ModelView(Searching_log, db.session))
 admin.add_view(FileAdmin(upload_dir, name='Uploads'))
 voice_symptom = ""
+userid = None
+pid = None
 
 ###########################################################
 
@@ -93,88 +117,58 @@ def home():
 @app.route('/user/login', methods=['GET', 'POST'])
 def login():
     data = request.get_json()
+    global userid
     if request.method == "POST":
-        # userid = request.files.get('userid')
-        # password = request.files.get('password')
-        # username = request.files.get('username')
-        username = ""
-        if data['new_userid']:
-            try:
-                userid = data['new_userid']
-                password = data['password']
-                username = data['username']
 
-                conn = sqlite3.connect('./Collect_Data.db')
-                cur = conn.cursor()
-                count = cur.execute("SELECT COUNT(Patient_id) FROM Patient").fetchall()
-                pid = "p" + str(count[0][0])
-                print(pid, userid, password, username)
-
-                cur.execute('''INSERT INTO Patient (Patient_id, ID, Username, Gender, Password)
-                            VALUES(?,?,?,?,?)''', (pid, userid, password, "", username))
-                conn.commit()
-                print("Inserted")
-                # "WHERE NOT EXISTS(SELECT 1 FROM Patient WHERE ID='" + userid + "')"
-                return render_template('login.html', userid=userid)
-            except sqlite3.IntegrityError:
-                print("Sqlite3 Integrity Error")
-                return render_template('login.html', userid="Username already exists")
-        else:
-            userid = data['userid']
+        try:
+            userid = data['new_userid']
             password = data['password']
             username = data['username']
 
-            # conn = sqlite3.connect('./Collect_Data.db')
-            # cur = conn.cursor()
-            # count = cur.execute("SELECT COUNT(Patient_id) FROM Patient").fetchall()
-            # pid = "p" + str(count[0][0])
-            # print(pid, userid, password, username)
-            #
-            # cur.execute('''INSERT INTO Patient (Patient_id, ID, Username, Gender, Password)
-            #                         VALUES(?,?,?,?,?)''', (pid, userid, password, "", username))
-            # conn.commit()
-            print("Logged in")
+            conn = sqlite3.connect('./Collect_Data.db')
+            cur = conn.cursor()
+            count = cur.execute("SELECT COUNT(Patient_id) FROM Patient").fetchall()
+            pid = "p" + str(count[0][0])
+
+            cur.execute('''INSERT INTO Patient (Patient_id, ID, Username, Gender, Password)
+                        VALUES(?,?,?,?,?)''', (pid, userid, username, "", password))
+            conn.commit()
+            print("Inserted")
+            return render_template('login.html', userid=userid)
+        except sqlite3.IntegrityError:
+            print("Sqlite3 Integrity Error")
+            userid = "Username already exists"
+            return render_template('login.html', userid=userid)
+
     else:
-        # if data:
-        #     userid = data['userid']
-        #     password = data['password']
-        #     username = data['username']
-        #
-        #     # conn = sqlite3.connect('./Collect_Data.db')
-        #     # cur = conn.cursor()
-        #     # count = cur.execute("SELECT COUNT(Patient_id) FROM Patient").fetchall()
-        #     # pid = "p" + str(count[0][0])
-        #     # print(pid, userid, password, username)
-        #     #
-        #     # cur.execute('''INSERT INTO Patient (Patient_id, ID, Username, Gender, Password)
-        #     #                         VALUES(?,?,?,?,?)''', (pid, userid, password, "", username))
-        #     # conn.commit()
-        #     print("Logged in")
-        #
-        #     return render_template('service.html', symptom=None)
-        # else:
         print('login GET')
-        return render_template('login.html', username=None)
-    # id = request.get_json()['id']
-    # password = request.get_json()['password']
-    # cur.execute("SELECT * FROM Patient WHERE ID == '" + id + "'")
-    # rv = cur.fetchall()
-    #
-    # if bcrypt.check_password_hash(rv['password'], password):
-    #     access_token = create_access_token(
-    #         identity={'name': rv['name'], 'sex': rv['sex']})
-    #     result = access_token
-    # else:
-    #     result = jsonify({"error": "Invalid username and password"})
+        return render_template('login.html', userid=userid)
+
+
+# going to use with dropzone
+# userid = data['userid']
+# password = data['password']
+
+# id = request.get_json()['id']
+# password = request.get_json()['password']
+# cur.execute("SELECT * FROM Patient WHERE ID == '" + id + "'")
+# rv = cur.fetchall()
+#
+# if bcrypt.check_password_hash(rv['password'], password):
+#     access_token = create_access_token(
+#         identity={'name': rv['name'], 'sex': rv['sex']})
+#     result = access_token
+# else:
+#     result = jsonify({"error": "Invalid username and password"})
 
 @app.route('/user/register')
 def register():
-    return render_template('register.html')
+    return render_template('register.html', register=False, userid=userid)
 
 
 @app.route('/service', methods=['GET', 'POST'])
 def service():
-
+    global pid
     if request.method == "POST":
         if request.files:
             f = request.files['audio_data']
@@ -189,15 +183,33 @@ def service():
             thread1.join()
             try:
                 print(voice_symptom)
-                return render_template('service.html', symptom=None)
+                return render_template('service.html', symptom=None, pid=pid)
 
             except TypeError:
                 print("증상을 정확히 말씀해주세요")
                 pass
+        elif request.get_json():
+            data = request.get_json()
+            userid = data['userid']
+            password = data['password']
+            conn = sqlite3.connect('./Collect_Data.db')
+            cur = conn.cursor()
+
+            cur.execute('''
+                SELECT Username
+                FROM Patient
+                WHERE ID == "'''+userid+'''" AND Password == "'''+password+'''"
+            ''')
+            pid = cur.fetchall()[0][0]
+            print(f"found pid username: {pid}")
+
+            return render_template('service.html', symptom=None, pid=pid)
+
         else:
-            return render_template('service.html', symptom=None)
+            print("at service POST else part")
+            return render_template('service.html', symptom=None, pid=pid)
     else:
-        return render_template('service.html', symptom=None)
+        return render_template('service.html', symptom=None, pid=pid)
 
 
 @app.route('/getsymp', methods=['POST', 'GET'])
@@ -230,7 +242,7 @@ def getsymp(symptom=None):
             result += " · " + _ if result != "" else _
 
         return render_template('service.html', symptom=symptom, result=result,
-                               acups=sorted(new_acups), foods=sorted(new_foods))
+                               acups=sorted(new_acups), foods=sorted(new_foods), pid=pid)
 
 
 @app.route('/upload_photo', methods=['GET', 'POST'])
@@ -244,7 +256,7 @@ def upload_photo(symptom=None, result=None):
         matched_acups = KMT.search_Acup(symptom)
 
         return render_template('service.html', symptom=symptom, result=result,
-                           acups=matched_acups, foods=None)
+                           acups=matched_acups, foods=None, pid=pid)
     else:
         print("upload photo didn't work")
         pass
