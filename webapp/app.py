@@ -1,6 +1,6 @@
 import sqlite3
 
-from flask import Flask, jsonify, request, render_template, send_file
+from flask import Flask, redirect, request, render_template, send_file, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import Admin
@@ -9,12 +9,11 @@ from flask_admin.contrib.fileadmin import FileAdmin
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
-from flask_jwt_extended import (create_access_token)
 
 
 from os import path
 from threading import Thread
-from datetime import datetime
+from json import load
 
 from Text_Searching.Symptom_Search.search_symptom import Search_symptom
 from Text_Searching.Symptom_Matching.Matching_Symptom import KMT
@@ -85,7 +84,7 @@ admin.add_view(ModelView(Searching_log, db.session))
 admin.add_view(FileAdmin(upload_dir, name='Uploads'))
 voice_symptom = ""
 userid = None
-pid = None
+username = None
 
 ###########################################################
 
@@ -116,33 +115,26 @@ def home():
 
 @app.route('/user/login', methods=['GET', 'POST'])
 def login():
-    data = request.get_json()
+
     global userid
+    global username
     if request.method == "POST":
-
-        try:
-            userid = data['new_userid']
-            password = data['password']
-            username = data['username']
-
-            conn = sqlite3.connect('./Collect_Data.db')
-            cur = conn.cursor()
-            count = cur.execute("SELECT COUNT(Patient_id) FROM Patient").fetchall()
-            pid = "p" + str(count[0][0])
-
-            cur.execute('''INSERT INTO Patient (Patient_id, ID, Username, Gender, Password)
-                        VALUES(?,?,?,?,?)''', (pid, userid, username, "", password))
-            conn.commit()
-            print("Inserted")
-            return render_template('login.html', userid=userid)
-        except sqlite3.IntegrityError:
-            print("Sqlite3 Integrity Error")
-            userid = "Username already exists"
-            return render_template('login.html', userid=userid)
+        data = request.get_json()
+        userid = data['userid']
+        password = data['password']
+        conn = sqlite3.connect('./Collect_Data.db')
+        cur = conn.cursor()
+        cur.execute('''SELECT Username, ID FROM Patient 
+                        WHERE ID == "'''+userid+'''" 
+                        AND Password == "'''+password+'''"''')
+        rv = cur.fetchall()
+        username, userid = rv[0][0], rv[0][1]
+        print(f"found userid / username: {userid} {username}")
+        return render_template('login.html', userid=userid, username=username)
+        # return redirect(url_for('login'))
 
     else:
-        print('login GET')
-        return render_template('login.html', userid=userid)
+        return render_template('login.html', userid=userid, username=username)
 
 
 # going to use with dropzone
@@ -161,55 +153,69 @@ def login():
 # else:
 #     result = jsonify({"error": "Invalid username and password"})
 
-@app.route('/user/register')
+@app.route('/user/register', methods=['GET', 'POST'])
 def register():
-    return render_template('register.html', register=False, userid=userid)
+    global userid
+    global username
+
+    if request.method == "POST":
+        data = request.get_json()
+        try:
+            userid = data['new_userid']
+            password = data['password']
+            username = data['username']
+
+            conn = sqlite3.connect('./Collect_Data.db')
+            cur = conn.cursor()
+            count = cur.execute("SELECT COUNT(Patient_id) FROM Patient").fetchall()
+
+            cur.execute('''INSERT INTO Patient (Patient_id, ID, Username, Gender, Password)
+                            VALUES(?,?,?,?,?)''', ("p" + str(count[0][0]), userid, username, "", password))
+            conn.commit()
+            print("Inserted")
+            return redirect(url_for('login'))
+            # return render_template('register.html', userid=userid)
+
+        except sqlite3.IntegrityError:
+            print("Sqlite3 Integrity Error")
+            userid = "User id already exists"
+            return render_template('register.html', userid=userid)
+    else:
+        print(userid)
+        if userid is not None and userid != "User id already exists":
+            return redirect(url_for('login'))
+
+        return render_template('register.html', userid=userid)
 
 
 @app.route('/service', methods=['GET', 'POST'])
 def service():
-    global pid
+    global userid
+    global username
+    userid = "None"
+    username = "None"
     if request.method == "POST":
-        if request.files:
-            f = request.files['audio_data']
-            # uncomment here to try tour voice
-            # with open('voice.wav', 'wb') as voice:
-            #     f.save(voice)
-            print('file uploaded successfully')
+        f = request.files['audio_data']
+        # uncomment here to try tour voice
+        # with open('voice.wav', 'wb') as voice:
+        #     f.save(voice)
+        print('file uploaded successfully')
 
-            thread1 = Thread(target=get_voice_file)
-            thread1.start()
+        thread1 = Thread(target=get_voice_file)
+        thread1.start()
 
-            thread1.join()
-            try:
-                print(voice_symptom)
-                return render_template('service.html', symptom=None, pid=pid)
+        thread1.join()
+        try:
+            print(voice_symptom)
+            return render_template('service.html', symptom=None,
+                                   userid=userid, username=username)
 
-            except TypeError:
-                print("증상을 정확히 말씀해주세요")
-                pass
-        elif request.get_json():
-            data = request.get_json()
-            userid = data['userid']
-            password = data['password']
-            conn = sqlite3.connect('./Collect_Data.db')
-            cur = conn.cursor()
-
-            cur.execute('''
-                SELECT Username
-                FROM Patient
-                WHERE ID == "'''+userid+'''" AND Password == "'''+password+'''"
-            ''')
-            pid = cur.fetchall()[0][0]
-            print(f"found pid username: {pid}")
-
-            return render_template('service.html', symptom=None, pid=pid)
-
-        else:
-            print("at service POST else part")
-            return render_template('service.html', symptom=None, pid=pid)
+        except TypeError:
+            print("증상을 정확히 말씀해주세요")
+            pass
     else:
-        return render_template('service.html', symptom=None, pid=pid)
+        return render_template('service.html', symptom=None,
+                               userid=userid, username=username)
 
 
 @app.route('/getsymp', methods=['POST', 'GET'])
@@ -241,8 +247,12 @@ def getsymp(symptom=None):
         for _ in new_symps:
             result += " · " + _ if result != "" else _
 
+
+        print(new_acups)
+
         return render_template('service.html', symptom=symptom, result=result,
-                               acups=sorted(new_acups), foods=sorted(new_foods), pid=pid)
+                               acups=sorted(new_acups), foods=sorted(new_foods),
+                               userid=userid, username=username)
 
 
 @app.route('/upload_photo', methods=['GET', 'POST'])
@@ -250,13 +260,16 @@ def upload_photo(symptom=None, result=None):
     if request.method == 'POST':
         # 파일 올릴때만 request.files 를 써야한다고 함
         f = request.files.get('file')
-        f.save(path.join(upload_dir, f.filename))
-        symptom = request.args.get('symptom')
-        result = request.args.get('result')
-        matched_acups = KMT.search_Acup(symptom)
+        f.save(path.join(upload_dir, 'test.jpg'))
 
-        return render_template('service.html', symptom=symptom, result=result,
-                           acups=matched_acups, foods=None, pid=pid)
+        return render_template('service.html', symptom=None, userid=userid, username=username)
+
+        # symptom = request.args.get('symptom')
+        # result = request.args.get('result')
+        # matched_acups = KMT.search_Acup(symptom)
+
+        # return render_template('service.html', symptom=symptom, result=result,
+        #                    acups=matched_acups, foods=None, userid=userid)
     else:
         print("upload photo didn't work")
         pass
@@ -299,7 +312,8 @@ def getvoice():
             voice_result += " · " + _ if voice_result != "" else _
 
         return render_template('service.html', symptom=voice_symptom, result=voice_result,
-                               acups=sorted(new_acups), foods=sorted(new_foods))
+                               acups=sorted(new_acups), foods=sorted(new_foods),
+                               userid=userid, username=username)
 
 
 ###########################################################

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V16</title>
+	<title>진단을 위한 로그인</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -31,38 +31,41 @@
 	<div class="login">
         <div class="limiter">
             <div class="container-login100" style="background-image: url('../static/images/bg-01.jpg');">
-                <div class="wrap-login100 p-t-30 p-b-50">
-                    <span class="login100-form-title p-b-41">
-                        {% if userid == 'Username already exists' %}
-                            User id already exists
-                        {% else %}
+                {% if userid != None %}
+                    <div class="wrap-login100 p-t-30 p-b-50">
+                        <span class="login100-form-title p-b-41">
+                            Welcome {{ userid }}
+                        </span>
+                        {% include "dropzone.html" %}
+                    </div>
+                {% else %}
+                    <div class="wrap-login100 p-t-30 p-b-50">
+                        <span class="login100-form-title p-b-41">
                             Welcome
-                        {% endif %}
-                    </span>
-                    <div class="login100-form validate-form p-b-33 p-t-5">
-                        <div class="wrap-input100 validate-input" data-validate = "Enter user id">
-                            <input class="input100" id="userid" type="text" name="username" placeholder="User id">
-                            <span class="focus-input100" data-placeholder="&#xe82a;"></span>
-                        </div>
+                        </span>
+                        <div class="login100-form validate-form p-b-33 p-t-5">
+                            <div class="wrap-input100 validate-input" data-validate = "Enter user id">
+                                <input class="input100" id="userid" type="text" name="username" placeholder="User id">
+                                <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+                            </div>
 
-                        <div class="wrap-input100 validate-input" data-validate="Enter password">
-                            <input class="input100" id="userpassword" type="password" name="pass" placeholder="Password">
-                            <span class="focus-input100" data-placeholder="&#xe80f;"></span>
-                        </div>
-                        <div style="text-align: center;">
-                            <a href="../user/register" class="register-url">
-                                아이디 만들기
-                            </a>
-                        </div>
-                        <div class="container-login100-form-btn m-t-11">
-                            <button class="login100-form-btn" id="loginBtn">
-                                로그인
-                            </button>
+                            <div class="wrap-input100 validate-input" data-validate="Enter password">
+                                <input class="input100" id="userpassword" type="password" name="pass" placeholder="Password">
+                                <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                            </div>
+                            <div style="text-align: center;">
+                                <a href="../user/register" class="register-url">
+                                    아이디 만들기
+                                </a>
+                            </div>
+                            <div class="container-login100-form-btn m-t-11">
+                                <button class="login100-form-btn" id="loginBtn">
+                                    로그인
+                                </button>
+                            </div>
                         </div>
                     </div>
-{#                    <form method="POST" action="/service">#}
-{#                    </form>#}
-                </div>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -93,7 +96,7 @@
         loginBtn.addEventListener("click", function(event){
             $.ajax({
                 type: "POST",
-                url: "/service",
+                url: "/user/login",
                 contentType: "application/json",
                 data: JSON.stringify({'userid': userid.value.toString(), 'password': password.value.toString()}),
                 dataType: "json",
@@ -104,7 +107,7 @@
                     console.log(err);
                 }
             });
-            window.location.replace("../service");
+            window.location.replace("../user/login");
          });
     </script>
 </body>

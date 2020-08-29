@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Flask-Dropzone Demo: Custom Options</title>
     {{ dropzone.load_css() }}
-    {{ dropzone.style('border: 2px dashed #0087F7; margin: 7%; min-height: 200px; min-width:50px;') }}
+    {{ dropzone.style('border: 2px dashed #0087F7; margin: 7%; min-height: 200px; min-width:300px;') }}
     {{ dropzone.load_js() }}
     {{ dropzone.config(custom_init='dz = this;document.getElementById("upload-btn").addEventListener("click", function handler(e) {dz.processQueue();});',
                          custom_options='autoProcessQueue: false, addRemoveLinks: true, parallelUploads: 20,') }}
@@ -12,9 +12,14 @@
 <body>
     <div id="upload-photo" style="display:inline">
         {{ dropzone.create(action='upload_photo') }}
-        <div class="wrapper" style="text-align: center">
-            <button id="upload-btn">Upload</button>
+        <div class="container-login100-form-btn m-t-11">
+            <button class="login100-form-btn" id="upload-btn" onclick="gotoServicePage()">Upload</button>
         </div>
     </div>
+    <script>
+        function gotoServicePage(){
+            window.location.replace("../service");
+        }
+    </script>
 </body>
 </html>

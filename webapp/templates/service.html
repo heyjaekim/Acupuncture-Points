@@ -148,7 +148,7 @@
                 <div class="display-table-cell vertical-align-middle">
                     <div class="font-weight-300 alt-font title-large text-extra-dark-gray display-inline-block vertical-align-bottom">
                         <p class="margin-5px-bottom" style="font-size:93%">어서오세요,</p>
-                        <span class="font-weight-600 text-bold-underline position-relative ">{{ pid }}님</span>
+                        <span class="font-weight-600 text-bold-underline position-relative ">{{ username }}님</span>
                     </div>
                     <div class="text-medium-gray text-small text-uppercase margin-40px-top letter-spacing-2 alt-font xs-margin-10px-top">
                         고려대학교 빅데이터 13조
@@ -189,9 +189,9 @@
                 &nbsp;
                 <h6 class="font-weight-300 text-extra-dark-gray no-margin"><strong
                         class="text-extra-dark-gray font-weight-600">'{{ symptom }}'</strong>
-                    에 대한 증상을 가지고 계시군요. 질문해 주신 진단을 판단한 결과 환자분께서는 <strong
+                    에 대한 증상을 가지고 계시군요. 진단을 결과 환자분께서는 <strong
                             class="font-weight-500 text-deep-pink">{{ result }}</strong>
-                    와 밀접한 관련을 가지고 계신것 같습니다.</h6>
+                    와 밀접한 관련을 가지고 계신것 같습니다. 보다 정확한 진단을 위해 몇 가지 질문에 답해주세요.</h6>
             </div>
         </div>
         <div class="row">
@@ -391,14 +391,12 @@
     {#    window.open("map", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=700,height=700");#}
     {# }#}
 
-    
+    {#$(document).ready(function () {#}
+    {#        $.getJSON('Synonyms.json', function (data) {#}
+    {#            console.log(data);#}
+    {#        });#}
+    {#    });#}
 
-    {#var gotoVoicePage = document.getElementById("goto-voice-page");#}
-    {#function openVoicePage(){#}
-    {#    gotoVoicePage.display = "block";#}
-    {#    console.log("goto-voice-page clicked")#}
-    {#    gotoVoicePage.click();#}
-    {# }#}
 </script>
 
 </body>

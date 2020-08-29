@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Login V16</title>
+	<title>계정 만들기</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
@@ -33,10 +33,13 @@
             <div class="container-login100" style="background-image: url('../static/images/bg-01.jpg');">
                 <div class="wrap-login100 p-t-30 p-b-50">
                     <span class="login100-form-title p-b-41">
-                        Register Account
+                        {% if userid == 'Username already exists' %}
+                            User id already exists
+                        {% else %}
+                            Register Account
+                        {% endif %}
                     </span>
                     <div class="login100-form validate-form p-b-33 p-t-5">
-
                         <div class="wrap-input100 validate-input" data-validate = "Enter user id">
                             <input class="input100" id="userid" type="text" name="userid" placeholder="User ID">
                             <span class="focus-input100" data-placeholder="&#xe82a;"></span>
@@ -51,7 +54,7 @@
                             <input class="input100" id="username" type="text" name="username" placeholder="User Name">
                             <span class="focus-input100" data-placeholder="&#xe80f;"></span>
                         </div>
-                        <form method="GET" action="/user/login">
+                        <form method="GET" action="/user/register">
                             <div class="container-login100-form-btn m-t-36">
                                 <button class="login100-form-btn" id="register-userid">
                                     등록하기
@@ -92,7 +95,7 @@
         registerBtn.addEventListener("click", function(event){
             $.ajax({
                 type: "POST",
-                url: "/user/login",
+                url: "/user/register",
                 contentType: "application/json",
                 data: JSON.stringify({'new_userid': new_userid.value.toString(),
                     'password': password.value.toString(),
