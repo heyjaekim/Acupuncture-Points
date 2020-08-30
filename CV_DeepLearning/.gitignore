@@ -2,6 +2,7 @@ Acu_Dataset
 color_mnist2
 dataset
 Hands_sobu
+testdata/
 .ipynb_checkpoints/
 runs/
 checkpoints/
