@@ -129,5 +129,15 @@ class Tensorize(object):
                 'label' : label}
 
 
-class Rotate(object):
-    pass
+def create_dataset(kw, augtype = 'filled', transform =None ):
+    my_transforms = transform
+    if augtype == 'org':
+        img_dir = './Acu_Dataset/' + kw + '/org' 
+        json_file = f'./Acu_Dataset/{kw}/{kw}_info.json' 
+        return HandDataSet(json_file, img_dir, transform = my_transforms, train=True, hand_flag=True)
+    elif augtype in ['filled', 'rotated', 'rotated_filled', 'sctr', 'sctr_filled']:
+        img_dir = f'./Acu_Dataset/{kw}/{augtype}/{augtype}' 
+        json_file = f'./Acu_Dataset/{kw}/{augtype}/{kw}_{augtype}.json' 
+        return HandDataSet(json_file, img_dir, transform = my_transforms, train=True) 
+    else:
+        pass

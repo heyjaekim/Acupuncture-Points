@@ -2,7 +2,7 @@ from os import listdir, makedirs
 from os.path import isfile, isdir, join
 import cv2, copy, json, os
 import numpy as np
-from PIL import Image
+from PIL import Image,ImageDraw
 import matplotlib.pyplot as plt
 import numpy as np
 import os, shutil, PIL 
@@ -406,7 +406,7 @@ def rotate_image_trnsfm(org_path, json_data, save_name, save_path, chg_flag = Fa
 
         json_new[acupuncture_new_id] = list()
         json_new[acupuncture_new_id].append({
-            "acup_info": f"{acupuncture_info}",
+            "acup_info": f"{acu_info}",
             "hand_pos": f"{img_hand_pos}"
         })
         json_new[acupuncture_new_id].append({
