@@ -15,9 +15,10 @@
 - Python 3.7 +
 ### 1. Downloading and Creating Dataset Folder
 #### Step1. Download dataset of interest to directory `./Acu_Dataset` using the following link: 
-    google drive link: 
+    google drive link:
+    https://drive.google.com/drive/folders/1F-lQY83tHvRy0fUVVS0hUTjJHrl00M50?usp=sharing
 
-Dataset included in the drive: 
+Dataset included in the drive: ekmoon, gwanchung, hapgok, hugye, jungjer, nogung, sangyang, shinmoon, sochung, sotack, taeyeon, urjae
 
 #### Step2. make sure to align with the following directory structure. For instance, if `ekmoon` folder is downloaded in Acu_Dataset Folder: 
     .
@@ -36,7 +37,7 @@ Dataset included in the drive:
     └── testdata
 
 ### 2. Augmenting Dataset
-
+Using `IMG_Augment.ipynb`, augment dataset.
 
 After full augmentation, the following directory structure is expected:
 
