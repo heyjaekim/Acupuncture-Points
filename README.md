@@ -1,7 +1,7 @@
 # 빅데이터 청년인재 13조 - 손을 주시오, 혈을 잡겠오
 
 ## 프로젝트 소개
-  <img width="640" alt="cover" src="https://user-images.githubusercontent.com/63584973/91728824-9dbe8f80-ebde-11ea-89c9-4efb5f2c1327.png">
+  <img width="640" alt="cover" src="https://user-images.githubusercontent.com/63584973/91730400-d1021e00-ebe0-11ea-94f9-1766a5ae8cee.png">
   
   1. 프로젝트 명: 손을 주시오, 혈을 잡겠오  
   2. 조원: 김성진, 김재원, 김정규, 정지우, 최선  
