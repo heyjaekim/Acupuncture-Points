@@ -1,3 +1,3 @@
 DATASET FOLDER
 
-From google drive and download dataset here!!
+From google drive, download dataset here!!

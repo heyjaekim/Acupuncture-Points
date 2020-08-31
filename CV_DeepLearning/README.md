@@ -55,11 +55,11 @@ After full augmentation, the following directory structure is expected:
     ...  
 
 ### 3. Training Network
-To train ekmoon on resnet18 with batch size 32: 
+To train hapgok on resnet18 with batch size 32: 
 
     python main.py --kw hapgok --model resnet18 --bs 32
 
-or using Jupyter notebook run all cells in `Acup_train.ipynb`
+or using Jupyter notebook run all cells in `Acup_train.ipynb` 
 
 To check tensorboard:
 
