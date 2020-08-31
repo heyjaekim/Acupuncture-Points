@@ -148,7 +148,7 @@ iframe {
 }
 
 .container-login100 {
-  width: 100%;  
+  width: 100%;
   min-height: 100vh;
   display: -webkit-box;
   display: -webkit-flex;
@@ -164,7 +164,7 @@ iframe {
   background-position: center;
   background-size: cover;
   position: relative;
-  z-index: 1;  
+  z-index: 1;
 }
 
 .container-login100::before {
@@ -187,6 +187,13 @@ iframe {
   background: transparent;
 }
 
+.wrap-login100-dropzone {
+  width: 505px;
+  border-radius: 10px;
+  overflow: hidden;
+
+  background: transparent;
+}
 
 /*------------------------------------------------------------------
 [ Form ]*/
@@ -224,6 +231,20 @@ iframe {
   text-transform: uppercase;
 
   display: block;
+}
+
+.login100-form-dropzone {
+  font-family: Ubuntu-Bold;
+  font-size: 18px;
+  color: #0056b3;
+  border-color: white;
+  border-style: dotted;
+  /*line-height: 1.2;*/
+  /*text-align: center;*/
+  text-transform: uppercase;
+  /*width: 100%;*/
+  flex-direction: row;
+  /*display: block;*/
 }
 
 
@@ -360,6 +381,7 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 0 20px;
+  margin-bottom: 20px ;
   min-width: 160px;
   height: 42px;
   border-radius: 21px;

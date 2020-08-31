@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="symptom" value="{{new_symp}}"></div>
+{#    <div id="prior-answer">#}
+    <h6 class="font-weight-300 text-extra-dark-gray no-margin"><strong
+            class="text-extra-dark- gray font-weight-600">'{{ symptom }}'</strong>
+        에 대한 증상을 가지고 계시군요. 진단을 결과 환자분께서는 <strong
+                class="font-weight-500 text-deep-pink">{{ result }}</strong>
+        와 밀접한 관련을 가지고 계신것 같습니다. 보다 정확한 진단을 위해 몇 가지 질문에 응하시겠습니까?
+    </h6>
+{#    </div>#}
+    <br>
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-10 col-xs-12 center-col text-center">
+            <h5 class="alt-font text-uppercase font-weight-600 text-extra-dark-gray width-80 center-col margin-35px-bottom md-width-100 wow fadeInUp" id="question"></h5>
+            <span class="form-group col-xs-6 center-col" id="outer_scope_box" style="transition-delay: 5s;">
+                <input class="btn btn-medium btn-rounded btn-transparent-dark-gray wow fadeInUp" id="yes_q" type="button" data-wow-delay="0.2s" value="네, 진단할게요" />
+                <input class="btn btn-medium btn-rounded btn-transparent-dark-gray wow fadeInUp" id="no_q" type="button" data-wow-delay="0.2s" value="아니요, 괜찮습니다" />
+            </span>
+            <div class="form-group col-xs-6 center-col" id="inner_scope_box" style="display: none; transition-duration: 3s;">
+                <input class="btn btn-medium btn-rounded btn-transparent-dark-gray wow fadeInUp" id="yes" type="button" value="네"/>
+                <input class="btn btn-medium btn-rounded btn-transparent-dark-gray wow fadeInUp" id="no" type="button" value="아니오"/>
+            </div>
+        </div>
+    </div>
+    <br>
+
+</body>
+</html>

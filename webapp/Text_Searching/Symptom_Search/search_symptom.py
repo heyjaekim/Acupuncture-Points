@@ -1,7 +1,6 @@
 import re
 from string import punctuation
 from collections import defaultdict
-import struct
 from struct import pack, unpack
 from os import listdir
 from konlpy.tag import Okt

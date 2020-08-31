@@ -10,11 +10,8 @@ from flask_cors import CORS
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 
-
 from os import path
 from threading import Thread
-from json import load
-
 from Text_Searching.Symptom_Search.search_symptom import Search_symptom
 from Text_Searching.Symptom_Matching.Matching_Symptom import KMT
 from Text_Searching.speech2text import csr
@@ -119,31 +116,30 @@ def login():
     global userid
     global username
     if request.method == "POST":
-        data = request.get_json()
-        userid = data['userid']
-        password = data['password']
-        conn = sqlite3.connect('./Collect_Data.db')
-        cur = conn.cursor()
-        cur.execute('''SELECT Username, ID FROM Patient 
-                        WHERE ID == "'''+userid+'''" 
-                        AND Password == "'''+password+'''"''')
-        rv = cur.fetchall()
-        username, userid = rv[0][0], rv[0][1]
-        print(f"found userid / username: {userid} {username}")
-        return render_template('login.html', userid=userid, username=username)
-        # return redirect(url_for('login'))
+        try:
+            data = request.get_json()
+            userid = data['userid']
+            password = data['password']
+            if userid == "":
+                userid = None
+            conn = sqlite3.connect('./Collect_Data.db')
+            cur = conn.cursor()
+            cur.execute('''SELECT Username, ID FROM Patient 
+                            WHERE ID == "'''+userid+'''" 
+                            AND Password == "'''+password+'''"''')
+            rv = cur.fetchall()
+            username, userid = rv[0][0], rv[0][1]
+            print(f"found userid / username: {userid} {username}")
+            return render_template('login.html', userid=userid, username=username)
+            # return redirect(url_for('login'))
+        except (TypeError, IndexError) as e:
+            print("Can't find the user in database")
+            userid = None
+            return render_template('login.html', userid=userid, username=None)
 
     else:
         return render_template('login.html', userid=userid, username=username)
 
-
-# going to use with dropzone
-# userid = data['userid']
-# password = data['password']
-
-# id = request.get_json()['id']
-# password = request.get_json()['password']
-# cur.execute("SELECT * FROM Patient WHERE ID == '" + id + "'")
 # rv = cur.fetchall()
 #
 # if bcrypt.check_password_hash(rv['password'], password):
@@ -152,6 +148,7 @@ def login():
 #     result = access_token
 # else:
 #     result = jsonify({"error": "Invalid username and password"})
+
 
 @app.route('/user/register', methods=['GET', 'POST'])
 def register():
@@ -169,8 +166,7 @@ def register():
             cur = conn.cursor()
             count = cur.execute("SELECT COUNT(Patient_id) FROM Patient").fetchall()
 
-            cur.execute('''INSERT INTO Patient (Patient_id, ID, Username, Gender, Password)
-                            VALUES(?,?,?,?,?)''', ("p" + str(count[0][0]), userid, username, "", password))
+            cur.execute('''INSERT INTO Patient (Patient_id, ID, Username, Gender, Password) VALUES(?,?,?,?,?)''', ("p" + str(count[0][0]), userid, username, "", password))
             conn.commit()
             print("Inserted")
             return redirect(url_for('login'))
@@ -181,7 +177,6 @@ def register():
             userid = "User id already exists"
             return render_template('register.html', userid=userid)
     else:
-        print(userid)
         if userid is not None and userid != "User id already exists":
             return redirect(url_for('login'))
 
@@ -192,13 +187,12 @@ def register():
 def service():
     global userid
     global username
-    userid = "None"
-    username = "None"
+
     if request.method == "POST":
         f = request.files['audio_data']
         # uncomment here to try tour voice
-        # with open('voice.wav', 'wb') as voice:
-        #     f.save(voice)
+        with open('voice.wav', 'wb') as voice:
+            f.save(voice)
         print('file uploaded successfully')
 
         thread1 = Thread(target=get_voice_file)
@@ -247,33 +241,30 @@ def getsymp(symptom=None):
         for _ in new_symps:
             result += " · " + _ if result != "" else _
 
-
+        print(new_symps)
         print(new_acups)
 
-        return render_template('service.html', symptom=symptom, result=result,
+        return render_template('service.html', symptom=symptom, new_symps=new_symps, result=result,
                                acups=sorted(new_acups), foods=sorted(new_foods),
                                userid=userid, username=username)
 
 
-@app.route('/upload_photo', methods=['GET', 'POST'])
-def upload_photo(symptom=None, result=None):
+@app.route('/upload_photo_1', methods=['POST'])
+def upload_photo_1(symptom=None, result=None):
     if request.method == 'POST':
-        # 파일 올릴때만 request.files 를 써야한다고 함
         f = request.files.get('file')
-        f.save(path.join(upload_dir, 'test.jpg'))
+        if not path.isfile('./uploads/yourhand1.jpg'):
+            f.save(path.join(upload_dir, 'yourhand1.jpg'))
+        else:
+            f.save(path.join(upload_dir, 'yourhand2.jpg'))
+
+        # f.save("./uploads")
 
         return render_template('service.html', symptom=None, userid=userid, username=username)
 
-        # symptom = request.args.get('symptom')
-        # result = request.args.get('result')
-        # matched_acups = KMT.search_Acup(symptom)
-
-        # return render_template('service.html', symptom=symptom, result=result,
-        #                    acups=matched_acups, foods=None, userid=userid)
     else:
         print("upload photo didn't work")
         pass
-
 
 @app.route('/map')
 def openmap():
@@ -311,11 +302,31 @@ def getvoice():
         for _ in new_symps:
             voice_result += " · " + _ if voice_result != "" else _
 
-        return render_template('service.html', symptom=voice_symptom, result=voice_result,
+        return render_template('service.html', symptom=voice_symptom, new_symps=new_symps, result=voice_result,
                                acups=sorted(new_acups), foods=sorted(new_foods),
                                userid=userid, username=username)
 
 
+###########################################################
+@app.route('/example_dorsal.png')
+def ex_one():
+    f = cv2.resize(cv2.imread("./examples/example_1.jpg"), dsize=(700,700))
+    file_object = BytesIO()
+    new_img = Image.fromarray(cv2.cvtColor(f, cv2.COLOR_BGR2RGB))
+    new_img.save(file_object, 'PNG')
+    file_object.seek(0)
+
+    return send_file(file_object, mimetype='image/PNG')
+
+@app.route('/example_palmar.png')
+def ex_two():
+    f = cv2.resize(cv2.imread("./examples/example_2.jpg"), dsize=(700,700))
+    file_object = BytesIO()
+    new_img = Image.fromarray(cv2.cvtColor(f, cv2.COLOR_BGR2RGB))
+    new_img.save(file_object, 'PNG')
+    file_object.seek(0)
+
+    return send_file(file_object, mimetype='image/PNG')
 ###########################################################
 # Image Processing #
 
@@ -331,7 +342,7 @@ def dl_predict():
     transform = transforms.ToTensor()
 
     # open image
-    f = "./uploads/test2.jpg"
+    f = "./uploads/yourhand1.jpg"
     img1 = img2 = cv2.resize(cv2.imread(f), dsize=(256, 256))
     img2 = cv2.cvtColor(clear_background(img2), cv2.COLOR_BGR2RGB)
     img2 = transform(Image.fromarray(img2))
@@ -352,7 +363,7 @@ def dl_predict():
     # open_cv edited new image
     coord = (x, y)
     dot_size = 2
-    new_img = cv2.circle(img1, (int(x), int(y)), dot_size, (0, 0, 255), -1)
+    new_img: None = cv2.circle(img1, (int(x), int(y)), dot_size, (0, 0, 255), -1)
     print('Label: ', checkpoint_dir.split('/')[2].split('_')[0][:-4])
     print('Coord:', coord)
     # PIL Image

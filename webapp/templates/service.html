@@ -58,7 +58,9 @@
 
                 <!-- start logo -->
                 <div class="col-md-4 col-sm-4 col-xs-6 xs-text-left">
-                    <a class="logo" href="service"><img src="../static/images/logo/logo.png" data-rjs="images/logo/logo@2x.png" class="default" alt="KB13"></a>
+                    <a class="logo" href="service"><img src="../static/images/logo/logo.png"
+                                                        data-rjs="images/logo/logo@2x.png" class="default"
+                                                        alt="KB13"></a>
                 </div>
                 <!-- end logo -->
                 <div class="col-md-4 col-sm-4 col-xs-6 text-right">
@@ -74,7 +76,8 @@
                         </div>
                         <div class="hamburger-menu-wrepper xs-text-center">
                             <div class="hamburger-logo text-left"><a href="service" class="logo"><img
-                                    src="../static/images/logo/logo_white_white-1.png" data-rjs="images/logo-white@2x.png"
+                                    src="../static/images/logo/logo_white_white-1.png"
+                                    data-rjs="images/logo-white@2x.png"
                                     alt="KB13"/></a></div>
                             <div class="btn btn-hamburger border-none">
                                 <button class="close-menu close-button-menu" id="close-button"></button>
@@ -95,12 +98,13 @@
                                                 <div class="display-table-cell vertical-align-middle social-style-3">
                                                     <span class="text-extra-large text-deep-pink alt-font display-block margin-15px-bottom">손을 주시오 혈을 잡겠오</span>
                                                     <span class="text-medium alt-font display-block font-weight-300 margin-15px-bottom line-height-30">고려대학교<br/><br/>빅데이터 기반의<br/>지능 정보 시스템 개발 과정</span>
-                                                    
-                                                    
+
+
                                                     <div class="social-icon-style-9">
                                                         <ul class="small-icon">
                                                             <li><a class="margin-20px-right github"
-                                                                   href="https://github.com/heyjaekim/Acupuncture-Points" target="_blank"><i
+                                                                   href="https://github.com/heyjaekim/Acupuncture-Points"
+                                                                   target="_blank"><i
                                                                     class="ti-github"></i></a></li>
                                                             <li><a class="google_drive"
                                                                    href="https://www.facebook.com/" target="_blank"><i
@@ -148,22 +152,23 @@
         </div>
     </div>
     {% if symptom == None %}
-    <div class="container" style="border: 5px solid deeppink">
-        <div class="row">
-            <div class="col-lg-8 col-md-8 col-sm-9 col-xs-12 center-col margin-eight-bottom text-center last-paragraph-no-margin sm-margin-40px-bottom xs-margin-30px-bottom">
-                <h5 class="alt-font font-weight-700 text-extra-dark-gray text-uppercase margin-auto">당신의 증상을 진단하여 혈자리를
-                    찾아드립니다.</h5><br>
-            </div>
-            <form method="GET" action="/getsymp">
-                <div>
-                    <input type="text" id="symptom-input-text" name="symptom" placeholder="Describe about your symptom">
-                    <input type="submit" value="Submit" hidden="True">
+        <div class="container" style="border: 5px solid deeppink">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-9 col-xs-12 center-col margin-eight-bottom text-center last-paragraph-no-margin sm-margin-40px-bottom xs-margin-30px-bottom">
+                    <h5 class="alt-font font-weight-700 text-extra-dark-gray text-uppercase margin-auto">당신의 증상을 진단하여
+                        혈자리를 찾아드립니다.</h5>
                 </div>
-            </form>
-            {% include 'record.html' %}
-            <br/>
+                <form method="GET" action="/getsymp">
+                    <div>
+                        <input type="text" id="symptom-input-text" name="symptom"
+                               placeholder="Describe about your symptom">
+                        <input type="submit" value="Submit" hidden="True">
+                    </div>
+                </form>
+                {% include 'record.html' %}
+                <br/>
+            </div>
         </div>
-    </div>
     {% endif %}
 </section>
 <!-- end hero section -->
@@ -174,15 +179,30 @@
         <div class="row">
             <div class="col-md-16 col-sm-12 col-xs-12 center-col text-center margin-six-bottom xs-margin-30px-bottom">
                 &nbsp;
-                <div class="alt-font font-weight-900 text-medium-gray margin-5px-bottom text-uppercase text-extra-large">Diagnosis of your
-                    symptom
+                <div class="alt-font font-weight-900 text-medium-gray margin-5px-bottom text-uppercase text-extra-large">
+                    Diagnosis of your symptom
                 </div>
-                &nbsp;
-                <h6 class="font-weight-300 text-extra-dark-gray no-margin"><strong
+                <br>
+                {% if '두통' in new_symps %}
+                    {% set new_symp = '두통' %}
+                    {% include "service-detail.html" %}
+                {% elif '흉통' in new_symps %}
+                    {% set new_symp = '흉통' %}
+                    {% include "service-detail.html" %}
+                {% else %}
+                    <h6 class="font-weight-300 text-extra-dark-gray no-margin"><strong
                         class="text-extra-dark-gray font-weight-600">'{{ symptom }}'</strong>
+<<<<<<< HEAD
+                        에 대한 증상을 가지고 계시군요. 진단을 결과 환자분께서는 <strong
+                                class="font-weight-500 text-deep-pink">{{ result }}</strong>
+                        와 밀접한 관련을 가지고 계신것 같습니다.
+                    </h6>
+                {% endif %}
+=======
                     에 대한 증상을 가지고 계시군요. <br/>진단을 결과 환자분께서는 <strong
                             class="font-weight-500 text-deep-pink">{{ result }}</strong>
                     와 밀접한 관련을 가지고 계신것 같습니다.<br/> 보다 정확한 진단을 위해 몇 가지 질문에 답해주세요.</h6>
+>>>>>>> f68a514af56191db2ae28d3466caad93a13e9bec
             </div>
         </div>
         <div class="row">
@@ -232,15 +252,15 @@
                 <div class="panel panel-default">
                     <div id="collapseOne" class="panel-collapse collapse in">
                         <!-- start features box -->
-                            <div class="col-md-4 col-sm-4 col-xs-12 sm-margin-four-bottom last-paragraph-no-margin xs-margin-30px-bottom wow fadeInUp center-col">
-                                <div class="bg-white text-center">
-                                    {% include "dropzone.html" %}
-                                    <p><img src="../image.png" alt="dl_img" width="500" height="500"/></p>
-                                    <div class="padding-45px-all sm-padding-15px-all inner-match-height">
-                                        <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">TAKE A LOOK AT YOUR BEAUTIFUL HAND ACUPUNCTURE POINTS</span>
-                                    </div>
+                        <div class="col-md-4 col-sm-4 col-xs-12 sm-margin-four-bottom last-paragraph-no-margin xs-margin-30px-bottom wow fadeInUp center-col">
+                            <div class="bg-white text-center">
+{#                                {% include "dropzone.html" %}#}
+                                <p><img src="../image.png" alt="dl_img" width="500" height="500"/></p>
+                                <div class="padding-45px-all sm-padding-15px-all inner-match-height">
+                                    <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">TAKE A LOOK AT YOUR BEAUTIFUL HAND ACUPUNCTURE POINTS</span>
                                 </div>
                             </div>
+                        </div>
                         <!-- end feature box -->
                     </div>
                 </div>
@@ -253,9 +273,11 @@
                         {% if foods != None %}
                             {% for i in foods %}
                                 <!-- start features box -->
-                                <div class="col-md-4 col-sm-4 col-xs-12 sm-margin-four-bottom last-paragraph-no-margin xs-margin-30px-bottom wow fadeInUp" style="height: 500px">
+                                <div class="col-md-4 col-sm-4 col-xs-12 sm-margin-four-bottom last-paragraph-no-margin xs-margin-30px-bottom wow fadeInUp"
+                                     style="height: 500px">
                                     <div class="bg-white text-center">
-                                        <a href="{{ i[3] }}"><img src="{{ i[3] }}" alt="img" style="width:750px; height:300px;" /></a>
+                                        <a href="{{ i[3] }}"><img src="{{ i[3] }}" alt="img"
+                                                                  style="width:750px; height:300px;"/></a>
                                         <div class="padding-45px-all sm-padding-15px-all inner-match-height">
                                             <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">{{ i[0] }}</span>
                                             <div> {{ i[1] }} </div>
@@ -282,8 +304,6 @@
     </div>
 
 {% endif %}
-<!--</section>-->
-<!-- end about agency section -->
 
 
 <!-- start scroll to top -->
@@ -339,6 +359,7 @@
 <script type="text/javascript" src="../static/revolution/js/jquery.themepunch.tools.min.js"></script>
 <script type="text/javascript" src="../static/revolution/js/jquery.themepunch.revolution.min.js"></script>
 <script type="text/javascript" src="../static/js/main.js"></script>
+<script type="text/javascript" src="../static/js/detail-questions.js"></script>
 
 <script>
     var service1 = document.getElementById("service1");
@@ -374,16 +395,6 @@
             service3.style.display = "none";
         }
     }
-
-    {#function openMap() {#}
-    {#    window.open("map", "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=100,width=700,height=700");#}
-    {# }#}
-
-    {#$(document).ready(function () {#}
-    {#        $.getJSON('Synonyms.json', function (data) {#}
-    {#            console.log(data);#}
-    {#        });#}
-    {#    });#}
 
 </script>
 
