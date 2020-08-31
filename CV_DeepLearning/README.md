@@ -5,9 +5,9 @@
         - ResNet (18, 34, 50, 101,151) 
     3. Output: Target Acupuncture Coordinates
 #### Data Flow
-![Img1](ex2.png)
+![Img1](./misc/ex2.png)
 #### Fitting result
-![Img2](Result.jpg)
+![Img2](./misc/Result.jpg)
 ---
 ### Dependencies 
 - Pytorch 1.6.0
