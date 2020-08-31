@@ -1,33 +1,25 @@
 ## DL Application to Predict Acupuncture Points 
-## **Overview**
-
+#### **Overview**
     1. Input: Hand Image 
     2. CNN Feature Extractor
         - ResNet (18, 34, 50, 101,151) 
     3. Output: Target Acupuncture Coordinates
-
-
-### Data Flow
+#### Data Flow
 ![Img1](ex2.png)
-
-### Fitting result
+#### Fitting result
 ![Img2](Result.jpg)
-
 ---
-
-## Dependencies 
+### Dependencies 
 - Pytorch 1.6.0
 - cuda
 - Python 3.7 +
-
-## 1. Downloading and Creating Dataset Folder
-
-### Step1. Download dataset of interest to directory `./Acu_Dataset` using the following link: 
+### 1. Downloading and Creating Dataset Folder
+#### Step1. Download dataset of interest to directory `./Acu_Dataset` using the following link: 
     google drive link: 
 
 Dataset included in the drive: 
 
-### Step2. make sure to align with the following directory structure. For instance, if `ekmoon` folder is downloaded in Acu_Dataset Folder: 
+#### Step2. make sure to align with the following directory structure. For instance, if `ekmoon` folder is downloaded in Acu_Dataset Folder: 
     .
     ├── Acu_Dataset
     │   ├── ekmoon
@@ -43,7 +35,7 @@ Dataset included in the drive:
     ├── runs
     └── testdata
 
-## 2. Augmenting Dataset
+### 2. Augmenting Dataset
 
 
 After full augmentation, the following directory structure is expected:
@@ -61,7 +53,7 @@ After full augmentation, the following directory structure is expected:
     │   ...
     ...  
 
-## 3. Training Network
+### 3. Training Network
 To train ekmoon on resnet18 with batch size 32: 
 
     python main.py --kw ekmoon --model resnet18 --bs 32
