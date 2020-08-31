@@ -334,17 +334,17 @@ def ex_two():
 def dl_predict():
 
     # checkpoint
-    checkpoint_dir = './CV_DL/hapgok0823_1759org+rot+fill+rotfill_model_best.pth.tar'
-    if path.isfile(checkpoint_dir):
-        checkpoint = torch.load(checkpoint_dir)
+    hapgok_ckp = './CV_DL/hapgok0830_1930all+sc+sc_filled_model_best.pth.tar'
+
+    if path.isfile(hapgok_ckp):
+        checkpoint = torch.load(hapgok_ckp)
         model.load_state_dict(checkpoint['state_dict'])
     # transformation
     transform = transforms.ToTensor()
-
     # open image
     f = "./uploads/yourhand1.jpg"
     img1 = img2 = cv2.resize(cv2.imread(f), dsize=(256, 256))
-    img2 = cv2.cvtColor(clear_background(img2), cv2.COLOR_BGR2RGB)
+    img2 = cv2.cvtColor(hapgok_ckp(img2), cv2.COLOR_BGR2RGB)
     img2 = transform(Image.fromarray(img2))
 
     # get coordinate results
@@ -364,7 +364,7 @@ def dl_predict():
     coord = (x, y)
     dot_size = 2
     new_img: None = cv2.circle(img1, (int(x), int(y)), dot_size, (0, 0, 255), -1)
-    print('Label: ', checkpoint_dir.split('/')[2].split('_')[0][:-4])
+    print('Label: ', hapgok_ckp.split('/')[2].split('_')[0][:-4])
     print('Coord:', coord)
     # PIL Image
     new_img = Image.fromarray(cv2.cvtColor(new_img, cv2.COLOR_BGR2RGB))
