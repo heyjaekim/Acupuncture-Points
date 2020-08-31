@@ -135,15 +135,17 @@ def login():
             # return redirect(url_for('login'))
         except (TypeError, IndexError) as e:
             print("Can't find the user in database")
+            # if the user type in wrong userid or password, the user can't login the system
             userid = None
             return render_template('login.html', userid=userid, username=None)
 
     else:
-        print(userid, username)
+
         return render_template('login.html', userid=userid, username=username)
 
 
-
+# Create new user id, password, username
+# check if the userid already exists, else then create  a new id
 @app.route('/user/register', methods=['GET', 'POST'])
 def register():
     global userid
@@ -160,11 +162,11 @@ def register():
             cur = conn.cursor()
             count = cur.execute("SELECT COUNT(Patient_id) FROM Patient").fetchall()
 
-            cur.execute('''INSERT INTO Patient (Patient_id, ID, Username, Gender, Password) VALUES(?,?,?,?,?)''', ("p" + str(count[0][0]), userid, username, "", password))
+            cur.execute('''INSERT INTO Patient (Patient_id, ID, Username, Gender, Password) VALUES(?,?,?,?,?)''',
+                        ("p" + str(count[0][0]), userid, username, "", password))
             conn.commit()
             print("Inserted")
             return redirect(url_for('login'))
-            # return render_template('register.html', userid=userid)
 
         except sqlite3.IntegrityError:
             print("Sqlite3 Integrity Error")
@@ -177,6 +179,7 @@ def register():
         return render_template('register.html', userid=userid)
 
 
+# get to handle text searching or voice searching
 @app.route('/service', methods=['GET', 'POST'])
 def service():
     global userid
@@ -206,6 +209,7 @@ def service():
                                userid=userid, username=username)
 
 
+# handle symptom text file, searched by the user
 @app.route('/getsymp', methods=['POST', 'GET'])
 def getsymp(symptom=None):
     if request.method == "POST":
@@ -244,6 +248,7 @@ def getsymp(symptom=None):
                                userid=userid, username=username)
 
 
+# upload hands to the local storage, !important: recommend to upload dorsal hand first then palmar hand in order.
 @app.route('/upload_photo_1', methods=['POST'])
 def upload_photo_1(symptom=None, result=None):
     if request.method == 'POST':
@@ -261,6 +266,8 @@ def upload_photo_1(symptom=None, result=None):
         print("upload photo didn't work")
         pass
 
+
+# parse map.html to the /getsymp or /getvoice page
 @app.route('/map')
 def openmap():
 
@@ -273,6 +280,7 @@ def get_voice_file():
     voice_symptom = csr_inst.convert()
 
 
+# proceed to handle voice recording text file to diagnose symptom
 @app.route('/getvoice', methods=['GET'])
 def getvoice():
     if request.method == 'GET':
@@ -305,6 +313,7 @@ def getvoice():
                                userid=userid, username=username)
 
 
+# example hand images, showing in the user/login page
 ###########################################################
 @app.route('/example_dorsal.png')
 def ex_one():
@@ -325,9 +334,11 @@ def ex_two():
     file_object.seek(0)
 
     return send_file(file_object, mimetype='image/PNG')
+
+
 ###########################################################
 # Image Processing #
-
+# save the processed image in local and send over to the web page when it requests through the image tag
 @app.route('/dorsal.png')
 def dl_predict1():
 
