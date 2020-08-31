@@ -152,6 +152,8 @@
         </div>
     </div>
     {% if symptom == None %}
+        <img src="../dorsal.png" alt="dl_img" width="500" height="500" hidden/>
+{#        <img src="../palmar.png" alt="dl_img" width="500" height="500" hidden/>#}
         <div class="container" style="border: 5px solid deeppink">
             <div class="row">
                 <div class="col-lg-8 col-md-8 col-sm-9 col-xs-12 center-col margin-eight-bottom text-center last-paragraph-no-margin sm-margin-40px-bottom xs-margin-30px-bottom">
@@ -192,9 +194,9 @@
                 {% else %}
                     <h6 class="font-weight-300 text-extra-dark-gray no-margin"><strong
                         class="text-extra-dark-gray font-weight-600">'{{ symptom }}'</strong>
-                        에 대한 증상을 가지고 계시군요. 진단 결과 환자분께서는 <strong
+                        에 대한 증상을 가지고 계시군요.<br/>진단 결과 환자분께서는 <strong
                                 class="font-weight-500 text-deep-pink">{{ result }}</strong>
-                        와 밀접한 관련을 가지고 계신것 같습니다.
+                        와 밀접한 관련을 가지고 계신것 같습니다.<br/><br/> 증상에 대한 해당 혈점은: <strong>{{ result_acup }}</strong> 입니다.
                     </h6>
                 {% endif %}
             </div>
@@ -246,14 +248,22 @@
                 <div class="panel panel-default">
                     <div id="collapseOne" class="panel-collapse collapse in">
                         <!-- start features box -->
-                        <div class="col-md-4 col-sm-4 col-xs-12 sm-margin-four-bottom last-paragraph-no-margin xs-margin-30px-bottom wow fadeInUp center-col">
+                        <div class="col-md-11 col-sm-11 col-xs-9 sm-margin-four-bottom last-paragraph-no-margin xs-margin-30px-bottom wow fadeInUp center-col">
+                            <div class="dl_images">
+                                <p class="center-col" style="display: inline-block"><img src="../static/images/cv_dl_hands/dorsal.jpg" alt="dl_img" style="width:500px; height:500px;"/></p>
+                                <img src="../palmar.png" alt="dl_img" style="width:500px; height:500px;"/></p>
+                            </div>
                             <div class="bg-white text-center">
-{#                                {% include "dropzone.html" %}#}
-                                <p><img src="../dorsal.png" alt="dl_img" width="500" height="500"/></p>
-                                <p><img src="../palmar.png" alt="dl_img" width="500" height="500"/></p>
-                                <div class="padding-45px-all sm-padding-15px-all inner-match-height">
+                                    <span class="text-extra-dark-gray font-weight-600 display-block alt-font">
+                                        <div class="text-medium alt-font text-capitalize text-extra-dark-gray margin-10px-bottom sm-margin-5px-bottom display-inline">
+                                            소충:<h6 style="color: blue; display: inline;">&#9679</h6>&nbsp;&nbsp;
+                                            휴계:<h6 style="color: green; display: inline;">&#9679</h6>&nbsp;&nbsp;
+                                            합곡:<h6 style="color: red; display: inline;">&#9679</h6>&nbsp;&nbsp;
+                                            소부:<h6 style="color: yellow; display: inline;">&#9679</h6>&nbsp;&nbsp;
+                                            신문:<h6 style="color: black; display: inline;">&#9675</h6>&nbsp;&nbsp;
+                                        </div>
+                                    </span>
                                     <span class="text-extra-dark-gray font-weight-600 display-block alt-font margin-10px-bottom">TAKE A LOOK AT YOUR BEAUTIFUL HAND ACUPUNCTURE POINTS</span>
-                                </div>
                             </div>
                         </div>
                         <!-- end feature box -->

@@ -222,6 +222,7 @@ def getsymp(symptom=None):
         new_foods = set()
         new_symps = set()
         result = ""
+        result_acup = ""
 
         a = Search_symptom()
         symptom = request.args.get('symptom')
@@ -241,11 +242,11 @@ def getsymp(symptom=None):
         for _ in new_symps:
             result += " · " + _ if result != "" else _
 
-        print(new_symps)
-        print(new_acups)
+        for _ in new_acups:
+            result_acup = " · " + _[0] if result_acup != "" else _[0]
 
         return render_template('service.html', symptom=symptom, new_symps=new_symps, result=result,
-                               acups=sorted(new_acups), foods=sorted(new_foods),
+                               result_acup=result_acup, foods=sorted(new_foods),
                                userid=userid, username=username)
 
 
@@ -285,6 +286,7 @@ def getvoice():
         new_foods = set()
         new_symps = set()
         voice_result = ""
+        result_acup = ""
 
         a = Search_symptom()
         symp_lst = a.tokenizer2(voice_symptom)
@@ -301,9 +303,11 @@ def getvoice():
 
         for _ in new_symps:
             voice_result += " · " + _ if voice_result != "" else _
+        for _ in new_acups:
+            result_acup = " · " + _[0] if result_acup != "" else _[0]
 
         return render_template('service.html', symptom=voice_symptom, new_symps=new_symps, result=voice_result,
-                               acups=sorted(new_acups), foods=sorted(new_foods),
+                               result_acup=result_acup, foods=sorted(new_foods),
                                userid=userid, username=username)
 
 
@@ -370,81 +374,76 @@ def dl_predict1():
 
 
     # open_cv edited new image
-    for  c in coords:
+    for c in coords:
         dot_size = 2
         if c[2] == "sochung": #파란색
             new_img: None = cv2.circle(img1, (int(c[0]), int(c[1])), dot_size, (255, 0, 0), -1)
-        elif c[2] == "hapgok": #초록색
-            new_img: None = cv2.circle(img1, (int(c[0]), int(c[1])), dot_size, (0, 255, 0), -1)
-        elif c[2] == "hugye": #빨간색
+        elif c[2] == "hapgok": #빨간색
             new_img: None = cv2.circle(img1, (int(c[0]), int(c[1])), dot_size, (0, 0, 255), -1)
+        elif c[2] == "hugye": #초록색
+            new_img: None = cv2.circle(img1, (int(c[0]), int(c[1])), dot_size, (0, 255, 0), -1)
         print('Label: ', c[2])
         print('Coord:', c)
 
     # PIL Image
     new_img = Image.fromarray(cv2.cvtColor(new_img, cv2.COLOR_BGR2RGB))
+    new_img.save('./static/images/cv_dl_hands/dorsal.jpg')
+    return render_template('service.html', symptom=None, userid=userid, username=username)
 
+
+@app.route('/palmar.png')
+def dl_predict2():
+
+    # checkpoint
+    palmar_ckp=['./CV_DL/sobu0831_0245all+sc+sc_filled_model_best.pth.tar', './CV_DL/shinmoon0829_0441org+rot+fill+rotfill_model_best.pth.tar']
+    coords = []
+
+    # hands dorsal and palmar directory
+    palmar = "./uploads/hand_palmar.jpg"
+    img1 = img2 = cv2.resize(cv2.imread(palmar), dsize=(256, 256))
+
+    for checkpoint_dir in palmar_ckp:
+        if path.isfile(checkpoint_dir):
+            checkpoint = torch.load(checkpoint_dir)
+            model.load_state_dict(checkpoint['state_dict'])
+        # transformation
+        transform = transforms.ToTensor()
+
+        # open image
+        img2 = cv2.cvtColor(clear_background(img2), cv2.COLOR_BGR2RGB)
+        img2 = transform(Image.fromarray(img2))
+
+        # get coordinate results
+        if torch.cuda.is_available():
+            print('running on GPU')
+            model.to('cuda')
+            _, result = model(img2.unsqueeze(0).to('cuda'))
+            result.cpu().detach().numpy()
+            x, y = result.cpu().detach().numpy().squeeze()
+        else:
+            print('running on CPU')
+            model.to('cpu')
+            _, result = model(img2.unsqueeze(0))
+            x, y = result.detach().numpy().squeeze()
+        coords.append([x, y, checkpoint_dir.split('/')[2].split('_')[0][:-4]])
+        img1 = img2 = cv2.resize(cv2.imread(palmar), dsize=(256, 256))
+
+
+    # open_cv edited new image
+    for c in coords:
+        dot_size = 2
+        if c[2] == "shinmoon": #흰색
+            new_img: None = cv2.circle(img1, (int(c[0]), int(c[1])), dot_size, (255, 255, 255), -1)
+        elif c[2] == "sobu": #노란색
+            new_img: None = cv2.circle(img1, (int(c[0]), int(c[1])), dot_size, (0, 255, 255), -1)
+
+    # PIL Image
+    new_img = Image.fromarray(cv2.cvtColor(new_img, cv2.COLOR_BGR2RGB))
     file_object = BytesIO()
     new_img.save(file_object, 'PNG')
     file_object.seek(0)
 
     return send_file(file_object, mimetype='image/PNG')
-
-# @app.route('/palmar.png')
-# def dl_predict2():
-#
-#     # checkpoint
-#     # checkpoint_dir = './CV_DL/hapgok0823_1759org+rot+fill+rotfill_model_best.pth.tar'
-#     palmar_ckp=['./CV_DL/sobu0831_0245all+sc+sc_filled_model_best.pth.tar', './CV_DL/shinmoon0829_0441org+rot+fill+rotfill_model_best.pth.tar']
-#     coords = []
-#
-#     # hands dorsal and palmar directory
-#     palmar = "./uploads/hand_palmar.jpg"
-#     img1 = img2 = cv2.resize(cv2.imread(palmar), dsize=(256, 256))
-#
-#     for checkpoint_dir in palmar_ckp:
-#         if path.isfile(checkpoint_dir):
-#             checkpoint = torch.load(checkpoint_dir)
-#             model.load_state_dict(checkpoint['state_dict'])
-#         # transformation
-#         transform = transforms.ToTensor()
-#
-#         # open image
-#         img2 = cv2.cvtColor(clear_background(img2), cv2.COLOR_BGR2RGB)
-#         img2 = transform(Image.fromarray(img2))
-#
-#         # get coordinate results
-#         if torch.cuda.is_available():
-#             print('running on GPU')
-#             model.to('cuda')
-#             _, result = model(img2.unsqueeze(0).to('cuda'))
-#             result.cpu().detach().numpy()
-#             x, y = result.cpu().detach().numpy().squeeze()
-#             coords.append((x, y))
-#         else:
-#             print('running on CPU')
-#             model.to('cpu')
-#             _, result = model(img2.unsqueeze(0))
-#             x, y = result.detach().numpy().squeeze()
-#             coords.append((x, y))
-#         img1 = img2 = cv2.resize(cv2.imread(palmar), dsize=(256, 256))
-#
-#
-#     # open_cv edited new image
-#     for  c in coords:
-#         dot_size = 2
-#         new_img: None = cv2.circle(img1, (int(c[0]), int(c[1])), dot_size, (0, 0, 255), -1)
-#         print('Label: ', checkpoint_dir.split('/')[2].split('_')[0][:-4])
-#         print('Coord:', c)
-#
-#     # PIL Image
-#     new_img = Image.fromarray(cv2.cvtColor(new_img, cv2.COLOR_BGR2RGB))
-#
-#     file_object = BytesIO()
-#     new_img.save(file_object, 'PNG')
-#     file_object.seek(0)
-#
-#     return send_file(file_object, mimetype='image/PNG')
 
 
 if __name__ == '__main__':
