@@ -7,7 +7,7 @@
 #### Data Flow
 ![Img1](./misc/ex2.png)
 #### Fitting result
-![Img2](./misc/Result.jpg)
+![Img2](./misc/Result.png)
 ---
 ### Dependencies 
 - Pytorch 1.6.0
