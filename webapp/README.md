@@ -12,4 +12,9 @@
       
     3. 환경 설정이 성공적으로 설치되었따면
     
-    
+### step1. Install Flask and Open Homepage
+![Screenshot (10)](https://user-images.githubusercontent.com/52299657/91724925-f25f0c00-ebd8-11ea-8470-2c33ddd9423c.png) 
+### step2. Impage Upload or Take Pictures for CV_Deep Learning
+![Screenshot (13)](https://user-images.githubusercontent.com/52299657/91724972-fee36480-ebd8-11ea-9988-95fcf80d0841.png)
+### step3. Type in Symptoms that you have
+![Screenshot (16)](https://user-images.githubusercontent.com/52299657/91725229-6699af80-ebd9-11ea-80c0-2a7ef44f3fb9.png)
