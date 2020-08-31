@@ -1,26 +1,73 @@
-# DL Application to predict Acupuncture Points 
-## Overview
-### 1. Image(Input) &rarr; 2. ConvNet (Feature Extraction) &rarr; 3. Coordinate Regression (Output)
-- Backbone : ResNet ( advancements will be made  )
-- **Colored Mnist Dataset** designed and used to check out basic performance
+## DL Application to Predict Acupuncture Points 
+## **Overview**
 
-- Toy Model
-![20200731 발표자료_최종 (15)](https://user-images.githubusercontent.com/63584973/89733880-7703b200-da93-11ea-8d2b-1b78dadedfcf.png)
+    1. Input: Hand Image 
+    2. CNN Feature Extractor
+        - ResNet (18, 34, 50, 101,151) 
+    3. Output: Target Acupuncture Coordinates
+
+
+### Data Flow
+![Img1](ex2.png)
+
+### Fitting result
+![Img2](Result.jpg)
 
 ---
-### TODO LIST
-- [x] Learning Rate Schduler
-- [x] Train / Validation Splitter
-- [x] Checkpoint Saver/Loader
-- [x] Quick Test Data Checking 
-- [x] Train Monitoring Utils (loss, time, pixel distance, real distance)
-- [ ] TB Utils (almost done)
-- [ ] Parser (ongoing)
-- [ ] Model Cfgs (ongoing)
-- [x] DataLoader (Hand Dataset)
-- [ ] Dataset Augmentation (Rotate, Flip, Crop, Add noise, erase, Cutmix) (need to check)
-- [ ] XAI
-- [ ] Hyperparameter Optimization 
-- [ ] Execution Speed 
-- [ ] New Data 
-- [ ] Graphics 
+
+## Dependencies 
+- Pytorch 1.6.0
+- cuda
+- Python 3.7 +
+
+## 1. Downloading and Creating Dataset Folder
+
+### Step1. Download dataset of interest to directory `./Acu_Dataset` using the following link: 
+    google drive link: 
+
+Dataset included in the drive: 
+
+### Step2. make sure to align with the following directory structure. For instance, if `ekmoon` folder is downloaded in Acu_Dataset Folder: 
+    .
+    ├── Acu_Dataset
+    │   ├── ekmoon
+    │   │   ├── org
+    │   │   │   ├── Hand_0000002.png
+    │   │   │   ...
+    │   │   │   └── Hand_0011628.png
+    │   │   └── ekmoon_info.json
+    │   ...
+    ...   
+    ├── checkpoints
+    ├── misc
+    ├── runs
+    └── testdata
+
+## 2. Augmenting Dataset
+
+
+After full augmentation, the following directory structure is expected:
+
+    .
+    ├── Acu_Dataset
+    │   ├── ekmoon
+    │   │   ├── org
+    │   │   ├── filled
+    │   │   ├── rotated
+    │   │   ├── rotated_filled
+    │   │   ├── sctr
+    │   │   ├── sctr_filled              
+    │   │   └── ekmoon_info.json
+    │   ...
+    ...  
+
+## 3. Training Network
+To train ekmoon on resnet18 with batch size 32: 
+
+    python main.py --kw ekmoon --model resnet18 --bs 32
+
+or using Jupyter notebook run all cells in `Acup_train.ipynb`
+
+To check tensorboard:
+
+    tensorboard --logdir=runs --samples_per_plugin=images=50
