@@ -20,15 +20,15 @@
 
 Dataset included in the drive: ekmoon, gwanchung, hapgok, hugye, jungjer, nogung, sangyang, shinmoon, sochung, sotack, taeyeon, urjae
 
-#### Step2. make sure to align with the following directory structure. For instance, if `ekmoon` folder is downloaded in Acu_Dataset Folder: 
+#### Step2. make sure to align with the following directory structure. For instance, if `hapgok` folder is downloaded in Acu_Dataset Folder: 
     .
     ├── Acu_Dataset
-    │   ├── ekmoon
+    │   ├── hapgok
     │   │   ├── org
     │   │   │   ├── Hand_0000002.png
     │   │   │   ...
     │   │   │   └── Hand_0011628.png
-    │   │   └── ekmoon_info.json
+    │   │   └── hapgok_info.json
     │   ...
     ...   
     ├── checkpoints
@@ -43,23 +43,23 @@ After full augmentation, the following directory structure is expected:
 
     .
     ├── Acu_Dataset
-    │   ├── ekmoon
+    │   ├── hapgok
     │   │   ├── org
     │   │   ├── filled
     │   │   ├── rotated
     │   │   ├── rotated_filled
     │   │   ├── sctr
     │   │   ├── sctr_filled              
-    │   │   └── ekmoon_info.json
+    │   │   └── hapgok_info.json
     │   ...
     ...  
 
 ### 3. Training Network
-To train ekmoon on resnet18 with batch size 32: 
+To train hapgok on resnet18 with batch size 32: 
 
-    python main.py --kw ekmoon --model resnet18 --bs 32
+    python main.py --kw hapgok --model resnet18 --bs 32
 
-or using Jupyter notebook run all cells in `Acup_train.ipynb`
+or using Jupyter notebook run all cells in `Acup_train.ipynb` 
 
 To check tensorboard:
 

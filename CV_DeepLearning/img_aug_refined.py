@@ -35,13 +35,13 @@ def move_dirs(oslist, src, dst):
         shutil.move(os.path.join(src, i), dst)
 
 
-def clean_and_rename_directory( dirlist ):
+def clean_and_rename_directory( dir_lists ):
     # directory must be './CV_DeepLearning/Acu_Dataset'
     if os.getcwd().split('/')[-1] == 'Image-Preprocess':
         print('cur')
         os.chdir('../CV_DeepLearning')
     
-    dir_lists = os.listdir(dirlist)
+  #  dir_lists = os.listdir(dirlist)
     print(os.getcwd())
     for dir_name in dir_lists:
         dir_cur = './Acu_Dataset/' + dir_name
@@ -56,13 +56,14 @@ def clean_and_rename_directory( dirlist ):
 
         if len(os.listdir(dir_cur) ) == 3:
             os.mkdir(dir_cur + '/org')
-            if True in [ 'dorsal' for d in os.listdir(dir_cur)]: 
+            if True in [ 'dor' in d for d in os.listdir(dir_cur)]: 
                 kw = '_dorsal_'
             else: 
                 kw = '_palmar_'
 
             left_dir = dir_cur + '/'+ dir_name + kw + 'left'
             right_dir = dir_cur + '/'+ dir_name + kw + 'right'
+            
             left_list = os.listdir(left_dir)
             right_list = os.listdir(right_dir)
             move_dirs(left_list, left_dir, dir_cur + '/org')
