@@ -10,6 +10,7 @@ import numbers
 import types
 import collections
 import warnings
+from torch.utils.data import ConcatDataset
 
 class CoordDataSet (Dataset):
     def __init__(self, json_file, rootdir, train = True, transform = None):
@@ -141,3 +142,27 @@ def create_dataset(kw, augtype = 'filled', transform =None ):
         return HandDataSet(json_file, img_dir, transform = my_transforms, train=True) 
     else:
         pass
+
+def concat_augmented(kw, transform = None):
+    my_transforms = transform
+    d1= create_dataset(kw, augtype = 'filled', transform = my_transforms)
+    d2= create_dataset(kw, augtype = 'rotated', transform = my_transforms)
+    d3= create_dataset(kw, augtype = 'rotated_filled', transform = my_transforms)
+    d4= create_dataset(kw, augtype = 'org', transform = my_transforms)
+    d5= create_dataset(kw, augtype = 'sctr', transform = my_transforms)
+    d6= create_dataset(kw, augtype = 'sctr_filled', transform = my_transforms)
+
+    return ConcatDataset([d1, d2, d3, d4, d5, d6])
+
+
+def train_test_valid_splitter(concat_dataset, t_ratio, v_ratio):
+
+    test_set_size = int(len(concat_dataset) * t_ratio) # 
+    train_set_size = len(concat_dataset) - test_set_size
+    train_set, test_set = torch.utils.data.random_split(concat_dataset, [train_set_size, test_set_size])
+    valid_set_size = int((train_set_size)*v_ratio) 
+    train_set_size = train_set_size - valid_set_size
+    train_set, valid_set  = torch.utils.data.random_split(train_set, [train_set_size, valid_set_size])
+    print( 'Split into: ', train_set_size, valid_set_size, test_set_size)
+    return (train_set, valid_set, test_set)
+
