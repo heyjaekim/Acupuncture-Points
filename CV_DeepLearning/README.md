@@ -50,7 +50,7 @@ After full augmentation, the following directory structure is expected:
     │   │   ├── rotated_filled
     │   │   ├── sctr
     │   │   ├── sctr_filled              
-    │   │   └── ekmoon_info.json
+    │   │   └── hapgok_info.json
     │   ...
     ...  
 
