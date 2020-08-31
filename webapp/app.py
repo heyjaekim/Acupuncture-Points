@@ -253,10 +253,10 @@ def getsymp(symptom=None):
 def upload_photo_1(symptom=None, result=None):
     if request.method == 'POST':
         f = request.files.get('file')
-        if not path.isfile('./uploads/yourhand1.jpg'):
-            f.save(path.join(upload_dir, 'yourhand1.jpg'))
-        else:
+        if not path.isfile('./uploads/yourhand2.jpg'):
             f.save(path.join(upload_dir, 'yourhand2.jpg'))
+        else:
+            f.save(path.join(upload_dir, 'yourhand1.jpg'))
 
         # f.save("./uploads")
 
