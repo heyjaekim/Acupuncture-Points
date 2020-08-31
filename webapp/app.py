@@ -66,10 +66,6 @@ class Searching_log(db.Model):
     Time_stamp = db.Column(db.DATETIME)
     Searching_keyword = db.Column(db.VARCHAR)
 
-# db.session.add(Patient(name="Flask", email="example@example.com"))
-# db.session.commit()
-
-
 ###########################################################
 
 # Flask and Flask-SQLAlchemy initialization here
@@ -92,6 +88,7 @@ model = create_model()
 ###########################################################
 
 
+# home directory
 @app.route('/', methods=['GET', 'POST'])
 def home():
     data = request.get_json()
@@ -110,6 +107,7 @@ def home():
     return render_template('home.html')
 
 
+# connect to the login page once the user clicks to the "진단 받기" from the homepage
 @app.route('/user/login', methods=['GET', 'POST'])
 def login():
 
@@ -117,6 +115,7 @@ def login():
     global username
     if request.method == "POST":
         try:
+            # once the user gets 'userid' and 'username' from the register page, request json to the register page
             data = request.get_json()
             userid = data['userid']
             password = data['password']
@@ -124,6 +123,8 @@ def login():
                 userid = None
             conn = sqlite3.connect('./Collect_Data.db')
             cur = conn.cursor()
+
+            # dig out all the unavailable userid with the password
             cur.execute('''SELECT Username, ID FROM Patient 
                             WHERE ID == "'''+userid+'''" 
                             AND Password == "'''+password+'''"''')
@@ -138,16 +139,9 @@ def login():
             return render_template('login.html', userid=userid, username=None)
 
     else:
+        print(userid, username)
         return render_template('login.html', userid=userid, username=username)
 
-# rv = cur.fetchall()
-#
-# if bcrypt.check_password_hash(rv['password'], password):
-#     access_token = create_access_token(
-#         identity={'name': rv['name'], 'sex': rv['sex']})
-#     result = access_token
-# else:
-#     result = jsonify({"error": "Invalid username and password"})
 
 
 @app.route('/user/register', methods=['GET', 'POST'])
@@ -314,7 +308,7 @@ def getvoice():
 ###########################################################
 @app.route('/example_dorsal.png')
 def ex_one():
-    f = cv2.resize(cv2.imread("./examples/example_1.jpg"), dsize=(700,700))
+    f = cv2.resize(cv2.imread("./examples/example1.jpg"), dsize=(700,700))
     file_object = BytesIO()
     new_img = Image.fromarray(cv2.cvtColor(f, cv2.COLOR_BGR2RGB))
     new_img.save(file_object, 'PNG')
@@ -324,7 +318,7 @@ def ex_one():
 
 @app.route('/example_palmar.png')
 def ex_two():
-    f = cv2.resize(cv2.imread("./examples/example_2.jpg"), dsize=(700,700))
+    f = cv2.resize(cv2.imread("./examples/example2.jpg"), dsize=(700,700))
     file_object = BytesIO()
     new_img = Image.fromarray(cv2.cvtColor(f, cv2.COLOR_BGR2RGB))
     new_img.save(file_object, 'PNG')

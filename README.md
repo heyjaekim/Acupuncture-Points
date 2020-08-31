@@ -1,31 +1,31 @@
 # 빅데이터 청년인재 13조 - 손을 주시오, 혈을 잡겠오
 
 ## 프로젝트 소개
-  1. 프로젝트 명: 손을 주시오, 혈을 잡겠오
-  2. 조원: 김성진, 김재원, 김정규, 정지우, 최선
-  3. 프로젝트 소개: 손, 발, 얼굴 등 사진을 찍었을때 해당하는 주치에 해당하는 혈자리들을 짚어주는 이미지 학습 모델링을 만들기 위함
-  4. 개발기간: 2020.07.06 ~ 2020.08.31
+  <img width="640" alt="cover" src="https://user-images.githubusercontent.com/63584973/91730400-d1021e00-ebe0-11ea-94f9-1766a5ae8cee.png">
   
-  <img width="640" alt="20200731 발표자료_최종 (2)" src="https://user-images.githubusercontent.com/63584973/89733815-0c527680-da93-11ea-850e-4c5a85212ac7.png">
+  1. 프로젝트 명: 손을 주시오, 혈을 잡겠오  
+  2. 조원: 김성진, 김재원, 김정규, 정지우, 최선  
+  3. 프로젝트 소개: 손, 발, 얼굴 등 사진을 찍었을때 해당하는 주치에 해당하는 혈자리들을 짚어주는 이미지 학습 모델링을 만들기 위함  
+  4. 개발기간: 2020.07.06 ~ 2020.08.31   
+
 
   
 ## Repository 구조
-    1. Acupuncture-Webapp 
-        : Flask와 React를 이용해 만든 애플리케이션
-    2. CV_DeepLearning 
-        : 딥러닝 기술(컴퓨터 비전) 을 활용한 신체 경혈점 예측
-    3. EDA 
+
+    1. CV_DeepLearning 
+        : 딥러닝 기술(ResNet-Coordinate Regressor)을 활용한 신체 경혈점 예측
+    2. EDA 
         : 이미지 데이터와 그에 관한 정보를 탐색하여 유의미한 관계가 있는지 검토
-    4. HospitalGeo 
+    3. HospitalGeo 
         : 주변 병원을 검색
-    5. Image-Preprocess 
-        : 이미지 태깅, 이미지 데이터 트랜스포메이션, json 데이터 추합 등
-    6. Login 
+    4. Image-Preprocess 
+        : 이미지 태깅, 이미지 데이터 Transformation & Augmentation, json 데이터 추합 등
+    5. Login 
         : 개인화를 위한 로그인
-    7. Text-Searching 
+    6. Text-Searching 
         : inverted index 기반 정보검색을 활용한 사용자 입력 기반 혈자리, 음식 및 약재 추천
-    8. webapp 
-        : 웹앱 구현
+    7. webapp 
+        : 서비스 화면 웹앱(flask) 구현
     
   
 ## COMMIT/공유사항 등의 작성방법
