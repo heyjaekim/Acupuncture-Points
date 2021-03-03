@@ -8,7 +8,9 @@
   3. 프로젝트 소개: 손, 발, 얼굴 등 사진을 찍었을때 해당하는 주치에 해당하는 혈자리들을 짚어주는 이미지 학습 모델링을 만들기 위함  
   4. 개발기간: 2020.07.06 ~ 2020.08.31   
 
+https://www.youtube.com/watch?v=K8ChF4QkCis&list=PL41Sc0PqF7eTUbIF4AUQc10iqGWihz5PG&index=11
 
+https://www.youtube.com/watch?v=mdDwSpfLT60&list=PL41Sc0PqF7eRirKnJ8beJ4fGOOynUyClL&index=12
   
 ## Repository 구조
 
