@@ -16,7 +16,7 @@ Flask-SQLAlchemy==2.4.4
 folium==0.11.0
 idna==2.10
 itsdangerous==1.1.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 JPype1==1.0.2
 konlpy==0.5.2
 lxml==4.5.2
