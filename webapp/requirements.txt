@@ -19,7 +19,7 @@ itsdangerous==1.1.0
 Jinja2==2.11.2
 JPype1==1.0.2
 konlpy==0.5.2
-lxml==4.5.2
+lxml==4.6.3
 MarkupSafe==1.1.1
 numpy==1.19.1
 oauthlib==3.1.0
